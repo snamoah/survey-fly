@@ -126,7 +126,7 @@ const Layout = ({ children, params }: Props) => {
               {segment === "integrate" && <IntegrateSidebar />}
             </section>
           )}
-          <main className="grow bg-white">{children}</main>
+          <main className="grow overflow-y-auto bg-white">{children}</main>
         </div>
       </div>
     </div>
