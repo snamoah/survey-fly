@@ -31,6 +31,6 @@
 
 @layer components {
   .btn {
-    @apply rounded-sm px-4 py-2 text-white hover:opacity-80;
+    @apply rounded-sm px-4 py-2 text-white outline-none hover:opacity-80;
   }
 }
