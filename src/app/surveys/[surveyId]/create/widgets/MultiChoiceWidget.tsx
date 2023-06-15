@@ -10,7 +10,7 @@ const MultiChoiceWidget = () => (
           <span className="h-5 w-3 bg-green-300"></span>
         </div>
         <div className="my-1 grid place-content-center rounded-sm">
-          <input type="checkbox" className="h-11/12 w-11/12" />
+          <input type="checkbox" disabled className="h-11/12 w-11/12" />
         </div>
         <input
           type="text"
