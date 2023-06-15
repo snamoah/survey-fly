@@ -7,38 +7,33 @@ import {
   useSearchParams,
   useSelectedLayoutSegment,
 } from "next/navigation";
-import { useRouter } from "next/router";
+import BuildSection from "./components/BuildSection";
+import DesignSection from "./components/DesignSection";
+import TriggerSection from "./components/TriggerSection";
+import IntegrateSidebar from "./components/IntegrateSidebar";
 
 const ASIDE_SEGMENTS = ["create", "integrate"];
 
 const navLinks = [
-  {
-    key: "create",
-    title: "Create",
-    href: "/create",
-  },
-  {
-    key: "integrate",
-    title: "Integrate",
-    href: "/integrate",
-  },
-  {
-    key: "share",
-    title: "Share",
-    href: "/share",
-  },
-  {
-    key: "responses",
-    title: "Responses",
-    href: "/responses",
-  },
+  { key: "create", title: "Create" },
+  { key: "integrate", title: "Integrate" },
+  { key: "share", title: "Share" },
+  { key: "responses", title: "Responses" },
 ];
 
-const toolbarLinks = [
+type ToolbarAction = "build" | "trigger" | "design";
+
+const toolbarLinks: { key: ToolbarAction; title: string }[] = [
   { key: "build", title: "Build" },
   { key: "trigger", title: "Trigger" },
   { key: "design", title: "Appearance" },
 ];
+
+const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
+  build: <BuildSection />,
+  design: <DesignSection />,
+  trigger: <TriggerSection />,
+};
 
 type Props = {
   children: React.ReactNode;
@@ -50,23 +45,22 @@ type Props = {
 const Layout = ({ children, params }: Props) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentToolbarTab = searchParams.get("t") ?? "build";
-  const basePath = `/surveys/${params.surveyId}`;
   const segment = useSelectedLayoutSegment();
-  const isToolbarVisible = segment === "create";
-  const isAsideVisible = segment && ASIDE_SEGMENTS.includes(segment);
 
-  console.log({ pathname });
+  const isToolbarVisible = segment === "create";
+  const basePath = `/surveys/${params.surveyId}`;
+  const isAsideVisible = segment && ASIDE_SEGMENTS.includes(segment);
+  const currentToolbarTab = (searchParams.get("t") ?? "build") as ToolbarAction;
 
   return (
     <div className="flex h-screen divide-x divide-slate-300">
       {isToolbarVisible && (
         <nav className="w-48 bg-yellow-200">
-          <div className="flex h-20 items-center justify-center">
-            <a href="">Go back</a>
+          <div className="flex h-20 w-48 items-center justify-center">
+            <a>Go back</a>
           </div>
 
-          <ul className="mt-20">
+          <menu className="mt-20">
             {toolbarLinks.map((link, index) => {
               const isActive = currentToolbarTab === link.key;
               return (
@@ -87,42 +81,49 @@ const Layout = ({ children, params }: Props) => {
                 </li>
               );
             })}
-          </ul>
+          </menu>
         </nav>
       )}
       <div className="flex grow flex-col divide-y divide-slate-300">
-        <nav className="flex h-20 justify-between bg-slate-200">
-          <ul className={classNames("flex", !isToolbarVisible && "ml-48")}>
-            {navLinks.map((navLink, index) => (
-              <li key={index} className="relative">
-                <Link href={`${basePath}/${navLink.href}`}>
-                  <span className="flex h-full items-center px-4">
-                    {navLink.title}
-                  </span>
-                  {navLink.key === segment && (
-                    <span className="absolute bottom-0 left-0 h-1 w-full bg-yellow-500"></span>
-                  )}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <nav className="flex h-20 min-h-max justify-between bg-slate-200">
+          <div className="flex">
+            {!isToolbarVisible && (
+              <div className="flex h-20 w-48 items-center justify-center">
+                <a>Go back</a>
+              </div>
+            )}
+            <menu className={classNames("flex")}>
+              {navLinks.map((navLink, index) => (
+                <li key={index} className="relative">
+                  <Link href={`${basePath}/${navLink.key}`}>
+                    <span className="flex h-20 items-center px-4">
+                      {navLink.title}
+                    </span>
+                    {navLink.key === segment && (
+                      <span className="absolute bottom-0 left-0 h-1 w-full bg-yellow-500"></span>
+                    )}
+                  </Link>
+                </li>
+              ))}
+            </menu>
+          </div>
 
-          <ul className="flex">
+          <ul className="mr-6 flex items-center gap-2">
             <li>
-              <button>Preview</button>
+              <button className="btn text-slate-700 ring-1 ring-slate-700">
+                Preview
+              </button>
             </li>
             <li>
-              <button>Publish</button>
+              <button className="btn bg-purple-500">Publish</button>
             </li>
           </ul>
         </nav>
-        <div className="flex grow divide-x divide-slate-300">
+        <div className="flex grow divide-x divide-slate-300 overflow-hidden">
           {isAsideVisible && (
-            <section className="flex h-full w-72 flex-col bg-slate-200">
-              <div className="grow"></div>
-              {segment === "integrate" && (
-                <footer className="align-self-end h-24 bg-indigo-300"></footer>
-              )}
+            <section className="flex w-72 flex-col bg-slate-200">
+              {segment === "create" && toolbarTabComponent[currentToolbarTab]}
+              {segment === "integrate" && <IntegrateSidebar />}
             </section>
           )}
           <main className="grow bg-white">{children}</main>
