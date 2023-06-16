@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { classNames } from "@/utils";
+import { ArrowRight } from "@/ui/icons";
 import {
   usePathname,
   useSearchParams,
   useSelectedLayoutSegment,
 } from "next/navigation";
+
 import BuildSection from "./components/BuildSection";
 import DesignSection from "./components/DesignSection";
 import TriggerSection from "./components/TriggerSection";
@@ -58,7 +60,8 @@ const Layout = ({ children, params }: Props) => {
       <div className="flex h-screen divide-x divide-slate-300">
         {isToolbarVisible && (
           <nav className="w-48 bg-yellow-200">
-            <div className="flex h-20 w-48 items-center justify-center">
+            <div className="flex h-20 w-48 items-center justify-center gap-2">
+              <ArrowRight size={16} />
               <a>Go back</a>
             </div>
 
@@ -90,7 +93,8 @@ const Layout = ({ children, params }: Props) => {
           <nav className="flex h-20 min-h-max justify-between bg-slate-200">
             <div className="flex">
               {!isToolbarVisible && (
-                <div className="flex h-20 w-48 items-center justify-center">
+                <div className="flex h-20 w-48 items-center justify-center gap-2">
+                  <ArrowRight size={16} />
                   <a>Go back</a>
                 </div>
               )}

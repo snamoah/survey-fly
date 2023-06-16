@@ -8,6 +8,8 @@ type QuestionType =
   | "input-field";
 
 type Question = {
+  uuid: string;
   title: string;
   type: QuestionType;
+  options?: string[];
 };
