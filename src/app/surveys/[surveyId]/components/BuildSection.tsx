@@ -3,15 +3,8 @@ import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { classNames } from "@/utils";
-import {
-  QuestionType,
-  YesOrNoQuestion,
-  SingleChoiceQuestion,
-  MultipleChoiceQuestion,
-} from "@/types";
-import { buildDefaultYesOrNo } from "@/widgets/YesOrNo";
-import { buildDefaultSingleChoice } from "@/widgets/SingleChoice";
-import { buildDefaultMultipleChoice } from "@/widgets/MultipleChoice";
+import { QuestionType } from "@/types";
+import { QuestionDefinitionMap } from "@/utils/constants/widgetDefinitions";
 import { QuestionsActionsContext, QuestionsContext } from "./QuestionsProvider";
 
 type QuestionDefinition = {
@@ -20,83 +13,12 @@ type QuestionDefinition = {
   description: string;
 };
 
-const defintions: QuestionDefinition[] = [
-  {
-    id: "multiple-choice",
-    name: "Multi Choice",
-    description: "Create a multiple choice question",
-  },
-  {
-    id: "single-choice",
-    name: "Single Choice",
-    description: "Create a single choice question",
-  },
-  // {
-  //   id: "address",
-  //   name: "Address",
-  //   description: "Create a yes or no question",
-  // },
-  // {
-  //   id: "signature",
-  //   name: "Signature",
-  //   description: "Create a yes or no question",
-  // },
-  {
-    id: "yes-or-no",
-    name: "Yes or No",
-    description: "Create a yes or no question",
-  },
-  // {
-  //   id: "star-rating",
-  //   name: "Star Rating",
-  //   description: "Create a yes or no question",
-  // },
-  // {
-  //   id: "input-field",
-  //   name: "Short Text",
-  //   description: "Create a yes or no question",
-  // },
-];
-
-const buildQuestion = (type: QuestionType) => {
-  switch (type) {
-    case "multiple-choice": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "multiple-choice",
-        widgetSettings: buildDefaultMultipleChoice(),
-      } satisfies MultipleChoiceQuestion;
-    }
-    case "single-choice": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "single-choice",
-        widgetSettings: buildDefaultSingleChoice(),
-      } satisfies SingleChoiceQuestion;
-    }
-    case "yes-or-no": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "yes-or-no",
-        widgetSettings: buildDefaultYesOrNo(),
-      } satisfies YesOrNoQuestion;
-    }
-
-    default: {
-      throw Error("cannot build unknown question type");
-    }
-  }
-};
-
 const BuildSection = () => {
   const { questions, selectedQuestion } = useContext(QuestionsContext);
   const { addQuestion, selectQuestion } = useContext(QuestionsActionsContext);
 
-  const onSelectQuestion = (definition: QuestionDefinition) => {
-    addQuestion(buildQuestion(definition.id));
+  const onSelectQuestion = (questionType: QuestionType) => {
+    addQuestion(QuestionDefinitionMap[questionType].buildQuestion());
   };
 
   return (
@@ -130,24 +52,28 @@ const BuildSection = () => {
                   </header>
                   <div className="h-full overflow-auto rounded-b-sm">
                     <ul className="m-3 flex flex-col gap-3">
-                      {defintions.map((definition) => (
-                        <li
-                          key={definition.id}
-                          onClick={() => {
-                            onSelectQuestion(definition);
-                            close();
-                          }}
-                          className="mt-1rounded-sm flex gap-2  p-2 hover:cursor-pointer hover:bg-slate-100"
-                        >
-                          <div className="h-6 w-6 rounded-sm bg-purple-500"></div>
-                          <div>
-                            <h3 className="text-sm">{definition.name}</h3>
-                            <span className="text-xs">
-                              {definition.description}
-                            </span>
-                          </div>
-                        </li>
-                      ))}
+                      {Object.values(QuestionDefinitionMap).map(
+                        (definition) => (
+                          <li
+                            key={definition.type}
+                            onClick={() => {
+                              onSelectQuestion(definition.type);
+                              close();
+                            }}
+                            className="mt-1rounded-sm flex gap-2  p-2 hover:cursor-pointer hover:bg-slate-100"
+                          >
+                            <div className="grid h-6 w-6 place-content-center rounded-sm bg-purple-400">
+                              <definition.Icon size={14} />
+                            </div>
+                            <div>
+                              <h3 className="text-sm">{definition.name}</h3>
+                              <span className="text-xs">
+                                {definition.description}
+                              </span>
+                            </div>
+                          </li>
+                        )
+                      )}
                     </ul>
                   </div>
                 </Popover.Panel>

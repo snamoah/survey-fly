@@ -2,25 +2,12 @@
 import { useContext, useState } from "react";
 
 import { Trash } from "@/ui/icons";
-import type { QuestionType } from "@/types";
 
 import {
   QuestionsContext,
   QuestionsActionsContext,
 } from "../components/QuestionsProvider";
-import { WidgetSettings } from "@/widgets";
-import { YesOrNoWidget } from "@/widgets/YesOrNo";
-import { SingleChoiceWidget } from "@/widgets/SingleChoice";
-import { MultipleChoiceWidget } from "@/widgets/MultipleChoice";
-
-const widgetComponentMap: Record<
-  QuestionType,
-  React.ComponentType<WidgetSettings<any>>
-> = {
-  "yes-or-no": YesOrNoWidget,
-  "single-choice": SingleChoiceWidget,
-  "multiple-choice": MultipleChoiceWidget,
-};
+import { QuestionDefinitionMap } from "@/utils/constants/widgetDefinitions";
 
 const TitleInput = ({
   value,
@@ -60,7 +47,8 @@ const Page = () => {
     });
   };
 
-  const WidgetComponent = widgetComponentMap[selectedQuestion.type];
+  const WidgetComponent =
+    QuestionDefinitionMap[selectedQuestion.type].widgetComponent;
 
   return (
     <article className="m-10 flex flex-col divide-y divide-slate-300 rounded-md ring-1 ring-slate-300">
