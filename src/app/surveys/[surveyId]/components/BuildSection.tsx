@@ -3,6 +3,10 @@ import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { classNames } from "@/utils";
+import { buildDefaultYesOrNo } from "@/widgets/YesOrNo";
+import { Question, QuestionType, WidgetOf } from "@/types";
+import { buildDefaultSingleChoice } from "@/widgets/SingleChoice";
+import { buildDefaultMultipleChoice } from "@/widgets/MultipleChoice";
 import { QuestionsActionsContext, QuestionsContext } from "./QuestionsProvider";
 
 type QuestionDefinition = {
@@ -22,32 +26,38 @@ const defintions: QuestionDefinition[] = [
     name: "Single Choice",
     description: "Create a single choice question",
   },
-  {
-    id: "address",
-    name: "Address",
-    description: "Create a yes or no question",
-  },
-  {
-    id: "signature",
-    name: "Signature",
-    description: "Create a yes or no question",
-  },
+  // {
+  //   id: "address",
+  //   name: "Address",
+  //   description: "Create a yes or no question",
+  // },
+  // {
+  //   id: "signature",
+  //   name: "Signature",
+  //   description: "Create a yes or no question",
+  // },
   {
     id: "yes-or-no",
     name: "Yes or No",
     description: "Create a yes or no question",
   },
-  {
-    id: "star-rating",
-    name: "Star Rating",
-    description: "Create a yes or no question",
-  },
-  {
-    id: "input-field",
-    name: "Short Text",
-    description: "Create a yes or no question",
-  },
+  // {
+  //   id: "star-rating",
+  //   name: "Star Rating",
+  //   description: "Create a yes or no question",
+  // },
+  // {
+  //   id: "input-field",
+  //   name: "Short Text",
+  //   description: "Create a yes or no question",
+  // },
 ];
+
+const defaultWidgetSettingsMap: Record<QuestionType, WidgetOf<Question>> = {
+  "yes-or-no": buildDefaultYesOrNo(),
+  "single-choice": buildDefaultSingleChoice(),
+  "multiple-choice": buildDefaultMultipleChoice(),
+};
 
 const BuildSection = () => {
   const { questions, selectedQuestion } = useContext(QuestionsContext);
@@ -59,6 +69,7 @@ const BuildSection = () => {
       uuid: id,
       title: `${definition.name} question`,
       type: definition.id,
+      widgetSettings: defaultWidgetSettingsMap[definition.id],
     });
     selectQuestion(id);
   };

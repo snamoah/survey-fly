@@ -1,23 +1,26 @@
 "use client";
 import { useContext, useState } from "react";
+
 import { Trash } from "@/ui/icons";
+import type { QuestionType } from "@/types";
 
-import MultiChoiceWidget from "./widgets/MultiChoiceWidget";
-import SingleChoiceWidget from "./widgets/SingleChoiceWidget";
 import {
-  QuestionsActionsContext,
   QuestionsContext,
+  QuestionsActionsContext,
 } from "../components/QuestionsProvider";
+import { WidgetSettings } from "@/widgets";
+import { YesOrNoWidget } from "@/widgets/YesOrNo";
+import { SingleChoiceWidget } from "@/widgets/SingleChoice";
+import { MultipleChoiceWidget } from "@/widgets/MultipleChoice";
 
-// const widgetComponentMap: Record<QuestionType, React.FC> = {
-//   address: SingleChoiceWidget,
-//   "single-choice": SingleChoiceWidget,
-//   "multiple-choice": MultiChoiceWidget,
-//   signature: SingleChoiceWidget,
-//   "input-field": SingleChoiceWidget,
-//   "star-rating": SingleChoiceWidget,
-//   "yes-or-no": SingleChoiceWidget,
-// };
+const widgetComponentMap: Record<
+  QuestionType,
+  React.ComponentType<WidgetSettings<any>>
+> = {
+  "yes-or-no": YesOrNoWidget,
+  "single-choice": SingleChoiceWidget,
+  "multiple-choice": MultipleChoiceWidget,
+};
 
 const TitleInput = ({
   value,
@@ -42,7 +45,9 @@ const TitleInput = ({
 
 const Page = () => {
   const { selectedQuestion } = useContext(QuestionsContext);
-  const { updateQuestion } = useContext(QuestionsActionsContext);
+  const { updateQuestion, updateQuestionSettings } = useContext(
+    QuestionsActionsContext
+  );
 
   if (!selectedQuestion) {
     return null;
@@ -54,13 +59,9 @@ const Page = () => {
       title,
     });
   };
-  const onChangeOptions = (options: string[]) =>
-    updateQuestion({
-      ...selectedQuestion,
-      options,
-    });
 
-  // const WidgetComponent = widgetComponentMap[selectedQuestion.type];
+  const WidgetComponent = widgetComponentMap[selectedQuestion.type];
+
   return (
     <article className="m-10 flex flex-col divide-y divide-slate-300 rounded-md ring-1 ring-slate-300">
       <header className="flex flex-col gap-2 p-6">
@@ -76,11 +77,10 @@ const Page = () => {
         />
       </header>
       <footer className="p-6">
-        {/* <WidgetComponent on /> */}
-        <SingleChoiceWidget
+        <WidgetComponent
           key={selectedQuestion.uuid}
-          onChange={onChangeOptions}
-          options={selectedQuestion.options}
+          onChange={updateQuestionSettings}
+          value={selectedQuestion.widgetSettings}
         />
       </footer>
     </article>

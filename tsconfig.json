@@ -22,6 +22,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/ui": ["./src/ui"],
+      "@types": ["./src/types/*"],
       "@/utils": ["./src/utils/index.ts"]
     }
   },

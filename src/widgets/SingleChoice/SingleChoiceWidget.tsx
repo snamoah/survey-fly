@@ -1,8 +1,20 @@
+import * as uuid from "uuid";
+import { produce } from "immer";
 import { useState } from "react";
-import { CloseCircle } from "@/ui/icons";
+
 import { classNames } from "@/utils";
+import { CloseCircle } from "@/ui/icons";
+import { WidgetSettings } from "../types";
+import { buildDefaultSingleChoice } from "./helpers";
 
 const MAX_OPTIONS_COUNT = 10;
+
+export type SingleChoice = {
+  options: {
+    key: string;
+    value: string;
+  }[];
+};
 
 const Input = ({
   value,
@@ -40,39 +52,49 @@ const Input = ({
   );
 };
 
-const SingleChoiceWidget = ({
-  options = ["Option 1"],
+export const SingleChoiceWidget = ({
+  value = buildDefaultSingleChoice(),
   onChange,
-}: {
-  options?: string[];
-  onChange: (options: string[]) => void;
-}) => {
-  const [optionsToEdit, setOptionsToEdit] = useState(options);
+}: WidgetSettings<SingleChoice>) => {
+  const updateOptionAtIndex = (str: string, id: string) =>
+    onChange(
+      produce(value, (draft) => {
+        const index = draft.options.findIndex((option) => option.key === id);
+        draft.options[index].value = str;
+      })
+    );
 
-  const updateOptionAtIndex = (value: string, index: number) => {
-    const newOptions = [...optionsToEdit];
-    newOptions[index] = value;
-    setOptionsToEdit(newOptions);
-  };
+  const addOption = () =>
+    onChange(
+      produce(value, (draft) => {
+        draft.options.push({
+          key: uuid.v4(),
+          value: "",
+        });
+      })
+    );
 
-  const addOption = () => setOptionsToEdit((prev) => prev.concat([""]));
-  const deleteOption = (index: number) =>
-    setOptionsToEdit((prev) => prev.filter((_, prevId) => prevId !== index));
+  const deleteOption = (id: string) =>
+    onChange(
+      produce(value, (draft) => {
+        draft.options = draft.options.filter((option) => option.key !== id);
+      })
+    );
 
   return (
-    <ul className="flex flex-col gap-3" onBlur={() => onChange(optionsToEdit)}>
-      {optionsToEdit.map((option, index) => (
+    <ul className="flex flex-col gap-3">
+      {value.options.map((option) => (
         <Input
-          key={option}
-          value={option}
-          deleteValue={() => deleteOption(index)}
-          onChange={(value) => updateOptionAtIndex(value, index)}
+          key={option.key}
+          value={option.value}
+          deleteValue={() => deleteOption(option.key)}
+          onChange={(value) => updateOptionAtIndex(value, option.key)}
         />
       ))}
       <li
         className={classNames(
           "mt-2 flex gap-2",
-          optionsToEdit.length === MAX_OPTIONS_COUNT && "invisible"
+          value.options.length === MAX_OPTIONS_COUNT && "invisible"
         )}
       >
         <button className="btn bg-purple-500" onClick={addOption}>
@@ -85,5 +107,3 @@ const SingleChoiceWidget = ({
     </ul>
   );
 };
-
-export default SingleChoiceWidget;

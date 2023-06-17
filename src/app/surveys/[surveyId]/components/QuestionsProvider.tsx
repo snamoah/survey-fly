@@ -1,4 +1,5 @@
 "use client";
+import { Question, WidgetOf } from "@/types";
 import { produce } from "immer";
 import { createContext, useState } from "react";
 
@@ -6,6 +7,7 @@ type QuestionActionType = {
   selectQuestion: (id: string) => void;
   addQuestion: (question: Question) => void;
   updateQuestion: (question: Question) => void;
+  updateQuestionSettings: (setting: WidgetOf<Question>) => void;
 };
 
 type QuestionsContextType = {
@@ -20,6 +22,7 @@ export const QuestionsActionsContext = createContext<QuestionActionType>({
   addQuestion() {},
   selectQuestion() {},
   updateQuestion() {},
+  updateQuestionSettings() {},
 });
 
 const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
@@ -43,9 +46,23 @@ const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const updateQuestionSettings = (settings: WidgetOf<Question>) => {
+    setQuestions(
+      produce(questions, (draft) => {
+        const index = draft.findIndex(
+          (question) => question.uuid === selectedQuestion?.uuid
+        );
+        if (index > -1) {
+          draft[index].widgetSettings = settings;
+        }
+      })
+    );
+  };
+
   const context = {
     addQuestion,
     updateQuestion,
+    updateQuestionSettings,
     selectQuestion: setSelectedQuestionId,
   };
 
