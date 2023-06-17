@@ -1,6 +1,6 @@
 import * as uuid from "uuid";
 import { produce } from "immer";
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { classNames } from "@/utils";
 import { CloseCircle } from "@/ui/icons";
 
@@ -8,6 +8,7 @@ import { WidgetSettings } from "../types";
 import { buildDefaultMultipleChoice } from "./helpers";
 
 const MAX_OPTIONS_COUNT = 10;
+const OTHER_TEXT = "Other";
 
 export type MultipleChoice = {
   options: {
@@ -20,7 +21,8 @@ const Input = ({
   value,
   onChange,
   deleteValue,
-}: {
+  ...props
+}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
   value: string;
   deleteValue: () => void;
   onChange: (value: string) => void;
@@ -41,6 +43,7 @@ const Input = ({
         onBlur={() => onChange(valueToEdit)}
         onChange={(e) => setValueToEdit(e.target.value)}
         className="my-1 w-full grow text-xs outline-none"
+        {...props}
       />
       <div
         onClick={deleteValue}
@@ -86,7 +89,7 @@ export const MultipleChoiceWidget = ({
       produce(value, (draft) => {
         draft.options.push({
           key: uuid.v4(),
-          value: "Other",
+          value: OTHER_TEXT,
         });
       })
     );
@@ -102,8 +105,10 @@ export const MultipleChoiceWidget = ({
         <Input
           key={option.key}
           value={option.value}
+          readOnly={option.value === OTHER_TEXT}
           deleteValue={() => deleteOption(option.key)}
           onChange={(value) => updateOptionAtIndex(value, option.key)}
+          {...(option.value === OTHER_TEXT ? { tabIndex: -1 } : {})}
         />
       ))}
       <li

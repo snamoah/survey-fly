@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { WidgetSettings } from "../types";
 
 export type YesOrNo = {
@@ -8,10 +8,9 @@ export type YesOrNo = {
 const Input = ({
   value,
   onChange,
-  readonly,
-}: {
+  ...props
+}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
   value: string;
-  readonly?: boolean;
   onChange: (value: string) => void;
 }) => {
   const [valueToEdit, setValueToEdit] = useState(value);
@@ -27,10 +26,10 @@ const Input = ({
       <input
         type="text"
         value={valueToEdit}
-        readOnly={readonly}
         onBlur={() => onChange(valueToEdit)}
         onChange={(e) => setValueToEdit(e.target.value)}
         className="my-1 w-full grow text-xs outline-none"
+        {...props}
       />
     </li>
   );
@@ -38,7 +37,7 @@ const Input = ({
 
 export const YesOrNoWidget = (props: WidgetSettings<YesOrNo>) => (
   <ul className="flex flex-col gap-3">
-    <Input value="Yes" readonly={true} onChange={() => {}} />
-    <Input value="No" readonly={true} onChange={() => {}} />
+    <Input value="Yes" tabIndex={-1} readOnly={true} onChange={() => {}} />
+    <Input value="No" tabIndex={-1} onChange={() => {}} />
   </ul>
 );
