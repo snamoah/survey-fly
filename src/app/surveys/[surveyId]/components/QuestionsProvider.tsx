@@ -31,6 +31,7 @@ const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addQuestion = (question: Question) => {
     setQuestions(questions.concat([question]));
+    setSelectedQuestionId(question.uuid);
   };
 
   const updateQuestion = (question: Question) => {

@@ -81,6 +81,21 @@ export const MultipleChoiceWidget = ({
       })
     );
 
+  const addOtherOption = () => {
+    onChange(
+      produce(value, (draft) => {
+        draft.options.push({
+          key: uuid.v4(),
+          value: "Other",
+        });
+      })
+    );
+  };
+
+  const isActionFooterInvisible =
+    value.options.length === MAX_OPTIONS_COUNT ||
+    value.options[value.options.length - 1].value === "Other";
+
   return (
     <ul className="flex flex-col gap-3">
       {value.options.map((option) => (
@@ -94,13 +109,16 @@ export const MultipleChoiceWidget = ({
       <li
         className={classNames(
           "mt-2 flex gap-2",
-          value.options.length === MAX_OPTIONS_COUNT && "invisible"
+          isActionFooterInvisible && "invisible"
         )}
       >
         <button className="btn bg-purple-500" onClick={addOption}>
           Add an option
         </button>
-        <button className="btn text-slate-700 ring-1 ring-slate-700">
+        <button
+          onClick={addOtherOption}
+          className="btn text-slate-700 ring-1 ring-slate-700"
+        >
           Add "Other"
         </button>
       </li>

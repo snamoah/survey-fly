@@ -3,8 +3,13 @@ import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { classNames } from "@/utils";
+import {
+  QuestionType,
+  YesOrNoQuestion,
+  SingleChoiceQuestion,
+  MultipleChoiceQuestion,
+} from "@/types";
 import { buildDefaultYesOrNo } from "@/widgets/YesOrNo";
-import { Question, QuestionType, WidgetOf } from "@/types";
 import { buildDefaultSingleChoice } from "@/widgets/SingleChoice";
 import { buildDefaultMultipleChoice } from "@/widgets/MultipleChoice";
 import { QuestionsActionsContext, QuestionsContext } from "./QuestionsProvider";
@@ -53,10 +58,37 @@ const defintions: QuestionDefinition[] = [
   // },
 ];
 
-const defaultWidgetSettingsMap: Record<QuestionType, WidgetOf<Question>> = {
-  "yes-or-no": buildDefaultYesOrNo(),
-  "single-choice": buildDefaultSingleChoice(),
-  "multiple-choice": buildDefaultMultipleChoice(),
+const buildQuestion = (type: QuestionType) => {
+  switch (type) {
+    case "multiple-choice": {
+      return {
+        uuid: uuid.v4(),
+        title: "",
+        type: "multiple-choice",
+        widgetSettings: buildDefaultMultipleChoice(),
+      } satisfies MultipleChoiceQuestion;
+    }
+    case "single-choice": {
+      return {
+        uuid: uuid.v4(),
+        title: "",
+        type: "single-choice",
+        widgetSettings: buildDefaultSingleChoice(),
+      } satisfies SingleChoiceQuestion;
+    }
+    case "yes-or-no": {
+      return {
+        uuid: uuid.v4(),
+        title: "",
+        type: "yes-or-no",
+        widgetSettings: buildDefaultYesOrNo(),
+      } satisfies YesOrNoQuestion;
+    }
+
+    default: {
+      throw Error("cannot build unknown question type");
+    }
+  }
 };
 
 const BuildSection = () => {
@@ -64,14 +96,7 @@ const BuildSection = () => {
   const { addQuestion, selectQuestion } = useContext(QuestionsActionsContext);
 
   const onSelectQuestion = (definition: QuestionDefinition) => {
-    const id = uuid.v4();
-    addQuestion({
-      uuid: id,
-      title: `${definition.name} question`,
-      type: definition.id,
-      widgetSettings: defaultWidgetSettingsMap[definition.id],
-    });
-    selectQuestion(id);
+    addQuestion(buildQuestion(definition.id));
   };
 
   return (
@@ -153,7 +178,7 @@ const BuildSection = () => {
                 )}
                 <div className="inline-block w-52">
                   <h3 className="overflow-hidden text-ellipsis whitespace-nowrap">
-                    {question.title}
+                    {question.title || "Untitled Question"}
                   </h3>
                   <p>{question.type}</p>
                 </div>

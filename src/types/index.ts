@@ -13,7 +13,8 @@ export type SingleChoiceQuestion = QuestionGeneric<
   "single-choice",
   SingleChoice
 >;
-export type MultiChoiceQuestion = QuestionGeneric<
+
+export type MultipleChoiceQuestion = QuestionGeneric<
   "multiple-choice",
   MultipleChoice
 >;
@@ -22,7 +23,7 @@ export type YesOrNoQuestion = QuestionGeneric<"yes-or-no", YesOrNo>;
 
 export type Question =
   | SingleChoiceQuestion
-  | MultiChoiceQuestion
+  | MultipleChoiceQuestion
   | YesOrNoQuestion;
 
 export type TypeOf<T extends { type: unknown }> = T["type"];
