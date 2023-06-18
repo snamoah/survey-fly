@@ -1,13 +1,16 @@
 "use client";
 import { produce } from "immer";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
 import { classNames } from "@/utils";
+import { CloseCircle } from "@/ui/icons";
 import { QuestionDefinitionMap } from "@/utils/constants";
 
 import { QuestionsContext } from "../components/QuestionsProvider";
 
 const Page = () => {
+  const router = useRouter();
   const { questions } = useContext(QuestionsContext);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -26,7 +29,13 @@ const Page = () => {
 
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col overflow-hidden">
-      <nav className="h-20 w-full bg-slate-400"></nav>
+      <nav className="flex h-20 w-full justify-end bg-slate-400">
+        <menu className="grid w-20 place-items-center">
+          <li className="hover:cursor-pointer" onClick={() => router.back()}>
+            <CloseCircle className="text-slate-100" size={24} />
+          </li>
+        </menu>
+      </nav>
       <p className="grid-row-1 grid h-10 place-content-center bg-yellow-200 text-slate-600">
         This is a preview. Publish to allow access to your repsondents
       </p>
