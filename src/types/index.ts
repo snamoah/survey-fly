@@ -2,6 +2,8 @@ import { YesOrNo, YesOrNoAnswer } from "@/widgets/YesOrNo";
 import { SingleChoice, SingleChoiceAnswer } from "@/widgets/SingleChoice";
 import { MultipleChoice, MultipleChoiceAnswer } from "@/widgets/MultipleChoice";
 
+export type SurveyStatus = "draft" | "published" | "scheduled";
+
 export type QuestionGeneric<T, WidgetType> = {
   type: T;
   uuid: string;
@@ -43,3 +45,11 @@ export type ByType<T extends Record<K, string>, K extends keyof T> = {
 };
 
 export type Answer = MultipleChoiceAnswer | SingleChoiceAnswer | YesOrNoAnswer;
+
+export type Survey = {
+  id: string;
+  title: string;
+  description: string;
+  status: SurveyStatus;
+  questions: Question[];
+};
