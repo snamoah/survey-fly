@@ -27,7 +27,7 @@ const Page = () => {
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col overflow-hidden">
       <nav className="h-20 w-full bg-slate-400"></nav>
-      <p className="grid-row-1 grid h-10 place-content-center bg-yellow-200">
+      <p className="grid-row-1 grid h-10 place-content-center bg-yellow-200 text-slate-600">
         This is a preview. Publish to allow access to your repsondents
       </p>
       <main className="row-span-3 grid flex-1 grid-cols-1 overflow-auto bg-white">
@@ -55,28 +55,27 @@ const Page = () => {
                   onChange={(answer) => submitAnswer(question.uuid, answer)}
                 />
 
-                <footer className="flex gap-1 ">
-                  {questionIndex < questions.length - 1 && (
+                <footer className="flex justify-end gap-1">
+                  {questionIndex > 0 && (
+                    <button className="btn bg-blue-500" onClick={goToPrevious}>
+                      Previous
+                    </button>
+                  )}
+                  {questionIndex < questions.length - 1 ? (
                     <button
-                      disabled={!answers[question.uuid]}
+                      disabled={answers[question.uuid] === undefined}
                       className="btn bg-blue-500"
                       onClick={gotoNext}
                     >
                       Next
                     </button>
-                  )}
-                  {questionIndex === questions.length - 1 && (
+                  ) : (
                     <button
-                      disabled={!answers[question.uuid]}
+                      disabled={answers[question.uuid] === undefined}
                       className="btn bg-blue-500"
                       onClick={submitSurvey}
                     >
                       Finish
-                    </button>
-                  )}
-                  {questionIndex > 0 && (
-                    <button className="btn bg-blue-500" onClick={goToPrevious}>
-                      Previous
                     </button>
                   )}
                 </footer>
