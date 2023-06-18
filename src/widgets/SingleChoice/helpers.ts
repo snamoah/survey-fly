@@ -1,5 +1,5 @@
 import * as uuid from "uuid";
-import { SingleChoice } from "./SingleChoiceWidget";
+import { SingleChoice } from "./types";
 
 export const buildDefaultSingleChoice = (): SingleChoice => ({
   options: [

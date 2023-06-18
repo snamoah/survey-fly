@@ -48,7 +48,7 @@ const Page = () => {
   };
 
   const WidgetComponent =
-    QuestionDefinitionMap[selectedQuestion.type].widgetComponent;
+    QuestionDefinitionMap[selectedQuestion.type].editorComponent;
 
   return (
     <article className="m-10 flex flex-col divide-y divide-slate-300 rounded-md ring-1 ring-slate-300">
