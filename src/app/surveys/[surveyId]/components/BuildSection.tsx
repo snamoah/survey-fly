@@ -1,17 +1,11 @@
-import * as uuid from "uuid";
 import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { classNames } from "@/utils";
 import { QuestionType } from "@/types";
-import { QuestionDefinitionMap } from "@/utils/constants/widgetDefinitions";
+import { VerticalDots } from "@/ui/icons";
+import { QuestionDefinitionMap } from "@/utils/constants";
 import { QuestionsActionsContext, QuestionsContext } from "./QuestionsProvider";
-
-type QuestionDefinition = {
-  id: QuestionType;
-  name: string;
-  description: string;
-};
 
 const BuildSection = () => {
   const { questions, selectedQuestion } = useContext(QuestionsContext);
@@ -42,7 +36,7 @@ const BuildSection = () => {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute z-10 mt-2 flex h-80 w-80 flex-col divide-y divide-slate-200 rounded-sm bg-white drop-shadow-md">
+                <Popover.Panel className="absolute z-10 mt-2 flex max-h-80 w-80 flex-col divide-y divide-slate-200 rounded-sm bg-white drop-shadow-md">
                   <header className="rounded-t-sm p-2">
                     <input
                       type="text"
@@ -99,14 +93,14 @@ const BuildSection = () => {
               >
                 {isSelected && (
                   <div className="mr-3 flex items-center justify-items-center font-bold">
-                    <span className="h-6 w-4 bg-lime-100"></span>
+                    <VerticalDots size={18} className="text-slate-300" />
                   </div>
                 )}
                 <div className="inline-block w-52">
-                  <h3 className="overflow-hidden text-ellipsis whitespace-nowrap">
+                  <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-base">
                     {question.title || "Untitled Question"}
                   </h3>
-                  <p>{question.type}</p>
+                  <p className="text-sm">{question.type}</p>
                 </div>
               </li>
             );

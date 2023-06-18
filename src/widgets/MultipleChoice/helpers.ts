@@ -1,5 +1,5 @@
 import * as uuid from "uuid";
-import { MultipleChoice } from "./MultiChoiceWidget";
+import type { MultipleChoice } from "./types";
 
 export const buildDefaultMultipleChoice = (): MultipleChoice => ({
   options: [

@@ -1,6 +1,6 @@
-import { YesOrNo } from "@/widgets/YesOrNo";
-import { SingleChoice } from "@/widgets/SingleChoice";
-import { MultipleChoice } from "@/widgets/MultipleChoice";
+import { YesOrNo, YesOrNoAnswer } from "@/widgets/YesOrNo";
+import { SingleChoice, SingleChoiceAnswer } from "@/widgets/SingleChoice";
+import { MultipleChoice, MultipleChoiceAnswer } from "@/widgets/MultipleChoice";
 
 export type QuestionGeneric<T, WidgetType> = {
   type: T;
@@ -34,3 +34,12 @@ export type WidgetOf<T extends { widgetSettings: unknown }> =
 export type QuestionType = TypeOf<Question>;
 
 export type WidgetOptions = WidgetOf<Question>;
+
+/**
+ * See stackoverflow https://stackoverflow.com/a/50125960
+ */
+export type ByType<T extends Record<K, string>, K extends keyof T> = {
+  [V in T[K]]: Extract<T, Record<K, V>>;
+};
+
+export type Answer = MultipleChoiceAnswer | SingleChoiceAnswer | YesOrNoAnswer;

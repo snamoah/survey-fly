@@ -1,43 +1,49 @@
-import { InputHTMLAttributes, useState } from "react";
-import { WidgetSettings } from "../types";
+import { classNames } from "@/utils";
 
-export type YesOrNo = {
-  value: boolean;
-};
+import { WidgetProps } from "../types";
+import { YesOrNo, YesOrNoAnswer } from "./types";
 
-const Input = ({
-  value,
-  onChange,
-  ...props
-}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
-  value: string;
-  onChange: (value: string) => void;
+const Radio = ({
+  label,
+  toggle,
+  checked,
+}: {
+  label: string;
+  checked?: boolean;
+  toggle: () => void;
 }) => {
-  const [valueToEdit, setValueToEdit] = useState(value);
-
   return (
-    <li className="flex h-10 gap-2 rounded-sm ring-1">
-      <div className="grid w-10 place-content-center">
-        <span className="h-5 w-3 bg-green-300"></span>
-      </div>
-      <div className="my-1 grid place-content-center rounded-sm">
-        <input type="radio" disabled className="h-11/12 w-11/12" />
-      </div>
-      <input
-        type="text"
-        value={valueToEdit}
-        onBlur={() => onChange(valueToEdit)}
-        onChange={(e) => setValueToEdit(e.target.value)}
-        className="my-1 w-full grow text-xs outline-none"
-        {...props}
-      />
+    <li
+      className={classNames(
+        "flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100",
+        !!checked && "rounded-md ring-blue-600"
+      )}
+      onClick={toggle}
+    >
+      <input id={label} checked={checked} type="radio" onChange={toggle} />
+      <label htmlFor={label} className="my-1 text-xs outline-none">
+        {label}
+      </label>
     </li>
   );
 };
 
-export const YesOrNoWidget = (props: WidgetSettings<YesOrNo>) => (
-  <ul className="flex flex-col gap-3">
-    <Input value="Yes" tabIndex={-1} readOnly={true} onChange={() => {}} />
-    <Input value="No" tabIndex={-1} onChange={() => {}} />
-  </ul>
-);
+export const YesOrNoWidget = ({
+  answer,
+  onChange,
+}: WidgetProps<YesOrNo, YesOrNoAnswer>) => {
+  return (
+    <div className="grid grid-flow-col gap-2">
+      <Radio
+        label="YES"
+        toggle={() => onChange(true)}
+        checked={answer === true}
+      />
+      <Radio
+        label="NO"
+        toggle={() => onChange(false)}
+        checked={answer === false}
+      />
+    </div>
+  );
+};

@@ -10,15 +10,21 @@ import {
 } from "@/types";
 import {
   SingleChoiceWidget,
+  SingleChoiceWidgetEditor,
   buildDefaultSingleChoice,
 } from "@/widgets/SingleChoice";
 import {
-  MultipleChoiceWidget,
+  MultiChoiceWidget,
+  MultipleChoiceWidgetEditor,
   buildDefaultMultipleChoice,
 } from "@/widgets/MultipleChoice";
 import { Icon, Trash } from "@/ui/icons";
-import { WidgetSettings } from "@/widgets";
-import { YesOrNoWidget, buildDefaultYesOrNo } from "@/widgets/YesOrNo";
+import { WidgetProps, WidgetSettings } from "@/widgets";
+import {
+  YesOrNoWidget,
+  YesOrNoWidgetEditor,
+  buildDefaultYesOrNo,
+} from "@/widgets/YesOrNo";
 
 export type QuestionDefinition = {
   type: QuestionType;
@@ -27,16 +33,18 @@ export type QuestionDefinition = {
   description: string;
   defaultTitle: string;
   buildQuestion: () => Question;
-  widgetComponent: ComponentType<WidgetSettings<any>>;
+  widgetComponent: ComponentType<WidgetProps>;
+  editorComponent: ComponentType<WidgetSettings<any>>;
 };
 
 export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
   "multiple-choice": {
-    name: "Multi Choice",
+    name: "Multiple Choice",
     defaultTitle: "",
     Icon: Trash,
     type: "multiple-choice",
-    widgetComponent: MultipleChoiceWidget,
+    widgetComponent: MultiChoiceWidget,
+    editorComponent: MultipleChoiceWidgetEditor,
     description: "Create a multiple choice question",
     buildQuestion() {
       return {
@@ -51,8 +59,8 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     name: "Single Choice",
     type: "single-choice",
     defaultTitle: "",
-
     widgetComponent: SingleChoiceWidget,
+    editorComponent: SingleChoiceWidgetEditor,
     description: "Create a single choice question",
     Icon: Trash,
     buildQuestion() {
@@ -71,6 +79,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     type: "yes-or-no",
     description: "Create a yes or no question",
     widgetComponent: YesOrNoWidget,
+    editorComponent: YesOrNoWidgetEditor,
     buildQuestion() {
       return {
         uuid: uuid.v4(),

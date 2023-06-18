@@ -3,8 +3,8 @@ export type WidgetSettings<T> = {
   onChange: (value: T) => void;
 };
 
-
-export type WidgetConfig = {
-  placeholderText: string;
-  
-}
+export type WidgetProps<SettingsType = any, AnswerType = any> = {
+  settings: SettingsType;
+  answer?: AnswerType;
+  onChange: (value: AnswerType) => void;
+};
