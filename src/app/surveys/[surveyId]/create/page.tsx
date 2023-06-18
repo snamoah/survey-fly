@@ -46,8 +46,8 @@ const Page = () => {
             <Empty />
           </div>
 
-          <h1 className="mt-5">Start by creating a new question</h1>
-          <p className="text-sm">
+          <h1 className="mt-5 text-center">Start by creating a new question</h1>
+          <p className="text-center text-sm">
             Click "Add your first question" to create your first question
           </p>
         </section>
