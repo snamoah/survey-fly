@@ -20,9 +20,9 @@ const Page = () => {
     );
   };
 
-  const gotoNext = () => {
-    setQuestionIndex((prevIndex) => prevIndex + 1);
-  };
+  const gotoNext = () => setQuestionIndex((prevIndex) => prevIndex + 1);
+  const goToPrevious = () => setQuestionIndex((prevIndex) => prevIndex - 1);
+  const submitSurvey = () => alert("Survey submitted, thanks!");
 
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col overflow-hidden">
@@ -40,11 +40,14 @@ const Page = () => {
             return (
               <section
                 key={question.uuid}
-                className={classNames("w-3/5", isInactive && "hidden")}
+                className={classNames(
+                  "flex w-2/5 flex-col gap-6",
+                  isInactive && "hidden"
+                )}
               >
-                <h1>{index + 1}</h1>
-                <h1>{question.title}</h1>
-                <p>{question.type}</p>
+                <header>
+                  <h1>{question.title}</h1>
+                </header>
 
                 <WidgetComponent
                   settings={question.widgetSettings}
@@ -52,13 +55,31 @@ const Page = () => {
                   onChange={(answer) => submitAnswer(question.uuid, answer)}
                 />
 
-                <button
-                  disabled={!answers[question.uuid]}
-                  className="btn bg-blue-500"
-                  onClick={gotoNext}
-                >
-                  Next
-                </button>
+                <footer className="flex gap-1 ">
+                  {questionIndex < questions.length - 1 && (
+                    <button
+                      disabled={!answers[question.uuid]}
+                      className="btn bg-blue-500"
+                      onClick={gotoNext}
+                    >
+                      Next
+                    </button>
+                  )}
+                  {questionIndex === questions.length - 1 && (
+                    <button
+                      disabled={!answers[question.uuid]}
+                      className="btn bg-blue-500"
+                      onClick={submitSurvey}
+                    >
+                      Finish
+                    </button>
+                  )}
+                  {questionIndex > 0 && (
+                    <button className="btn bg-blue-500" onClick={goToPrevious}>
+                      Previous
+                    </button>
+                  )}
+                </footer>
               </section>
             );
           })}
