@@ -46,14 +46,19 @@ const Page = () => {
                 )}
               >
                 <header>
+                  <small className="mb-5 block font-bold">
+                    {questionIndex + 1} of {questions.length}
+                  </small>
                   <h1>{question.title}</h1>
                 </header>
 
-                <WidgetComponent
-                  settings={question.widgetSettings}
-                  answer={answers[question.uuid]}
-                  onChange={(answer) => submitAnswer(question.uuid, answer)}
-                />
+                <div>
+                  <WidgetComponent
+                    settings={question.widgetSettings}
+                    answer={answers[question.uuid]}
+                    onChange={(answer) => submitAnswer(question.uuid, answer)}
+                  />
+                </div>
 
                 <footer className="flex justify-end gap-1">
                   {questionIndex > 0 && (
