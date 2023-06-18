@@ -7,6 +7,7 @@ import {
   YesOrNoQuestion,
   SingleChoiceQuestion,
   MultipleChoiceQuestion,
+  Answer,
 } from "@/types";
 import {
   SingleChoiceWidget,
@@ -19,7 +20,7 @@ import {
   buildDefaultMultipleChoice,
 } from "@/widgets/MultipleChoice";
 import { Icon, Trash } from "@/ui/icons";
-import { WidgetSettings } from "@/widgets";
+import { WidgetProps, WidgetSettings } from "@/widgets";
 import {
   YesOrNoWidget,
   YesOrNoWidgetEditor,
@@ -33,7 +34,7 @@ export type QuestionDefinition = {
   description: string;
   defaultTitle: string;
   buildQuestion: () => Question;
-  widgetComponent: ComponentType<any>;
+  widgetComponent: ComponentType<WidgetProps>;
   editorComponent: ComponentType<WidgetSettings<any>>;
 };
 

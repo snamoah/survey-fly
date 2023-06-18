@@ -1,4 +1,6 @@
 import { classNames } from "@/utils";
+
+import { WidgetProps } from "../types";
 import { SingleChoice, SingleChoiceAnswer } from "./types";
 
 const Radio = ({
@@ -30,11 +32,7 @@ export const SingleChoiceWidget = ({
   answer,
   settings,
   onChange,
-}: {
-  settings: SingleChoice;
-  answer?: SingleChoiceAnswer;
-  onChange: (answer: SingleChoiceAnswer) => void;
-}) => {
+}: WidgetProps<SingleChoice, SingleChoiceAnswer>) => {
   return (
     <div className="grid grid-flow-col gap-2">
       {settings.options.map((option) => (

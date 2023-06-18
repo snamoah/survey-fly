@@ -1,5 +1,7 @@
 import { produce } from "immer";
 import { classNames } from "@/utils";
+
+import { WidgetProps } from "../types";
 import { MultipleChoice, MultipleChoiceAnswer } from "./types";
 
 const CheckBox = ({
@@ -36,11 +38,7 @@ export const MultiChoiceWidget = ({
   answer,
   settings,
   onChange,
-}: {
-  settings: MultipleChoice;
-  answer?: MultipleChoiceAnswer;
-  onChange: (answer: MultipleChoiceAnswer) => void;
-}) => {
+}: WidgetProps<MultipleChoice, MultipleChoiceAnswer>) => {
   const toggleOption = (value: string) => {
     onChange(
       answer
@@ -52,7 +50,6 @@ export const MultiChoiceWidget = ({
     );
   };
 
-  console.log({ settings, answer });
   return (
     <div className="grid grid-flow-col gap-2">
       {settings.options.map((option) => (

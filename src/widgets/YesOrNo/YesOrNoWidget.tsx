@@ -1,5 +1,6 @@
 import { classNames } from "@/utils";
 
+import { WidgetProps } from "../types";
 import { YesOrNo, YesOrNoAnswer } from "./types";
 
 const Radio = ({
@@ -30,11 +31,7 @@ const Radio = ({
 export const YesOrNoWidget = ({
   answer,
   onChange,
-}: {
-  settings: YesOrNo;
-  answer?: YesOrNoAnswer;
-  onChange: (answer: YesOrNoAnswer) => void;
-}) => {
+}: WidgetProps<YesOrNo, YesOrNoAnswer>) => {
   return (
     <div className="grid grid-flow-col gap-2">
       <Radio
