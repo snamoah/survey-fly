@@ -20,8 +20,9 @@ const TitleInput = ({
 
   return (
     <input
-      onBlur={() => onChange(valueToEdit)}
+      autoFocus={true}
       value={valueToEdit}
+      onBlur={() => onChange(valueToEdit)}
       onChange={(e) => setValueToEdit(e.target.value)}
       placeholder="Type your question here..."
       className="placeholder h-10 w-full border-b-2 text-base outline-none"
@@ -32,7 +33,7 @@ const TitleInput = ({
 
 const Page = () => {
   const { selectedQuestion } = useContext(QuestionsContext);
-  const { updateQuestion, updateQuestionSettings } = useContext(
+  const { updateQuestion, deleteQuestion, updateQuestionSettings } = useContext(
     QuestionsActionsContext
   );
 
@@ -51,22 +52,26 @@ const Page = () => {
     QuestionDefinitionMap[selectedQuestion.type].editorComponent;
 
   return (
-    <article className="m-10 flex flex-col divide-y divide-slate-300 rounded-md ring-1 ring-slate-300">
+    <article
+      key={selectedQuestion.uuid}
+      className="m-10 flex flex-col divide-y divide-slate-300 rounded-md ring-1 ring-slate-300"
+    >
       <header className="flex flex-col gap-2 p-6">
         <div className="flex justify-end">
-          <button className="btn ring-1 ring-slate-800">
+          <button
+            onClick={() => deleteQuestion(selectedQuestion.uuid)}
+            className="btn px-2 ring-1 ring-slate-400"
+          >
             <Trash />
           </button>
         </div>
         <TitleInput
-          key={selectedQuestion.uuid}
           value={selectedQuestion.title}
           onChange={onChangeQuestionTitle}
         />
       </header>
       <footer className="p-6">
         <WidgetComponent
-          key={selectedQuestion.uuid}
           onChange={updateQuestionSettings}
           value={selectedQuestion.widgetSettings}
         />

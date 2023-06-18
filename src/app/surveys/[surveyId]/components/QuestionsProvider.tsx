@@ -5,6 +5,7 @@ import { createContext, useState } from "react";
 
 type QuestionActionType = {
   selectQuestion: (id: string) => void;
+  deleteQuestion: (id: string) => void;
   addQuestion: (question: Question) => void;
   updateQuestion: (question: Question) => void;
   updateQuestionSettings: (setting: WidgetOf<Question>) => void;
@@ -22,6 +23,7 @@ export const QuestionsActionsContext = createContext<QuestionActionType>({
   addQuestion() {},
   selectQuestion() {},
   updateQuestion() {},
+  deleteQuestion() {},
   updateQuestionSettings() {},
 });
 
@@ -60,9 +62,18 @@ const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const deleteQuestion = (id: string) => {
+    const nextQuestions = questions.filter((question) => question.uuid !== id);
+    setQuestions(nextQuestions);
+
+    const newLastQuestion = nextQuestions[nextQuestions.length - 1];
+    setSelectedQuestionId(newLastQuestion.uuid);
+  };
+
   const context = {
     addQuestion,
     updateQuestion,
+    deleteQuestion,
     updateQuestionSettings,
     selectQuestion: setSelectedQuestionId,
   };

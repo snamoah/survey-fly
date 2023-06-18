@@ -2,7 +2,7 @@ import * as uuid from "uuid";
 import { produce } from "immer";
 import { InputHTMLAttributes, useState } from "react";
 
-import { CloseCircle, VerticalDots } from "@/ui/icons";
+import { CloseCircleOutline, VerticalDots } from "@/ui/icons";
 
 import type { MultipleChoice } from "./types";
 import type { WidgetSettings } from "../types";
@@ -44,7 +44,7 @@ const Input = ({
         onClick={deleteValue}
         className="grid w-12 place-content-center hover:cursor-pointer"
       >
-        <CloseCircle size={18} />
+        <CloseCircleOutline size={18} />
       </div>
     </li>
   );
