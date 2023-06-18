@@ -106,7 +106,7 @@ export const MultipleChoiceWidget = ({
     value.options[value.options.length - 1].value === "Other";
 
   return (
-    <ul className="flex flex-col gap-3 bg-yellow-300">
+    <ul className="flex flex-col gap-3">
       {value.options.map((option) => (
         <Input
           key={option.key}

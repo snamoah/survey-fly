@@ -3,7 +3,7 @@ import { produce } from "immer";
 import { InputHTMLAttributes, useState } from "react";
 
 import { classNames } from "@/utils";
-import { CloseCircle } from "@/ui/icons";
+import { CloseCircle, VerticalDots } from "@/ui/icons";
 
 import { WidgetSettings } from "../types";
 import { buildDefaultSingleChoice } from "./helpers";
@@ -32,12 +32,12 @@ const Input = ({
   const [valueToEdit, setValueToEdit] = useState(value);
 
   return (
-    <li className="flex h-10 gap-2 rounded-sm ring-1">
-      <div className="flex w-10 items-center">
-        <span className="h-5 w-3 bg-green-300"></span>
+    <li className="flex h-10 flex-row gap-2 rounded-sm p-2 ring-1">
+      <div className="flex items-center bg-green-300">
+        <VerticalDots size={12} className="fill-slate-300" />
       </div>
-      <div className="my-1 grid place-content-center rounded-sm">
-        <input type="radio" disabled className="h-11/12 w-11/12" />
+      <div className="grid place-content-center">
+        <input type="radio" disabled />
       </div>
       <input
         {...props}
@@ -45,11 +45,11 @@ const Input = ({
         value={valueToEdit}
         onBlur={() => onChange(valueToEdit)}
         onChange={(e) => setValueToEdit(e.target.value)}
-        className="my-1 w-full grow text-xs outline-none"
+        className="my-1 grow text-xs outline-none"
       />
       <div
         onClick={deleteValue}
-        className="grid w-12 place-content-center bg-slate-200 hover:cursor-pointer"
+        className="grid w-12 place-content-center hover:cursor-pointer"
       >
         <CloseCircle size={18} />
       </div>

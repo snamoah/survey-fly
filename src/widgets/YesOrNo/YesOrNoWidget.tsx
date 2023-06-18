@@ -16,12 +16,9 @@ const Input = ({
   const [valueToEdit, setValueToEdit] = useState(value);
 
   return (
-    <li className="flex h-10 gap-2 rounded-sm ring-1">
-      <div className="grid w-10 place-content-center">
-        <span className="h-5 w-3 bg-green-300"></span>
-      </div>
+    <li className="flex h-10 gap-2 rounded-sm px-4 py-2 ring-1">
       <div className="my-1 grid place-content-center rounded-sm">
-        <input type="radio" disabled className="h-11/12 w-11/12" />
+        <input type="radio" disabled />
       </div>
       <input
         {...props}
