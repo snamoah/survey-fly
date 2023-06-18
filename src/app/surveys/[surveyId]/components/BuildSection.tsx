@@ -1,102 +1,18 @@
-import * as uuid from "uuid";
 import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 
 import { classNames } from "@/utils";
-import {
-  QuestionType,
-  YesOrNoQuestion,
-  SingleChoiceQuestion,
-  MultipleChoiceQuestion,
-} from "@/types";
-import { buildDefaultYesOrNo } from "@/widgets/YesOrNo";
-import { buildDefaultSingleChoice } from "@/widgets/SingleChoice";
-import { buildDefaultMultipleChoice } from "@/widgets/MultipleChoice";
+import { QuestionType } from "@/types";
+import { QuestionDefinitionMap, definitions } from "@/utils/constants";
 import { QuestionsActionsContext, QuestionsContext } from "./QuestionsProvider";
-
-type QuestionDefinition = {
-  id: QuestionType;
-  name: string;
-  description: string;
-};
-
-const defintions: QuestionDefinition[] = [
-  {
-    id: "multiple-choice",
-    name: "Multi Choice",
-    description: "Create a multiple choice question",
-  },
-  {
-    id: "single-choice",
-    name: "Single Choice",
-    description: "Create a single choice question",
-  },
-  // {
-  //   id: "address",
-  //   name: "Address",
-  //   description: "Create a yes or no question",
-  // },
-  // {
-  //   id: "signature",
-  //   name: "Signature",
-  //   description: "Create a yes or no question",
-  // },
-  {
-    id: "yes-or-no",
-    name: "Yes or No",
-    description: "Create a yes or no question",
-  },
-  // {
-  //   id: "star-rating",
-  //   name: "Star Rating",
-  //   description: "Create a yes or no question",
-  // },
-  // {
-  //   id: "input-field",
-  //   name: "Short Text",
-  //   description: "Create a yes or no question",
-  // },
-];
-
-const buildQuestion = (type: QuestionType) => {
-  switch (type) {
-    case "multiple-choice": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "multiple-choice",
-        widgetSettings: buildDefaultMultipleChoice(),
-      } satisfies MultipleChoiceQuestion;
-    }
-    case "single-choice": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "single-choice",
-        widgetSettings: buildDefaultSingleChoice(),
-      } satisfies SingleChoiceQuestion;
-    }
-    case "yes-or-no": {
-      return {
-        uuid: uuid.v4(),
-        title: "",
-        type: "yes-or-no",
-        widgetSettings: buildDefaultYesOrNo(),
-      } satisfies YesOrNoQuestion;
-    }
-
-    default: {
-      throw Error("cannot build unknown question type");
-    }
-  }
-};
+import { VerticalDots } from "@/ui/icons";
 
 const BuildSection = () => {
   const { questions, selectedQuestion } = useContext(QuestionsContext);
   const { addQuestion, selectQuestion } = useContext(QuestionsActionsContext);
 
-  const onSelectQuestion = (definition: QuestionDefinition) => {
-    addQuestion(buildQuestion(definition.id));
+  const onSelectQuestion = (questionType: QuestionType) => {
+    addQuestion(QuestionDefinitionMap[questionType].buildQuestion());
   };
 
   return (
@@ -120,7 +36,7 @@ const BuildSection = () => {
                 leaveFrom="opacity-100 translate-y-0"
                 leaveTo="opacity-0 translate-y-1"
               >
-                <Popover.Panel className="absolute z-10 mt-2 flex h-80 w-80 flex-col divide-y divide-slate-200 rounded-sm bg-white drop-shadow-md">
+                <Popover.Panel className="absolute z-10 mt-2 flex max-h-80 w-80 flex-col divide-y divide-slate-200 rounded-sm bg-white drop-shadow-md">
                   <header className="rounded-t-sm p-2">
                     <input
                       type="text"
@@ -130,16 +46,18 @@ const BuildSection = () => {
                   </header>
                   <div className="h-full overflow-auto rounded-b-sm">
                     <ul className="m-3 flex flex-col gap-3">
-                      {defintions.map((definition) => (
+                      {definitions.map((definition) => (
                         <li
-                          key={definition.id}
+                          key={definition.type}
                           onClick={() => {
-                            onSelectQuestion(definition);
+                            onSelectQuestion(definition.type);
                             close();
                           }}
                           className="mt-1rounded-sm flex gap-2  p-2 hover:cursor-pointer hover:bg-slate-100"
                         >
-                          <div className="h-6 w-6 rounded-sm bg-purple-500"></div>
+                          <div className="grid h-6 w-6 place-content-center rounded-sm bg-purple-200">
+                            <definition.Icon size={14} />
+                          </div>
                           <div>
                             <h3 className="text-sm">{definition.name}</h3>
                             <span className="text-xs">
@@ -173,14 +91,14 @@ const BuildSection = () => {
               >
                 {isSelected && (
                   <div className="mr-3 flex items-center justify-items-center font-bold">
-                    <span className="h-6 w-4 bg-lime-100"></span>
+                    <VerticalDots size={18} className="text-slate-300" />
                   </div>
                 )}
                 <div className="inline-block w-52">
-                  <h3 className="overflow-hidden text-ellipsis whitespace-nowrap">
+                  <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-base">
                     {question.title || "Untitled Question"}
                   </h3>
-                  <p>{question.type}</p>
+                  <p className="text-sm">{question.type}</p>
                 </div>
               </li>
             );

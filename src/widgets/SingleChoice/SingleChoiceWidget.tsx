@@ -1,13 +1,16 @@
 import * as uuid from "uuid";
 import { produce } from "immer";
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 
 import { classNames } from "@/utils";
 import { CloseCircle } from "@/ui/icons";
+
 import { WidgetSettings } from "../types";
 import { buildDefaultSingleChoice } from "./helpers";
 
 const MAX_OPTIONS_COUNT = 10;
+const MIN_OPTIONS = 2;
+const OTHER_TEXT = "Other";
 
 export type SingleChoice = {
   options: {
@@ -20,7 +23,8 @@ const Input = ({
   value,
   onChange,
   deleteValue,
-}: {
+  ...props
+}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
   value: string;
   deleteValue: () => void;
   onChange: (value: string) => void;
@@ -29,13 +33,14 @@ const Input = ({
 
   return (
     <li className="flex h-10 gap-2 rounded-sm ring-1">
-      <div className="grid w-10 place-content-center">
+      <div className="flex w-10 items-center">
         <span className="h-5 w-3 bg-green-300"></span>
       </div>
       <div className="my-1 grid place-content-center rounded-sm">
         <input type="radio" disabled className="h-11/12 w-11/12" />
       </div>
       <input
+        {...props}
         type="text"
         value={valueToEdit}
         onBlur={() => onChange(valueToEdit)}
@@ -74,12 +79,16 @@ export const SingleChoiceWidget = ({
       })
     );
 
-  const deleteOption = (id: string) =>
-    onChange(
-      produce(value, (draft) => {
-        draft.options = draft.options.filter((option) => option.key !== id);
-      })
-    );
+  const deleteOption = (id: string) => {
+    const shouldDelete = value.options.length > MIN_OPTIONS;
+    if (shouldDelete) {
+      onChange(
+        produce(value, (draft) => {
+          draft.options = draft.options.filter((option) => option.key !== id);
+        })
+      );
+    }
+  };
 
   const addOtherOption = () =>
     onChange(
@@ -95,20 +104,24 @@ export const SingleChoiceWidget = ({
     value.options.length === MAX_OPTIONS_COUNT ||
     value.options[value.options.length - 1].value === "Other";
 
+  console.log({ isActionFooterInvisible });
+
   return (
     <ul className="flex flex-col gap-3">
       {value.options.map((option) => (
         <Input
           key={option.key}
           value={option.value}
+          readOnly={option.value === OTHER_TEXT}
           deleteValue={() => deleteOption(option.key)}
           onChange={(value) => updateOptionAtIndex(value, option.key)}
+          {...(option.value === OTHER_TEXT ? { tabIndex: -1 } : {})}
         />
       ))}
       <li
         className={classNames(
           "mt-2 flex gap-2",
-          isActionFooterInvisible && "invisible"
+          isActionFooterInvisible ? "invisible" : "visible"
         )}
       >
         <button className="btn bg-purple-500" onClick={addOption}>

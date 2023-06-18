@@ -116,9 +116,12 @@ const Layout = ({ children, params }: Props) => {
 
             <ul className="mr-6 flex items-center gap-2">
               <li>
-                <button className="btn text-slate-700 ring-1 ring-slate-700">
+                <Link
+                  href={`${basePath}/preview`}
+                  className="btn text-slate-700 ring-1 ring-slate-700"
+                >
                   Preview
-                </button>
+                </Link>
               </li>
               <li>
                 <button className="btn bg-purple-500">Publish</button>
