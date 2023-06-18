@@ -35,12 +35,12 @@ export const YesOrNoWidget = ({
   return (
     <div className="grid grid-flow-col gap-2">
       <Radio
-        label="YES"
+        label="Yes"
         toggle={() => onChange(true)}
         checked={answer === true}
       />
       <Radio
-        label="NO"
+        label="No"
         toggle={() => onChange(false)}
         checked={answer === false}
       />

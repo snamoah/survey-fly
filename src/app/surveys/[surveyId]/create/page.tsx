@@ -2,12 +2,13 @@
 import { useContext, useState } from "react";
 
 import { Trash } from "@/ui/icons";
+import { Empty } from "@/ui/illustrations";
+import { QuestionDefinitionMap } from "@/utils/constants";
 
 import {
   QuestionsContext,
   QuestionsActionsContext,
 } from "../components/QuestionsProvider";
-import { QuestionDefinitionMap } from "@/utils/constants/widgetDefinitions";
 
 const TitleInput = ({
   value,
@@ -38,7 +39,20 @@ const Page = () => {
   );
 
   if (!selectedQuestion) {
-    return null;
+    return (
+      <article className="grid h-full place-items-center">
+        <section className="flex flex-col items-center gap-1">
+          <div className="p-15 flex-wrap rounded-full bg-cyan-50">
+            <Empty />
+          </div>
+
+          <h1 className="mt-5">Start by creating a new question</h1>
+          <p className="text-sm">
+            Click "Add your first question" to create your first question
+          </p>
+        </section>
+      </article>
+    );
   }
 
   const onChangeQuestionTitle = (title: string) => {

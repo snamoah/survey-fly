@@ -50,7 +50,7 @@ const Page = () => {
               <section
                 key={question.uuid}
                 className={classNames(
-                  "flex w-2/5 flex-col gap-6",
+                  "flex w-2/5 flex-col gap-6 py-4",
                   isInactive && "hidden"
                 )}
               >

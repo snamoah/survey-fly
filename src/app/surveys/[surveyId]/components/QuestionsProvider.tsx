@@ -67,7 +67,9 @@ const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
     setQuestions(nextQuestions);
 
     const newLastQuestion = nextQuestions[nextQuestions.length - 1];
-    setSelectedQuestionId(newLastQuestion.uuid);
+    if (newLastQuestion) {
+      setSelectedQuestionId(newLastQuestion.uuid);
+    }
   };
 
   const context = {

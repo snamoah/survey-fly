@@ -18,7 +18,7 @@ const BuildSection = () => {
   return (
     <div className="flex h-full flex-col">
       <header className="mb-2 p-4">
-        <h3 className="mb-3">New Survey</h3>
+        <h2 className="mb-3">New Survey</h2>
         <Popover>
           {({ close }) => (
             <>
@@ -40,6 +40,7 @@ const BuildSection = () => {
                   <header className="rounded-t-sm p-2">
                     <input
                       type="text"
+                      autoFocus={true}
                       placeholder="Search question type..."
                       className="w-full p-1 text-xs outline-none"
                     />
