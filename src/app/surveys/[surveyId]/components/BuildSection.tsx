@@ -57,11 +57,13 @@ const BuildSection = () => {
                             }}
                             className="mt-1rounded-sm flex gap-2  p-2 hover:cursor-pointer hover:bg-slate-100"
                           >
-                            <div className="grid h-6 w-6 place-content-center rounded-sm bg-purple-400">
+                            <div className="mt-1 grid h-6 w-6 place-content-center rounded-sm bg-purple-400 text-white">
                               <definition.Icon size={14} />
                             </div>
                             <div>
-                              <h3 className="text-sm">{definition.name}</h3>
+                              <h3 className="mt-0 text-sm">
+                                {definition.name}
+                              </h3>
                               <span className="text-xs">
                                 {definition.description}
                               </span>

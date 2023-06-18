@@ -18,7 +18,7 @@ import {
   MultipleChoiceWidgetEditor,
   buildDefaultMultipleChoice,
 } from "@/widgets/MultipleChoice";
-import { Icon, Trash } from "@/ui/icons";
+import { Checkbox, Icon, Radio, ThumbUpThumbDown, Trash } from "@/ui/icons";
 import { WidgetProps, WidgetSettings } from "@/widgets";
 import {
   YesOrNoWidget,
@@ -41,7 +41,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
   "multiple-choice": {
     name: "Multiple Choice",
     defaultTitle: "",
-    Icon: Trash,
+    Icon: Checkbox,
     type: "multiple-choice",
     widgetComponent: MultiChoiceWidget,
     editorComponent: MultipleChoiceWidgetEditor,
@@ -62,7 +62,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     widgetComponent: SingleChoiceWidget,
     editorComponent: SingleChoiceWidgetEditor,
     description: "Create a single choice question",
-    Icon: Trash,
+    Icon: Radio,
     buildQuestion() {
       return {
         uuid: uuid.v4(),
@@ -75,7 +75,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
   "yes-or-no": {
     name: "Yes or No",
     defaultTitle: "",
-    Icon: Trash,
+    Icon: ThumbUpThumbDown,
     type: "yes-or-no",
     description: "Create a yes or no question",
     widgetComponent: YesOrNoWidget,
