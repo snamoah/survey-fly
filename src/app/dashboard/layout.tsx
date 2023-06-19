@@ -14,7 +14,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <menu className="ml-10 grid h-full grid-flow-col gap-4">
             <li className="flex items-center">
               <Link
-                href=""
+                href="/dashboard"
                 className="px-3 py-2 font-medium text-slate-100 hover:text-orange-400"
               >
                 Surveys
@@ -26,14 +26,16 @@ const Layout = ({ children }: { children: ReactNode }) => {
           <menu className="ml-4 grid h-full grid-flow-col gap-4">
             <li className="flex items-center">
               <Link
-                href=""
+                href="/login"
                 className="rounded-sm px-3 py-2 font-medium text-slate-100 hover:bg-slate-600"
               >
                 Login
               </Link>
             </li>
             <li className="flex items-center">
-              <button className="btn bg-orange-500">Sign up</button>
+              <Link href="/signup" className="btn bg-orange-500">
+                Sign up
+              </Link>
             </li>
           </menu>
         </div>

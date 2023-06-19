@@ -1,6 +1,6 @@
 import { Chain } from "@/ui/icons";
 
-const Page = () => (
+const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => (
   <div className="flex h-full flex-col items-center gap-3 overflow-y-auto p-10">
     <article className="flex w-3/5 flex-col gap-3">
       <header className="">
@@ -15,19 +15,26 @@ const Page = () => (
           Make sure you <b>publish</b> your survey before sharing.
         </span>
       </p>
-      <section className="mt-5 flex flex-col gap-2 rounded-sm p-6 ring-1 ring-slate-300">
-        <label className="text-sm font-medium">Link to share</label>
-        <p className="flex items-center rounded-sm bg-slate-200">
-          <span className="bg-green grid place-content-center p-3">
-            <Chain size={12} />
-          </span>
-          <span className="flex-1 select-all font-mono text-slate-600">
-            https://fill.surveyfly.com/i/2483038948
-          </span>
-        </p>
-        <div className="flex justify-end">
-          <button className="btn bg-purple-500">Copy</button>
-        </div>
+      <section className="mt-5 flex flex-col gap-5 rounded-sm p-6 ring-1 ring-slate-300">
+        <header>
+          <h3>Direct Survey Link</h3>
+          <p className="text-sm">
+            Copy direct link to survey and share whereever you want.
+          </p>
+        </header>
+        <footer className="flex flex-col gap-2">
+          <p className="flex items-center rounded-sm bg-slate-200">
+            <span className="bg-green grid place-content-center p-3">
+              <Chain size={12} />
+            </span>
+            <span className="flex-1 select-all font-mono text-slate-600">
+              https://fill.surveyfly.com/i/{surveyId}
+            </span>
+          </p>
+          <div className="flex justify-end">
+            <button className="btn bg-purple-500">Copy link</button>
+          </div>
+        </footer>
       </section>
       <section className="mt-5 flex flex-col gap-5 rounded-sm p-6 ring-1 ring-slate-300">
         <header>

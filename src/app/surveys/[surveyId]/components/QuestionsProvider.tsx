@@ -1,7 +1,8 @@
 "use client";
-import { Question, WidgetOf } from "@/types";
 import { produce } from "immer";
 import { createContext, useState } from "react";
+
+import { Question, WidgetOf } from "@/types";
 
 type QuestionActionType = {
   selectQuestion: (id: string) => void;
@@ -27,8 +28,13 @@ export const QuestionsActionsContext = createContext<QuestionActionType>({
   updateQuestionSettings() {},
 });
 
-const QuestionsProvider = ({ children }: { children: React.ReactNode }) => {
-  const [questions, setQuestions] = useState<Question[]>([]);
+type Props = {
+  initialValue: Question[];
+  children: React.ReactNode;
+};
+
+const QuestionsProvider = ({ children, initialValue }: Props) => {
+  const [questions, setQuestions] = useState<Question[]>(initialValue);
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>();
 
   const addQuestion = (question: Question) => {

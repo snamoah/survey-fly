@@ -1,4 +1,5 @@
 import { EmptyPackage } from "@/ui/illustrations";
+import { CreateSurveyButton } from "./components/CreateSurveyButton";
 
 const EmptyScreen = () => (
   <div className="grid h-full place-content-center">
@@ -24,7 +25,7 @@ export default function DashboardPage() {
             placeholder="Search surveys..."
             className="w-72 rounded-sm bg-slate-200 px-3 py-3 text-xs text-slate-800 outline-slate-400"
           />
-          <button className="btn bg-purple-500">Create Survey</button>
+          <CreateSurveyButton />
         </div>
       </header>
       <div className="flex-1 overflow-auto px-20">
