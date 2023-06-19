@@ -26,7 +26,7 @@ const Input = ({
 
   return (
     <li className="flex h-10 flex-row gap-2 rounded-sm p-2 ring-1">
-      <div className="flex items-center bg-green-300">
+      <div className="flex items-center">
         <VerticalDots size={12} className="fill-slate-300" />
       </div>
       <div className="grid place-content-center">

@@ -10,7 +10,7 @@ const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => {
         </div>
         <div className="flex w-2/3 flex-col gap-1 text-center">
           <h2>No responses yet</h2>
-          <p className="text-sm">
+          <p className="text-xs">
             Start receiving responses to your survey by sharing the link on your
             various platforms.
           </p>

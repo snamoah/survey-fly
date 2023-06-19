@@ -17,7 +17,7 @@ const CheckBox = ({
     <li
       className={classNames(
         "flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100",
-        !!checked && "rounded-md ring-blue-600"
+        !!checked && "rounded-md bg-slate-100"
       )}
       onClick={toggle}
     >
