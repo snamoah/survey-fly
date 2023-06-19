@@ -22,8 +22,9 @@ export default function DashboardPage() {
           <input
             type="search"
             placeholder="Search surveys..."
-            className="w-72 rounded-sm bg-slate-200 px-3 py-2 text-slate-800 outline-slate-400"
+            className="w-72 rounded-sm bg-slate-200 px-3 py-3 text-xs text-slate-800 outline-slate-400"
           />
+          <button className="btn bg-purple-500">Create Survey</button>
         </div>
       </header>
       <div className="flex-1 overflow-auto px-20">
