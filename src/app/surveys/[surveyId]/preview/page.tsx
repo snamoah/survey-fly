@@ -37,7 +37,7 @@ const Page = () => {
         </menu>
       </nav>
       <p className="grid-row-1 grid h-10 place-content-center bg-yellow-200 text-slate-600">
-        This is a preview. Publish to allow access to your repsondents
+        This is a preview. Publish to allow access to your respondents
       </p>
       <main className="row-span-3 grid flex-1 grid-cols-1 overflow-auto bg-white">
         <div className="grid grid-rows-1 place-items-center">
@@ -85,6 +85,7 @@ const Page = () => {
                     </button>
                   ) : (
                     <button
+                      type="button"
                       disabled={answers[question.uuid] === undefined}
                       className="btn bg-blue-500"
                       onClick={submitSurvey}

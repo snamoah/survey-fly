@@ -49,6 +49,8 @@ export type Answer = MultipleChoiceAnswer | SingleChoiceAnswer | YesOrNoAnswer;
 export type Survey = {
   id: string;
   title: string;
+  createdAt: string;
+  updatedAt: string;
   description: string;
   status: SurveyStatus;
   questions: Question[];

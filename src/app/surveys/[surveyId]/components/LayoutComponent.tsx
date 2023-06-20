@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { useSearchParams, useSelectedLayoutSegment } from "next/navigation";
 
-import type { Survey } from "@/types";
 import { classNames } from "@/utils";
+import type { Survey } from "@/types";
 import { ArrowRight } from "@/ui/icons";
 import BuildSection from "./BuildSection";
+import { publishSurveyAction } from "@/lib/actions";
+
 import DesignSection from "./DesignSection";
 import TriggerSection from "./TriggerSection";
 import IntegrateSidebar from "./IntegrateSidebar";
@@ -41,6 +43,7 @@ const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
 };
 
 export const LayoutComponent = ({ survey, children }: Props) => {
+  const [isPublishing, setIsPublishing] = useState(false);
   const searchParams = useSearchParams();
   const segment = useSelectedLayoutSegment();
 
@@ -48,6 +51,12 @@ export const LayoutComponent = ({ survey, children }: Props) => {
   const basePath = `/surveys/${survey.id}`;
   const isAsideVisible = segment && ASIDE_SEGMENTS.includes(segment);
   const currentToolbarTab = (searchParams.get("t") ?? "build") as ToolbarAction;
+
+  const publishSurvey = async () => {
+    setIsPublishing(true);
+    await publishSurveyAction(survey.id);
+    setIsPublishing(false);
+  };
 
   return (
     <div className="flex h-screen divide-x divide-slate-300">
@@ -123,7 +132,13 @@ export const LayoutComponent = ({ survey, children }: Props) => {
               </Link>
             </li>
             <li>
-              <button className="btn bg-purple-500">Publish</button>
+              <button
+                disabled={isPublishing}
+                onClick={publishSurvey}
+                className="btn bg-purple-500"
+              >
+                {isPublishing ? "Publishing..." : "Publish"}
+              </button>
             </li>
           </ul>
         </nav>

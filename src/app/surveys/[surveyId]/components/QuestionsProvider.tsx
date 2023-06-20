@@ -1,8 +1,9 @@
 "use client";
 import { produce } from "immer";
-import { createContext, useState } from "react";
+import { createContext, startTransition, useEffect, useState } from "react";
 
 import { Question, WidgetOf } from "@/types";
+import { updateSurveyQuestionsAction } from "@/lib/actions";
 
 type QuestionActionType = {
   selectQuestion: (id: string) => void;
@@ -29,13 +30,20 @@ export const QuestionsActionsContext = createContext<QuestionActionType>({
 });
 
 type Props = {
+  surveyId: string;
   initialValue: Question[];
   children: React.ReactNode;
 };
 
-const QuestionsProvider = ({ children, initialValue }: Props) => {
+const QuestionsProvider = ({
+  children,
+  surveyId,
+  initialValue = [],
+}: Props) => {
   const [questions, setQuestions] = useState<Question[]>(initialValue);
-  const [selectedQuestionId, setSelectedQuestionId] = useState<string>();
+  const [selectedQuestionId, setSelectedQuestionId] = useState<string>(() =>
+    questions.length ? questions[0].uuid : ""
+  );
 
   const addQuestion = (question: Question) => {
     setQuestions(questions.concat([question]));
@@ -85,6 +93,15 @@ const QuestionsProvider = ({ children, initialValue }: Props) => {
     updateQuestionSettings,
     selectQuestion: setSelectedQuestionId,
   };
+
+  useEffect(() => {
+    startTransition(() => {
+      console.log("===> sync status started", questions);
+      updateSurveyQuestionsAction(surveyId, questions).then(() => {
+        console.log("===> sync status completed", questions);
+      });
+    });
+  }, [questions]);
 
   const selectedQuestion = questions.find(
     (question) => question.uuid === selectedQuestionId

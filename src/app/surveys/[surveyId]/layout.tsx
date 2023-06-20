@@ -13,7 +13,6 @@ type Props = {
 };
 
 const Layout = async ({ children, params }: Props) => {
-  console.log(params);
   const survey = await getSurvey(params.surveyId);
 
   if (!survey) {
@@ -21,7 +20,7 @@ const Layout = async ({ children, params }: Props) => {
   }
 
   return (
-    <QuestionsProvider initialValue={survey.questions}>
+    <QuestionsProvider surveyId={survey.id} initialValue={survey.questions}>
       <LayoutComponent survey={survey}>{children}</LayoutComponent>
     </QuestionsProvider>
   );
