@@ -1,5 +1,5 @@
 import path from "path";
-import * as uuid from "uuid";
+import { nanoid } from "nanoid";
 import { open } from "fs/promises";
 
 import type { Survey } from "@/types";
@@ -26,7 +26,7 @@ const db = {
 export const createSurvey = async () => {
   const now = new Date().toISOString();
   const newSurvey: Survey = {
-    id: uuid.v4(),
+    id: nanoid(),
     questions: [],
     description: "",
     status: "draft",

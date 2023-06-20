@@ -1,4 +1,4 @@
-import * as uuid from "uuid";
+import { nanoid } from "nanoid";
 import type { ComponentType } from "react";
 
 import {
@@ -9,6 +9,11 @@ import {
   MultipleChoiceQuestion,
 } from "@/types";
 import {
+  YesOrNoWidget,
+  YesOrNoWidgetEditor,
+  buildDefaultYesOrNo,
+} from "@/widgets/YesOrNo";
+import {
   SingleChoiceWidget,
   SingleChoiceWidgetEditor,
   buildDefaultSingleChoice,
@@ -18,13 +23,8 @@ import {
   MultipleChoiceWidgetEditor,
   buildDefaultMultipleChoice,
 } from "@/widgets/MultipleChoice";
-import { Checkbox, Icon, Radio, ThumbUpThumbDown, Trash } from "@/ui/icons";
 import { WidgetProps, WidgetSettings } from "@/widgets";
-import {
-  YesOrNoWidget,
-  YesOrNoWidgetEditor,
-  buildDefaultYesOrNo,
-} from "@/widgets/YesOrNo";
+import { Checkbox, Icon, Radio, ThumbUpThumbDown } from "@/ui/icons";
 
 export type QuestionDefinition = {
   type: QuestionType;
@@ -48,7 +48,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     description: "Create a multiple choice question",
     buildQuestion() {
       return {
-        uuid: uuid.v4(),
+        uuid: nanoid(),
         title: "",
         type: "multiple-choice",
         widgetSettings: buildDefaultMultipleChoice(),
@@ -65,7 +65,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     Icon: Radio,
     buildQuestion() {
       return {
-        uuid: uuid.v4(),
+        uuid: nanoid(),
         title: "",
         type: "single-choice",
         widgetSettings: buildDefaultSingleChoice(),
@@ -82,7 +82,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     editorComponent: YesOrNoWidgetEditor,
     buildQuestion() {
       return {
-        uuid: uuid.v4(),
+        uuid: nanoid(),
         title: "",
         type: "yes-or-no",
         widgetSettings: buildDefaultYesOrNo(),
