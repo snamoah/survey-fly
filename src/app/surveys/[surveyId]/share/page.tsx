@@ -28,7 +28,7 @@ const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => (
               <Chain size={12} />
             </span>
             <span className="flex-1 select-all font-mono text-slate-600">
-              https://fill.surveyfly.com/i/{surveyId}
+              https://fill.surveyfly.com/s/{surveyId}
             </span>
           </p>
           <div className="flex justify-end">

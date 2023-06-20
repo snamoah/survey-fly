@@ -36,10 +36,10 @@ const Page = () => {
           </li>
         </menu>
       </nav>
-      <p className="grid-row-1 grid h-10 place-content-center bg-yellow-200 text-slate-600">
+      <p className="grid h-10 place-content-center bg-yellow-200 text-slate-600">
         This is a preview. Publish to allow access to your respondents
       </p>
-      <main className="row-span-3 grid flex-1 grid-cols-1 overflow-auto bg-white">
+      <main className="grid flex-1 grid-cols-1 overflow-auto bg-white">
         <div className="grid grid-rows-1 place-items-center">
           {questions.map((question, index) => {
             const isInactive = questionIndex !== index;
