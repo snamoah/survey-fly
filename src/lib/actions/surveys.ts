@@ -12,13 +12,15 @@ export const createSurveyAction = async () => {
 
 export const getSurveyAction = async (surveyId: string) => {
   const survey = await getSurvey(surveyId);
-
-  if (!survey) {
-    return notFound();
-  }
-
+  if (!survey) return notFound();
   return survey;
 };
+
+export const getSurveyForSubmissionAction = async (surveyId: string) => {
+  const survey = await getSurveyAction(surveyId);
+  if (survey.status !== 'published') return notFound();
+  return survey;
+}
 
 export const updateSurveyQuestionsAction = async (
   surveyId: string,

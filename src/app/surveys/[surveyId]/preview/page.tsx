@@ -3,6 +3,7 @@ import { produce } from "immer";
 import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
 
+import { Answer } from "@/types";
 import { classNames } from "@/utils";
 import { CloseCircle } from "@/ui/icons";
 import { QuestionDefinitionMap } from "@/utils/constants";
@@ -12,10 +13,10 @@ import { QuestionsContext } from "../components/QuestionsProvider";
 const Page = () => {
   const router = useRouter();
   const { questions } = useContext(QuestionsContext);
-  const [answers, setAnswers] = useState<Record<string, any>>({});
+  const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [questionIndex, setQuestionIndex] = useState(0);
 
-  const submitAnswer = (questionId: string, answer: any) => {
+  const submitAnswer = (questionId: string, answer: Answer) => {
     setAnswers(
       produce(answers, (draft) => {
         draft[questionId] = answer;
