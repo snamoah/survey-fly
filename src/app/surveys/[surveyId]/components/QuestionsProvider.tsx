@@ -95,12 +95,7 @@ const QuestionsProvider = ({
   };
 
   useEffect(() => {
-    startTransition(() => {
-      console.log("===> sync status started", questions);
-      updateSurveyQuestionsAction(surveyId, questions).then(() => {
-        console.log("===> sync status completed", questions);
-      });
-    });
+    updateSurveyQuestionsAction(surveyId, questions);
   }, [questions]);
 
   const selectedQuestion = questions.find(

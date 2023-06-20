@@ -51,7 +51,7 @@ export const MultiChoiceWidget = ({
   };
 
   return (
-    <div className="grid grid-flow-col gap-2">
+    <div className="grid grid-flow-row gap-2">
       {settings.options.map((option) => (
         <CheckBox
           key={option.key}

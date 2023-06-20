@@ -34,7 +34,7 @@ export const SingleChoiceWidget = ({
   onChange,
 }: WidgetProps<SingleChoice, SingleChoiceAnswer>) => {
   return (
-    <div className="grid grid-flow-col gap-2">
+    <div className="grid grid-flow-row gap-2">
       {settings.options.map((option) => (
         <Radio
           key={option.key}

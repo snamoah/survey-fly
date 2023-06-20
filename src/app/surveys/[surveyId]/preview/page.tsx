@@ -61,13 +61,11 @@ const Page = () => {
                   <h1>{question.title}</h1>
                 </header>
 
-                <div>
-                  <WidgetComponent
-                    settings={question.widgetSettings}
-                    answer={answers[question.uuid]}
-                    onChange={(answer) => submitAnswer(question.uuid, answer)}
-                  />
-                </div>
+                <WidgetComponent
+                  settings={question.widgetSettings}
+                  answer={answers[question.uuid]}
+                  onChange={(answer) => submitAnswer(question.uuid, answer)}
+                />
 
                 <footer className="flex justify-end gap-1">
                   {questionIndex > 0 && (
