@@ -55,3 +55,24 @@ export type Survey = {
   status: SurveyStatus;
   questions: Question[];
 };
+
+export type BrowserInfo = {
+  language: string;
+  userAgent: string;
+};
+
+export type SurveyResponse = {
+  id: string;
+  surveyId: string;
+  createdAt: string;
+  updatedAt: string;
+  respondentId: string;
+  tmpRespondentId: string;
+  browserInfo: BrowserInfo;
+  answers: Record<string, Answer>;
+};
+
+export type SurveyResponsePayload = Omit<
+  SurveyResponse,
+  "id" | "createdAt" | "updatedAt"
+>;

@@ -1,6 +1,6 @@
 import { getSurveyForSubmissionAction } from "@/lib/actions";
 
-import { QuestionList } from "./QuestionList";
+import { Stages } from "./Stages";
 
 type Props = {
   params: { surveyId: string };
@@ -12,7 +12,7 @@ export const Page = async ({ params: { surveyId } }: Props) => {
   return (
     <main className="grid h-screen w-screen grid-cols-1 place-items-center">
       <section className="flex w-full flex-1 flex-col items-center">
-        <QuestionList survey={survey} />
+        <Stages survey={survey} />
       </section>
     </main>
   );

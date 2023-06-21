@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { getSurvey } from "@/lib/database";
+import { getSurvey } from "@/lib/storage/database";
 
 import QuestionsProvider from "./components/QuestionsProvider";
 import { LayoutComponent } from "./components/LayoutComponent";

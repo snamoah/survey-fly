@@ -9,7 +9,7 @@ const CheckBox = ({
   toggle,
   checked,
 }: {
-  checked?: boolean;
+  checked: boolean ; 
   option: MultipleChoice["options"][number];
   toggle: () => void;
 }) => {
@@ -35,9 +35,9 @@ const CheckBox = ({
 };
 
 export const MultiChoiceWidget = ({
-  answer,
   settings,
   onChange,
+  answer = [],
 }: WidgetProps<MultipleChoice, MultipleChoiceAnswer>) => {
   const toggleOption = (value: string) => {
     onChange(
@@ -57,7 +57,7 @@ export const MultiChoiceWidget = ({
           key={option.key}
           option={option}
           toggle={() => toggleOption(option.value)}
-          checked={answer?.includes(option.value)}
+          checked={answer.includes(option.value)}
         />
       ))}
     </div>

@@ -1,17 +1,20 @@
 "use client";
 
+import * as uuid from "uuid";
 import { produce } from "immer";
 import { useState } from "react";
 
 import { classNames } from "@/utils";
-import { Answer, Survey } from "@/types";
+import { clientStorage } from "@/lib/storage";
 import { QuestionDefinitionMap } from "@/utils/constants";
+import { Answer, Survey, SurveyResponsePayload } from "@/types";
 
 type Props = {
   survey: Survey;
+  submitResponse: (payload: SurveyResponsePayload) => void;
 };
 
-export const QuestionList = ({ survey }: Props) => {
+export const QuestionList = ({ survey, submitResponse }: Props) => {
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [questionIndex, setQuestionIndex] = useState(0);
 
@@ -25,7 +28,27 @@ export const QuestionList = ({ survey }: Props) => {
 
   const gotoNext = () => setQuestionIndex((prevIndex) => prevIndex + 1);
   const goToPrevious = () => setQuestionIndex((prevIndex) => prevIndex - 1);
-  const submitSurvey = () => alert("Survey submitted, thanks!");
+
+  const onFinish = async () => {
+    let tmpRespondentId = clientStorage.getItem("tmpRespondentId");
+    if (!tmpRespondentId) {
+      tmpRespondentId = uuid.v4();
+      clientStorage.setItem("tmpRespondentId", tmpRespondentId);
+    }
+
+    const response: SurveyResponsePayload = {
+      answers,
+      tmpRespondentId,
+      surveyId: survey.id,
+      respondentId: tmpRespondentId,
+      browserInfo: {
+        language: navigator.language,
+        userAgent: navigator.userAgent,
+      },
+    };
+
+    await submitResponse(response);
+  };
 
   return (
     <>
@@ -74,7 +97,7 @@ export const QuestionList = ({ survey }: Props) => {
                   type="button"
                   disabled={answers[question.uuid] === undefined}
                   className="btn bg-blue-500"
-                  onClick={submitSurvey}
+                  onClick={onFinish}
                 >
                   Finish
                 </button>

@@ -1,9 +1,17 @@
 "use server";
 
+import * as uuid from "uuid";
+import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
-import { Question, Survey } from "@/types";
-import { createSurvey, getSurvey, updateSurvey } from "../database";
+import { Question, Survey, SurveyResponsePayload } from "@/types";
+import {
+  getSurvey,
+  updateSurvey,
+  createSurvey,
+  createSurveyResponse,
+  listSurveyResponses,
+} from "../storage/database";
 
 export const createSurveyAction = async () => {
   const survey = await createSurvey();
@@ -18,9 +26,9 @@ export const getSurveyAction = async (surveyId: string) => {
 
 export const getSurveyForSubmissionAction = async (surveyId: string) => {
   const survey = await getSurveyAction(surveyId);
-  if (survey.status !== 'published') return notFound();
+  if (survey.status !== "published") return notFound();
   return survey;
-}
+};
 
 export const updateSurveyQuestionsAction = async (
   surveyId: string,
@@ -50,4 +58,28 @@ export const publishSurveyAction = async (surveyId: string) => {
 
   await updateSurvey(surveyId, surveyToUpdate);
   return surveyToUpdate;
+};
+
+export const submitSurveyAction = async (survey: SurveyResponsePayload) => {
+  const existingSubmission = await getUserSubmission(survey.surveyId, survey.respondentId);
+  if (existingSubmission) {
+    return { error: 'You have already made a submission' };
+  }
+  const response = await createSurveyResponse(survey);
+  return { response };
+};
+
+export const getUserSubmission = async (
+  surveyId: string,
+  tmpRespondentId: string
+) => {
+  const responses = await listSurveyResponses();
+  const filtered = responses.filter(
+    (response) =>
+      response.surveyId === surveyId &&
+      (response.respondentId === tmpRespondentId ||
+        response.tmpRespondentId === tmpRespondentId)
+  );
+
+  return filtered.at(0);
 };
