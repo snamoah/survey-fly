@@ -1,27 +1,10 @@
-import path from "path";
 import { nanoid } from "nanoid";
-import { open } from "fs/promises";
 
 import type { Survey } from "@/types";
 
-const db = {
-  async save(data: Map<string, Survey>) {
-    const file = await open(path.resolve("./surveys.db"), "w");
-    await file.writeFile(JSON.stringify(Object.fromEntries(data)), "utf-8");
-    await file.close();
-  },
-  async get() {
-    const file = await open(path.resolve("./surveys.db"), "r");
-    const rawData = await file.readFile({ encoding: "utf-8" });
-    await file.close();
+import { db } from "../firebase";
 
-    if (!rawData) {
-      return new Map<string, Survey>();
-    }
-    const data: Record<string, Survey> = JSON.parse(rawData);
-    return new Map(Object.entries(data));
-  },
-};
+const surveyCollection = db.collection('surveys');
 
 export const createSurvey = async () => {
   const now = new Date().toISOString();
@@ -35,7 +18,7 @@ export const createSurvey = async () => {
     updatedAt: now,
   };
 
-  await db.save((await db.get()).set(newSurvey.id, newSurvey));
+  await surveyCollection.doc(newSurvey.id).set(newSurvey);
   return newSurvey;
 };
 
@@ -43,27 +26,24 @@ export const updateSurvey = async (
   surveyId: string,
   survey: Partial<Survey>
 ) => {
-  const surveys = await db.get();
-  const existingSurvey = surveys.get(surveyId);
+  const surveyRef = surveyCollection.doc(surveyId);
+  const surveyDoc = await surveyRef.get();
 
-  if (!existingSurvey) {
+  if (!surveyDoc.exists) {
     throw new Error("Survey not found. you can only update an existing survey");
   }
 
   const surveyToUpdate: Survey = {
-    ...existingSurvey,
+    ...surveyDoc.data() as Survey,
     ...survey,
-    ...(Object.keys(survey).length === 0
-      ? {}
-      : { updatedAt: new Date().toISOString() }),
+    updatedAt: new Date().toISOString(),
   };
 
-  surveys.set(surveyId, surveyToUpdate);
-  await db.save(surveys);
+  await surveyRef.update(surveyToUpdate);
   return surveyToUpdate;
 };
 
 export const getSurvey = async (surveyId: string) => {
-  const survey = (await db.get()).get(surveyId);
-  return survey;
+  const surveyRef = await surveyCollection.doc(surveyId).get();
+  return surveyRef.exists ? surveyRef.data() as Survey : null;
 };

@@ -61,9 +61,12 @@ export const publishSurveyAction = async (surveyId: string) => {
 };
 
 export const submitSurveyAction = async (survey: SurveyResponsePayload) => {
-  const existingSubmission = await getUserSubmission(survey.surveyId, survey.respondentId);
+  const existingSubmission = await getUserSubmission(
+    survey.surveyId,
+    survey.respondentId
+  );
   if (existingSubmission) {
-    return { error: 'You have already made a submission' };
+    return { error: "You have already made a submission" };
   }
   const response = await createSurveyResponse(survey);
   return { response };
@@ -73,12 +76,12 @@ export const getUserSubmission = async (
   surveyId: string,
   tmpRespondentId: string
 ) => {
-  const responses = await listSurveyResponses();
+  const responses = await listSurveyResponses(surveyId);
+  console.log({ responses });
   const filtered = responses.filter(
     (response) =>
-      response.surveyId === surveyId &&
-      (response.respondentId === tmpRespondentId ||
-        response.tmpRespondentId === tmpRespondentId)
+      response.respondentId === tmpRespondentId ||
+      response.tmpRespondentId === tmpRespondentId
   );
 
   return filtered.at(0);
