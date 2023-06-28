@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 
 import { sendEmailLink } from "@/lib/auth";
 import { clientStorage } from "@/lib/storage";
+import Logo from "@/ui/Logo";
 
 const EmailForm = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +32,8 @@ const EmailForm = () => {
         name="email"
         type="email"
         value={email}
-        className="rounded p-3 text-sm ring-2 ring-slate-300"
+        placeholder="e.g. johndoe@example.com"
+        className="w-full rounded bg-slate-100 p-3 text-sm outline-none"
         onChange={(e) => setEmail(e.target.value)}
       />
       <button
@@ -48,10 +50,20 @@ const EmailForm = () => {
 
 const LoginPage = () => {
   return (
-    <>
-      <h1>Login</h1>
-      <EmailForm />
-    </>
+    <section className="grid grid-flow-row gap-8">
+      <div className="mb-10 grid place-items-center">
+        <Logo />
+      </div>
+      <header className="flex flex-col gap-1">
+        <h1 className="font-bold ">Welcome</h1>
+        <p className="text-sm text-slate-400">
+          To keep connected with us please login with your email
+        </p>
+      </header>
+      <div>
+        <EmailForm />
+      </div>
+    </section>
   );
 };
 

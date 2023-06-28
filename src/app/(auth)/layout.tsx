@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { redirect } from "next/navigation";
 
 import { isValidSession } from "@/lib/auth";
+import { Transport } from "@/ui/illustrations";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   // User is logged in so should be redirected directly into the app
@@ -10,12 +11,15 @@ const Layout = async ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className="flex h-screen flex-row bg-yellow-50">
-      <main className="relative flex basis-full items-center justify-center">
-        <nav className="absolute left-0 top-0 h-16 w-full bg-slate-400"></nav>
-        <div className="flex h-1/2 w-1/2 flex-col">{children}</div>
+    <div className="flex h-screen w-screen flex-row">
+      <main className="relative flex basis-1/3 items-center justify-center">
+        <div className="flex w-full flex-col px-8">{children}</div>
       </main>
-      <aside className="basis-1/2 bg-blue-700"></aside>
+      <aside className="relative flex flex-1 items-center justify-center">
+        <div className="h-5/6 w-5/6">
+          <Transport />
+        </div>
+      </aside>
     </div>
   );
 };
