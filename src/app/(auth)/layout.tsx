@@ -1,11 +1,11 @@
-import { getUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
+
+import { isValidSession } from "@/lib/auth";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   // User is logged in so should be redirected directly into the app
-  const user = await getUser();
-  if (user) {
+  if (await isValidSession()) {
     redirect("/dashboard");
   }
 

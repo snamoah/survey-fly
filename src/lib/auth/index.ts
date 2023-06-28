@@ -1,7 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 import { auth } from "../config/firebase";
 
@@ -42,17 +42,31 @@ export const sendEmailLink = async (email: string) => {
   console.log({ loginLink });
 };
 
-export const getUser = async () => {
+export const verifySession = async () => {
   const sessionCookie = cookies().get(AUTH_SESSION_KEY);
   if (!sessionCookie?.value) {
-    return redirectToLogin();
+    throw new Error("Login required");
   }
 
+  const decodedIdToken = await auth.verifySessionCookie(
+    sessionCookie.value,
+    true
+  );
+  return decodedIdToken;
+};
+
+export const isValidSession = async () => {
   try {
-    const decodedIdToken = await auth.verifySessionCookie(
-      sessionCookie.value,
-      true
-    );
+    await verifySession();
+    return true;
+  } catch (_) {
+    return false;
+  }
+};
+
+export const getUser = async () => {
+  try {
+    const decodedIdToken = await verifySession();
     const userRecord = await auth.getUser(decodedIdToken.uid);
     return userRecord;
   } catch (_) {
@@ -62,4 +76,31 @@ export const getUser = async () => {
 
 export const redirectToLogin = async () => {
   redirect("/login");
+};
+
+export const redirectToNotFoundIfNotSignedIn = async () => {
+  try {
+    await verifySession();
+  } catch (_) {
+    return notFound();
+  }
+};
+
+export const signOut = async () => {
+  cookies().set({
+    name: AUTH_SESSION_KEY,
+    value: "",
+    maxAge: 0,
+    secure: true,
+    httpOnly: true,
+    path: "/",
+  });
+
+  try {
+    const user = await getUser();
+    await auth.revokeRefreshTokens(user.uid);
+    await redirectToLogin();
+  } catch (_) {
+    // TODO: implement some error monitoring
+  }
 };

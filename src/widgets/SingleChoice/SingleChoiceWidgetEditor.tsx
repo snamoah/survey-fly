@@ -106,6 +106,7 @@ export const SingleChoiceWidgetEditor = ({
           key={option.key}
           value={option.value}
           readOnly={option.value === OTHER_TEXT}
+          placeholder="Type answer option here..."
           deleteValue={() => deleteOption(option.key)}
           onChange={(value) => updateOptionAtIndex(value, option.key)}
           {...(option.value === OTHER_TEXT ? { tabIndex: -1 } : {})}

@@ -1,8 +1,8 @@
 import { getUserSurveys } from "@/lib/actions";
 import { EmptyPackage } from "@/ui/illustrations";
 
-import { CreateSurveyButton } from "../components/CreateSurveyButton";
 import SurveyList from "./components/SurveyList";
+import { CreateSurveyButton } from "../components/CreateSurveyButton";
 
 const EmptyScreen = () => (
   <div className="grid h-full place-content-center">

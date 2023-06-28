@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-import { getUser } from "@/lib/auth";
+import { isAnonymousUser } from "@/utils";
+import { getUser, signOut } from "@/lib/auth";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
-  const userRecord = await getUser();
+  const user = await getUser();
 
   return (
     <div className="flex h-screen flex-col">
@@ -28,19 +29,34 @@ const Layout = async ({ children }: { children: ReactNode }) => {
         </div>
         <div>
           <menu className="ml-4 grid h-full grid-flow-col gap-4">
-            <li className="flex items-center">
-              <Link
-                href="/login"
-                className="rounded-sm px-3 py-2 font-medium text-slate-100 hover:bg-slate-600"
-              >
-                Login
-              </Link>
-            </li>
-            <li className="flex items-center">
-              <Link href="/signup" className="btn bg-orange-500">
-                Sign up
-              </Link>
-            </li>
+            {isAnonymousUser(user) ? (
+              <>
+                <li className="flex items-center">
+                  <Link
+                    href="/login"
+                    className="rounded-sm px-3 py-2 font-medium text-slate-100 hover:bg-slate-600"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li className="flex items-center">
+                  <Link href="/signup" className="btn bg-orange-500">
+                    Sign up
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <li className="flex items-center">
+                <form action={signOut}>
+                  <button
+                    type="submit"
+                    className="rounded-sm px-3 py-2 font-medium text-slate-100 hover:bg-slate-600"
+                  >
+                    Logout
+                  </button>
+                </form>
+              </li>
+            )}
           </menu>
         </div>
       </nav>

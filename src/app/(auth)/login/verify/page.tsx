@@ -8,6 +8,9 @@ import { verifyLoginLink } from "./helpers";
 const Page = () => {
   const router = useRouter();
 
+  /**
+   * Handle redirection client side
+   */
   useEffect(() => {
     const handleLogin = async () => {
       const { error } = await verifyLoginLink();
