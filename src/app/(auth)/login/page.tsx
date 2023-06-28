@@ -48,16 +48,10 @@ const EmailForm = () => {
 
 const LoginPage = () => {
   return (
-    <div className="flex h-screen flex-row bg-yellow-50">
-      <main className="relative flex basis-full items-center justify-center">
-        <nav className="absolute left-0 top-0 h-16 w-full bg-slate-400"></nav>
-        <div className="flex h-1/2 w-1/2 flex-col">
-          <h1>Login</h1>
-          <EmailForm />
-        </div>
-      </main>
-      <aside className="basis-1/2 bg-blue-700"></aside>
-    </div>
+    <>
+      <h1>Login</h1>
+      <EmailForm />
+    </>
   );
 };
 

@@ -1,5 +1,5 @@
 import { EmptyPackage } from "@/ui/illustrations";
-import { CreateSurveyButton } from "./components/CreateSurveyButton";
+import { CreateSurveyButton } from "../components/CreateSurveyButton";
 
 const EmptyScreen = () => (
   <div className="grid h-full place-content-center">

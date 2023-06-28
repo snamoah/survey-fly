@@ -1,9 +1,10 @@
-import { getUser } from "@/lib/auth";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { getUser } from "@/lib/auth";
+
 const Layout = async ({ children }: { children: ReactNode }) => {
-  const user = await getUser();
+  const userRecord = await getUser();
 
   return (
     <div className="flex h-screen flex-col">

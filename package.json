@@ -16,6 +16,7 @@
     "autoprefixer": "10.4.14",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "firebase": "^9.23.0",
     "firebase-admin": "^11.9.0",
     "immer": "^10.0.2",
     "nanoid": "^4.0.2",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@types/uuid": "^9.0.2",
+    "encoding": "^0.1.13",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
