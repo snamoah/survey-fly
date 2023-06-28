@@ -11,10 +11,13 @@ import {
   createSurvey,
   createSurveyResponse,
   listSurveyResponses,
+  listUserSurveys,
 } from "../storage/database";
+import { getUser } from "../auth";
 
 export const createSurveyAction = async () => {
-  const survey = await createSurvey();
+  const user = await getUser();
+  const survey = await createSurvey(user.uid);
   return redirect(`/surveys/${survey.id}/create`);
 };
 
@@ -85,4 +88,10 @@ export const getUserSubmission = async (
   );
 
   return filtered.at(0);
+};
+
+export const getUserSurveys = async () => {
+  const user = await getUser();
+  const surveys = await listUserSurveys(user.uid);
+  return surveys;
 };

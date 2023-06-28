@@ -6,9 +6,10 @@ import { db } from "../../config/firebase";
 
 const surveyCollection = db.collection("surveys");
 
-export const createSurvey = async () => {
+export const createSurvey = async (userId: string) => {
   const now = new Date().toISOString();
   const newSurvey: Survey = {
+    userId,
     id: nanoid(),
     questions: [],
     description: "",
@@ -46,4 +47,11 @@ export const updateSurvey = async (
 export const getSurvey = async (surveyId: string) => {
   const surveyRef = await surveyCollection.doc(surveyId).get();
   return surveyRef.exists ? (surveyRef.data() as Survey) : null;
+};
+
+export const listUserSurveys = async (userId: string) => {
+  const snapshots = await surveyCollection.where("userId", "==", userId).get();
+  const userSurveys: Survey[] = [];
+  snapshots.forEach((snapshot) => userSurveys.push(snapshot.data() as Survey));
+  return userSurveys;
 };

@@ -49,6 +49,7 @@ export type Answer = MultipleChoiceAnswer | SingleChoiceAnswer | YesOrNoAnswer;
 export type Survey = {
   id: string;
   title: string;
+  userId: string;
   createdAt: string;
   updatedAt: string;
   description: string;

@@ -1,5 +1,8 @@
+import { getUserSurveys } from "@/lib/actions";
 import { EmptyPackage } from "@/ui/illustrations";
+
 import { CreateSurveyButton } from "../components/CreateSurveyButton";
+import SurveyList from "./components/SurveyList";
 
 const EmptyScreen = () => (
   <div className="grid h-full place-content-center">
@@ -14,7 +17,9 @@ const EmptyScreen = () => (
   </div>
 );
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const list = await getUserSurveys();
+
   return (
     <div className="flex h-full flex-col divide-y">
       <header className="flex h-24 place-content-between items-center px-20">
@@ -29,7 +34,7 @@ export default function DashboardPage() {
         </div>
       </header>
       <div className="flex-1 overflow-auto px-20">
-        <EmptyScreen />
+        {list.length ? <SurveyList items={list} /> : <EmptyScreen />}
       </div>
     </div>
   );
