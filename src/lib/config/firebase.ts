@@ -2,7 +2,7 @@ import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 
-import { env } from "../config";
+import { env } from ".";
 
 const app =
   getApps()[0] ??

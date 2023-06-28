@@ -2,9 +2,9 @@ import { nanoid } from "nanoid";
 
 import type { Survey } from "@/types";
 
-import { db } from "../firebase";
+import { db } from "../../config/firebase";
 
-const surveyCollection = db.collection('surveys');
+const surveyCollection = db.collection("surveys");
 
 export const createSurvey = async () => {
   const now = new Date().toISOString();
@@ -34,7 +34,7 @@ export const updateSurvey = async (
   }
 
   const surveyToUpdate: Survey = {
-    ...surveyDoc.data() as Survey,
+    ...(surveyDoc.data() as Survey),
     ...survey,
     updatedAt: new Date().toISOString(),
   };
@@ -45,5 +45,5 @@ export const updateSurvey = async (
 
 export const getSurvey = async (surveyId: string) => {
   const surveyRef = await surveyCollection.doc(surveyId).get();
-  return surveyRef.exists ? surveyRef.data() as Survey : null;
+  return surveyRef.exists ? (surveyRef.data() as Survey) : null;
 };

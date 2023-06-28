@@ -5,6 +5,8 @@ import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 import { redirect } from "next/navigation";
 
+import { auth } from "../config/firebase";
+
 const AUTH_TOKEN_KEY = "authToken";
 
 // TODO: implement more secure check
@@ -21,4 +23,12 @@ export const handleSignIn = async () => {
   });
 
   return redirect("/dashboard");
+};
+
+export const sendEmailLink = async (email: string) => {
+  const loginLink = await auth.generateSignInWithEmailLink(email, {
+    url: "http://localhost:3000/login/verify",
+  });
+
+  console.log({ loginLink });
 };

@@ -2,7 +2,7 @@ import { nanoid } from "nanoid";
 
 import type { SurveyResponse, SurveyResponsePayload } from "@/types";
 
-import { db } from "../firebase";
+import { db } from "../../config/firebase";
 
 const responseCollection = db.collection("surveyResponses");
 

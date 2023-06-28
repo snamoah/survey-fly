@@ -1,6 +1,7 @@
 "use client";
 
 type Schema = {
+  email: string;
   sessionId: string;
   tmpRespondentId: string;
 };
