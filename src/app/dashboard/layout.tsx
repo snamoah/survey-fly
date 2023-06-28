@@ -1,7 +1,10 @@
+import { getUser } from "@/lib/auth";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-const Layout = ({ children }: { children: ReactNode }) => {
+const Layout = async ({ children }: { children: ReactNode }) => {
+  const user = await getUser();
+
   return (
     <div className="flex h-screen flex-col">
       <nav className="flex h-16 place-content-between divide-x bg-slate-800 p-3">

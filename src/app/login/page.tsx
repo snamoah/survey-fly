@@ -1,19 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
+
 import { sendEmailLink } from "@/lib/auth";
 import { clientStorage } from "@/lib/storage";
 
 const EmailForm = () => {
   const [email, setEmail] = useState("");
+  const [isPending, startTransition] = useTransition();
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
   const loginWithEmail = async () => {
     clientStorage.setItem("email", email);
     await sendEmailLink(email);
+    setIsEmailSent(true);
   };
 
-  return (
-    <form action={loginWithEmail} className="flex flex-col gap-3">
+  return isEmailSent ? (
+    <h1>
+      Email has been sent to <em>{email}</em>
+    </h1>
+  ) : (
+    <div className="flex flex-col gap-3">
       <label className="text-xs" htmlFor="email">
         You will receive an email to login
       </label>
@@ -26,10 +34,15 @@ const EmailForm = () => {
         className="rounded p-3 text-sm ring-2 ring-slate-300"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button type="submit" className="btn bg-orange-400">
-        Login
+      <button
+        disabled={isPending}
+        onClick={() => startTransition(loginWithEmail)}
+        type="submit"
+        className="btn bg-orange-400"
+      >
+        {isPending ? "Logging in..." : "Login"}
       </button>
-    </form>
+    </div>
   );
 };
 

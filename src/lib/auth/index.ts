@@ -32,3 +32,12 @@ export const sendEmailLink = async (email: string) => {
 
   console.log({ loginLink });
 };
+
+export const getUser = async () => {
+  const tokenCookie = cookies().get(AUTH_TOKEN_KEY);
+  if (!tokenCookie?.value) {
+    return redirect("/login");
+  }
+
+  return {};
+};
