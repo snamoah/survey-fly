@@ -2,9 +2,9 @@
 
 import { useState, useTransition } from "react";
 
+import Logo from "@/ui/Logo";
 import { sendEmailLink } from "@/lib/auth";
 import { clientStorage } from "@/lib/storage";
-import Logo from "@/ui/Logo";
 
 const EmailForm = () => {
   const [email, setEmail] = useState("");
@@ -17,12 +17,25 @@ const EmailForm = () => {
     setIsEmailSent(true);
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    startTransition(loginWithEmail);
+  };
+
   return isEmailSent ? (
-    <h1>
-      Email has been sent to <em>{email}</em>
-    </h1>
+    <div className="flex flex-col gap-2">
+      <h3 className="font-light text-slate-700">
+        Email has been sent to{" "}
+        <em className="rounded-sm bg-slate-100 px-3 py-1 font-sans font-bold text-orange-500">
+          {email}
+        </em>
+      </h3>
+      <p className="text-xs text-slate-500">
+        Check your email and click the link to complete the login.
+      </p>
+    </div>
   ) : (
-    <div className="flex flex-col gap-3">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <label className="text-xs" htmlFor="email">
         You will receive an email to login
       </label>
@@ -36,15 +49,10 @@ const EmailForm = () => {
         className="w-full rounded bg-slate-100 p-3 text-sm outline-none"
         onChange={(e) => setEmail(e.target.value)}
       />
-      <button
-        disabled={isPending}
-        onClick={() => startTransition(loginWithEmail)}
-        type="submit"
-        className="btn bg-orange-400"
-      >
+      <button disabled={isPending} type="submit" className="btn bg-orange-400">
         {isPending ? "Logging in..." : "Login"}
       </button>
-    </div>
+    </form>
   );
 };
 
