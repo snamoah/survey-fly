@@ -1,77 +1,43 @@
-"use client";
-
-import { useState, useTransition } from "react";
+import { redirect } from "next/navigation";
 
 import Logo from "@/ui/Logo";
-import { sendEmailLink } from "@/lib/auth";
-import { clientStorage } from "@/lib/storage";
+import { isValidSession } from "@/lib/auth";
+import { Transport } from "@/ui/illustrations";
 
-const EmailForm = () => {
-  const [email, setEmail] = useState("");
-  const [isPending, startTransition] = useTransition();
-  const [isEmailSent, setIsEmailSent] = useState(false);
+import { EmailForm } from "./EmailForm";
 
-  const loginWithEmail = async () => {
-    clientStorage.setItem("email", email);
-    await sendEmailLink(email);
-    setIsEmailSent(true);
-  };
+const LoginPage = async () => {
+  // User is logged in so should be redirected directly into the app
+  if (await isValidSession()) {
+    redirect("/dashboard");
+  }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    startTransition(loginWithEmail);
-  };
-
-  return isEmailSent ? (
-    <div className="flex flex-col gap-2">
-      <h3 className="font-light text-slate-700">
-        Email has been sent to{" "}
-        <em className="rounded-sm bg-slate-100 px-3 py-1 font-sans font-bold text-orange-500">
-          {email}
-        </em>
-      </h3>
-      <p className="text-xs text-slate-500">
-        Check your email and click the link to complete the login.
-      </p>
-    </div>
-  ) : (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <label className="text-xs" htmlFor="email">
-        You will receive an email to login
-      </label>
-      <input
-        required
-        id="email"
-        name="email"
-        type="email"
-        value={email}
-        placeholder="e.g. johndoe@example.com"
-        className="w-full rounded bg-slate-100 p-3 text-sm outline-none"
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button disabled={isPending} type="submit" className="btn bg-orange-400">
-        {isPending ? "Logging in..." : "Login"}
-      </button>
-    </form>
-  );
-};
-
-const LoginPage = () => {
   return (
-    <section className="grid grid-flow-row gap-8">
-      <div className="mb-10 grid place-items-center">
-        <Logo />
-      </div>
-      <header className="flex flex-col gap-1">
-        <h1 className="font-bold ">Welcome</h1>
-        <p className="text-sm text-slate-400">
-          To keep connected with us please login with your email
-        </p>
-      </header>
-      <div>
-        <EmailForm />
-      </div>
-    </section>
+    <div className="flex h-screen w-screen flex-row">
+      <main className="relative flex basis-1/3 items-center justify-center">
+        <div className="flex w-full flex-col px-8">
+          <section className="grid grid-flow-row gap-8">
+            <div className="mb-10 grid place-items-center">
+              <Logo />
+            </div>
+            <header className="flex flex-col gap-1">
+              <h1 className="font-bold ">Welcome</h1>
+              <p className="text-sm text-slate-400">
+                To keep connected with us please login with your email
+              </p>
+            </header>
+            <div>
+              <EmailForm />
+            </div>
+          </section>
+        </div>
+      </main>
+      <aside className="relative flex flex-1 items-center justify-center">
+        <div className="h-5/6 w-5/6">
+          <Transport />
+        </div>
+      </aside>
+    </div>
   );
 };
 
