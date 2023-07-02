@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "touch surveys.db && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -30,6 +30,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.195",
     "@types/uuid": "^9.0.2",
     "encoding": "^0.1.13",
     "prettier": "^2.8.8",

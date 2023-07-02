@@ -4,7 +4,7 @@ import type { Survey } from "@/types";
 
 import { db } from "../../config/firebase";
 
-const surveyCollection = db.collection("surveys");
+export const surveyCollection = db.collection("surveys");
 
 export const createSurvey = async (userId: string) => {
   const now = new Date().toISOString();

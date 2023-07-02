@@ -67,6 +67,7 @@ export type SurveyResponse = {
   surveyId: string;
   createdAt: string;
   updatedAt: string;
+  surveyOwnerId: string;
   respondentId: string;
   tmpRespondentId: string;
   browserInfo: BrowserInfo;

@@ -30,6 +30,7 @@ export const QuestionList = ({ survey, submitResponse }: Props) => {
   const goToPrevious = () => setQuestionIndex((prevIndex) => prevIndex - 1);
 
   const onFinish = async () => {
+    // TODO: implement anonymous signin instead
     let tmpRespondentId = clientStorage.getItem("tmpRespondentId");
     if (!tmpRespondentId) {
       tmpRespondentId = uuid.v4();
@@ -40,6 +41,7 @@ export const QuestionList = ({ survey, submitResponse }: Props) => {
       answers,
       tmpRespondentId,
       surveyId: survey.id,
+      surveyOwnerId: survey.userId,
       respondentId: tmpRespondentId,
       browserInfo: {
         language: navigator.language,

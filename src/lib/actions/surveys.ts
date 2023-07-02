@@ -1,7 +1,6 @@
 "use server";
 
-import * as uuid from "uuid";
-import { cookies } from "next/headers";
+import groupBy from "lodash/groupBy";
 import { notFound, redirect } from "next/navigation";
 
 import { Question, Survey, SurveyResponsePayload } from "@/types";
@@ -12,6 +11,8 @@ import {
   createSurveyResponse,
   listSurveyResponses,
   listUserSurveys,
+  listSurveyResponsesBySurveyOnwerId,
+  getSurveyRepsonseByRespondentId,
 } from "../storage/database";
 import { getUser } from "../auth";
 
@@ -79,19 +80,25 @@ export const getUserSubmission = async (
   surveyId: string,
   tmpRespondentId: string
 ) => {
-  const responses = await listSurveyResponses(surveyId);
-  console.log({ responses });
-  const filtered = responses.filter(
-    (response) =>
-      response.respondentId === tmpRespondentId ||
-      response.tmpRespondentId === tmpRespondentId
+  const response = await getSurveyRepsonseByRespondentId(
+    surveyId,
+    tmpRespondentId
   );
-
-  return filtered.at(0);
+  return response;
 };
 
 export const getUserSurveys = async () => {
   const user = await getUser();
   const surveys = await listUserSurveys(user.uid);
   return surveys;
+};
+
+export const getAllSurveyResponses = async () => {
+  const user = await getUser();
+  const responses = await listSurveyResponsesBySurveyOnwerId(user.uid);
+  const surveyResponsesBySurveyId = groupBy(
+    responses,
+    (response) => response.surveyId
+  );
+  return surveyResponsesBySurveyId;
 };

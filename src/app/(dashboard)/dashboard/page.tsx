@@ -1,4 +1,4 @@
-import { getUserSurveys } from "@/lib/actions";
+import { getAllSurveyResponses, getUserSurveys } from "@/lib/actions";
 import { EmptyPackage } from "@/ui/illustrations";
 
 import SurveyList from "./components/SurveyList";
@@ -18,7 +18,10 @@ const EmptyScreen = () => (
 );
 
 export default async function DashboardPage() {
-  const list = await getUserSurveys();
+  const [list, responses] = await Promise.all([
+    getUserSurveys(),
+    getAllSurveyResponses(),
+  ]);
 
   return (
     <div className="flex h-full flex-col divide-y">
@@ -34,7 +37,7 @@ export default async function DashboardPage() {
         </div>
       </header>
       <div className="flex-1 overflow-auto px-20 py-10">
-        {list.length ? <SurveyList items={list} /> : <EmptyScreen />}
+        {list.length ? <SurveyList items={list} responses={responses} /> : <EmptyScreen />}
       </div>
     </div>
   );
