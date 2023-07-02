@@ -33,7 +33,7 @@ export default async function DashboardPage() {
           <CreateSurveyButton />
         </div>
       </header>
-      <div className="flex-1 overflow-auto px-20">
+      <div className="flex-1 overflow-auto px-20 py-10">
         {list.length ? <SurveyList items={list} /> : <EmptyScreen />}
       </div>
     </div>
