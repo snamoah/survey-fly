@@ -1,8 +1,9 @@
 import { Chain } from "@/ui/icons";
 import { CopyLinkButton } from "./CopyLinkButton";
+import { clientEnv } from "@/lib/config/clientEnv";
 
 const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => {
-  const url = `https://fill.surveyfly.com/s/${surveyId}`;
+  const url = `${clientEnv("NEXT_PUBLIC_SURVEY_DOMAIN")}/s/${surveyId}`;
 
   return (
     <div className="flex h-full flex-col items-center gap-3 overflow-y-auto p-10">
