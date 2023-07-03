@@ -1,4 +1,5 @@
 import Link from "next/link";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import { Survey, SurveyResponse } from "@/types";
 
@@ -26,7 +27,9 @@ const SurveyList = async ({ items, responses }: Props) => {
                   <span>&#8226;</span>
                   <span>
                     {lastSubmission
-                      ? `Last submission on ${lastSubmission}`
+                      ? `Last submission was ${formatDistanceToNow(
+                          new Date(lastSubmission)
+                        )} ago`
                       : "No submissions received"}
                   </span>
                 </p>
