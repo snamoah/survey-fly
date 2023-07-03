@@ -7,8 +7,8 @@ import {
 } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 
+import { handleSignIn } from "@/lib/auth";
 import { clientStorage } from "@/lib/storage";
-import { handleSignIn, redirectToLogin } from "@/lib/auth";
 
 const app = initializeApp({
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,

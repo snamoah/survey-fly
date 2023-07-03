@@ -20,9 +20,9 @@ export default function Transport() {
               y2="2391.55"
               fill="none"
               stroke="#59221d"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="4212.96"
@@ -31,9 +31,9 @@ export default function Transport() {
               y2="1924.17"
               fill="none"
               stroke="#59221d"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
           </g>
           <g id="BUILDING">
@@ -167,8 +167,8 @@ export default function Transport() {
               y2="1021.44"
               fill="none"
               stroke="#cee4ed"
-              stroke-miterlimit="10"
-              stroke-width="6"
+              strokeMiterlimit="10"
+              strokeWidth="6"
             />
             <circle cx="3715.92" cy="1193.32" r="6.77" fill="#fff" />
             <circle cx="3671.16" cy="1193.32" r="6.77" fill="#fff" />
@@ -240,8 +240,8 @@ export default function Transport() {
               y2="1262.34"
               fill="none"
               stroke="#cee4ed"
-              stroke-miterlimit="10"
-              stroke-width="6"
+              strokeMiterlimit="10"
+              strokeWidth="6"
             />
             <path
               d="M1648.15,594V1837.17H379.82v-541l403.43-218V848.81a56.46,56.46,0,0,1,56.46-56.46h457.73V594Z"
@@ -278,8 +278,8 @@ export default function Transport() {
               y2="572.41"
               fill="none"
               stroke="#cee4ed"
-              stroke-miterlimit="10"
-              stroke-width="6"
+              strokeMiterlimit="10"
+              strokeWidth="6"
             />
             <rect
               x="539.69"
@@ -434,8 +434,8 @@ export default function Transport() {
                 d="M960.47,1071.17H907.63a25.89,25.89,0,0,0-25.89,25.89v104.73"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M1786.88,1096h48a9.82,9.82,0,0,1,9.82,9.82V1192a9.82,9.82,0,0,1-9.82,9.82H1796.7a9.82,9.82,0,0,1-9.82-9.82V1096a0,0,0,0,1,0,0Z"
@@ -446,8 +446,8 @@ export default function Transport() {
                 d="M1763.68,1071.17h52.83a25.89,25.89,0,0,1,25.89,25.89v104.73"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
             </g>
             <g id="HEADLAMPS">
@@ -469,8 +469,8 @@ export default function Transport() {
                 r="11.09"
                 fill="none"
                 stroke="#fff"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M1628.24,1715.88h135.43v-44.51H1659.84a28.17,28.17,0,0,0-22.17,10.79l-15.94,20.34A8.27,8.27,0,0,0,1628.24,1715.88Z"
@@ -491,8 +491,8 @@ export default function Transport() {
                 r="11.09"
                 fill="none"
                 stroke="#fff"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
             </g>
             <g id="CONTOURS">
@@ -503,9 +503,9 @@ export default function Transport() {
                 y2="1097.43"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1526.98"
@@ -514,9 +514,9 @@ export default function Transport() {
                 y2="1209.82"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1322.06"
@@ -525,9 +525,9 @@ export default function Transport() {
                 y2="1280.02"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1450.1"
@@ -536,9 +536,9 @@ export default function Transport() {
                 y2="1172.53"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1198.1"
@@ -547,24 +547,24 @@ export default function Transport() {
                 y2="1273.51"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <path
                 d="M1746.24,1041.87v402.91l-42.09,46.7a166,166,0,0,1-123.31,54.86H1143.3A166,166,0,0,1,1020,1491.48l-42.08-46.7V1041.87a39.06,39.06,0,0,1,39.06-39.06h690.21A39.06,39.06,0,0,1,1746.24,1041.87Z"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <path
                 d="M960.47,1649.21h102.39a57.21,57.21,0,0,1,45.41,22.42l23.49,30.68a70.06,70.06,0,0,0,55.6,27.45h349.42a70,70,0,0,0,55.6-27.45l23.5-30.68a57.18,57.18,0,0,1,45.4-22.42h102.39"
                 fill="none"
                 stroke="#fff"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
             </g>
           </g>
@@ -628,8 +628,8 @@ export default function Transport() {
                 y2="1090.77"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="2690.12"
@@ -638,8 +638,8 @@ export default function Transport() {
                 y2="1090.77"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="2250.8"
@@ -648,8 +648,8 @@ export default function Transport() {
                 y2="1104.99"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M2091.09,1535h754.77a63.79,63.79,0,0,1,63.79,63.79v266a0,0,0,0,1,0,0H2027.3a0,0,0,0,1,0,0v-266A63.79,63.79,0,0,1,2091.09,1535Z"
@@ -665,8 +665,8 @@ export default function Transport() {
                 r="26.16"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <circle cx="2806.9" cy="1611.16" r="12" fill="#f3b304" />
               <path
@@ -679,8 +679,8 @@ export default function Transport() {
                 r="26.16"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <circle cx="2129.24" cy="1611.16" r="12" fill="#f3b304" />
               <rect
@@ -799,9 +799,9 @@ export default function Transport() {
                 y2="1301.54"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="2613.89"
@@ -810,9 +810,9 @@ export default function Transport() {
                 y2="1227.93"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="2467.56"
@@ -821,9 +821,9 @@ export default function Transport() {
                 y2="1290.71"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
             </g>
             <rect
@@ -835,8 +835,8 @@ export default function Transport() {
               rx="14.18"
               fill="#fff"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
           </g>
           <g id="TREES">
@@ -897,36 +897,36 @@ export default function Transport() {
               y2="1756.74"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M3804.13,557.3S3770.07,704.17,3657.33,757a91.8,91.8,0,0,0-53.26,83"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M3383.83,492.38s46.32,103.67,168.11,148.54a80,80,0,0,1,52.13,75.13"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M3162.22,466.93v24.29a59.1,59.1,0,0,0,59.11,59.11h162a92.64,92.64,0,0,1,64,25.64"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M3456.78,823.32v69.62a132.06,132.06,0,0,0,47.3,101.27l50.68,42.52a138,138,0,0,1,49.31,105.75"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="706.49"
@@ -935,37 +935,37 @@ export default function Transport() {
               y2="1829.88"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M944,728c-16.41,44.18-65.61,133.24-185.19,170.23a74.29,74.29,0,0,0-52.28,71"
               fill="none"
               stroke="#59221d"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M597.26,744s6.49,38,75.5,50.49c19,3.44,33.9,19.73,33.9,39"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M776.55,657.44V699A45.94,45.94,0,0,1,745,742.66l-10.3,3.4a40.61,40.61,0,0,0-27.92,38.58"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M1016.14,737.14v0A30.14,30.14,0,0,1,986,767.32H944.41a34.74,34.74,0,0,0-29.12,15.78"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M369.11,814.43c.84.24,1.68.5,2.5.79a47.53,47.53,0,0,1-1.77,10.62c-7.27,25.35-34,39.93-59.61,32.58-.85-.24-1.69-.5-2.51-.79A47.56,47.56,0,0,1,309.5,847C316.76,821.66,343.45,807.08,369.11,814.43Z"
@@ -1014,9 +1014,9 @@ export default function Transport() {
               y2="1762.35"
               fill="none"
               stroke="#fff"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeLinecap="round"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <path
               d="M4229.92,1709.57,4155.69,1684l-105.57,28.39v48.35h-5V1654.09l-79.27-96.71q2.31-1.12,4.67-2.19l74.6,91V1538.72h5v60.47l60-49.86q2.73,1,5.41,2l-65.4,54.35v101.48l171.21-46.05c.53,1.58,1,3.18,1.5,4.78l-58.92,15.85,65.76,22.46C4229.78,1706,4229.87,1707.78,4229.92,1709.57Z"
@@ -1036,8 +1036,8 @@ export default function Transport() {
               d="M2367.75,583.31h610.83a173.3,173.3,0,0,1,173.3,173.31V1757.28"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <rect
               x="2362.41"
@@ -1061,8 +1061,8 @@ export default function Transport() {
               y2="864.05"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="3094.46"
@@ -1071,8 +1071,8 @@ export default function Transport() {
               y2="1137.61"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <rect
               x="3048.39"
@@ -1088,8 +1088,8 @@ export default function Transport() {
               y2="920.04"
               fill="none"
               stroke="#a74602"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="3024.02"
@@ -1098,8 +1098,8 @@ export default function Transport() {
               y2="943.5"
               fill="none"
               stroke="#a74602"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="3024.02"
@@ -1108,8 +1108,8 @@ export default function Transport() {
               y2="966.96"
               fill="none"
               stroke="#a74602"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <line
               x1="3024.02"
@@ -1118,8 +1118,8 @@ export default function Transport() {
               y2="990.43"
               fill="none"
               stroke="#a74602"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
             <circle cx="3049.77" cy="1089.99" r="24.78" fill="#ffc200" />
             <rect
@@ -1135,8 +1135,8 @@ export default function Transport() {
               d="M1289.33,126.54H415.5c-136.92,0-247.92,111-247.92,247.93V2310.88"
               fill="none"
               stroke="#59221d"
-              stroke-miterlimit="10"
-              stroke-width="5"
+              strokeMiterlimit="10"
+              strokeWidth="5"
             />
           </g>
           <g id="BUSH">
@@ -1162,16 +1162,16 @@ export default function Transport() {
                 ry="249.61"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M3563.88,1872.15c53-4,94.95,103.32,93,229"
                 fill="none"
                 stroke="#59221d"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <ellipse
                 cx="3572.05"
@@ -1180,8 +1180,8 @@ export default function Transport() {
                 ry="21.63"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <ellipse
                 cx="3135.02"
@@ -1190,16 +1190,16 @@ export default function Transport() {
                 ry="174.57"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M3094.4,1860.62c3.42-37.78,19.68-70.11,35.76-81"
                 fill="none"
                 stroke="#59221d"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <ellipse
                 cx="3135.02"
@@ -1208,8 +1208,8 @@ export default function Transport() {
                 ry="17.61"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
             </g>
             <g id="CHARACTER">
@@ -1228,9 +1228,9 @@ export default function Transport() {
                   y2="2007.54"
                   fill="none"
                   stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="5"
+                  strokeLinecap="round"
+                  strokeMiterlimit="10"
+                  strokeWidth="5"
                 />
                 <rect
                   x="3308.76"
@@ -1239,16 +1239,16 @@ export default function Transport() {
                   height="14.8"
                   fill="none"
                   stroke="#f3b304"
-                  stroke-miterlimit="10"
-                  stroke-width="5"
+                  strokeMiterlimit="10"
+                  strokeWidth="5"
                 />
                 <g id="SHOE">
                   <path
                     d="M3303.68,2165.92l-10.28,54.73a13.76,13.76,0,0,0,13.52,16.29h149v-7.62a34.39,34.39,0,0,0-5.91-19.27l-29.91-44.13Z"
                     fill="#fff"
                     stroke="#59221d"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                   <line
                     x1="3295.32"
@@ -1257,8 +1257,8 @@ export default function Transport() {
                     y2="2227.39"
                     fill="none"
                     stroke="#59221d"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                   <line
                     x1="3328.15"
@@ -1267,9 +1267,9 @@ export default function Transport() {
                     y2="2227.39"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                   <line
                     x1="3339.56"
@@ -1278,25 +1278,25 @@ export default function Transport() {
                     y2="2227.39"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                   <path
                     d="M3441.94,2185.78a9.94,9.94,0,0,0-9.93-9.94h-40.48a9.94,9.94,0,0,0-9.94,9.94"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                   <path
                     d="M3450.73,2198.59a9.93,9.93,0,0,0-9.93-9.93h-39.39a9.94,9.94,0,0,0-9.93,9.93"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                 </g>
               </g>
@@ -1312,33 +1312,33 @@ export default function Transport() {
                   y2="1544.87"
                   fill="none"
                   stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="5"
+                  strokeLinecap="round"
+                  strokeMiterlimit="10"
+                  strokeWidth="5"
                 />
                 <path
                   d="M3334.38,1414.11a52.7,52.7,0,0,1,26,32.57l47.13,169"
                   fill="none"
                   stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="5"
+                  strokeLinecap="round"
+                  strokeMiterlimit="10"
+                  strokeWidth="5"
                 />
                 <path
                   d="M3321.51,1649.18s-.18-18.94,39.4-31.67c36.33-11.68,46.57-1.85,46.57-1.85l-6.88-22.1s-12.17-12.8-48.51-1.12c-39.57,12.72-42.66,32.76-42.66,32.76Z"
                   fill="none"
                   stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="5"
                 />
                 <path
                   d="M3489.16,1626.93c1.21-6.66,18.51-15.77,40.64-20,21.33-4,39.89-3,44.37,2.15l-6.54-25.07c-4.48-5.14-23-7.27-44.37-3.24-22.13,4.18-39.43,14.39-40.64,21Z"
                   fill="none"
                   stroke="#fff"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="5"
                 />
               </g>
               <g id="HANDS">
@@ -1351,25 +1351,25 @@ export default function Transport() {
                     d="M3484.73,1758.09a10.83,10.83,0,0,0,9.8-14.55l-6.73-18.42"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <path
                     d="M3469,1758.37a10.84,10.84,0,0,0,9.8-14.55l-6.74-18.41"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <path
                     d="M3452.63,1758.83a10.84,10.84,0,0,0,9.8-14.56l-6.74-18.41"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <line
                     x1="3432.08"
@@ -1378,9 +1378,9 @@ export default function Transport() {
                     y2="1692.32"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                 </g>
                 <g id="RIGHT">
@@ -1392,33 +1392,33 @@ export default function Transport() {
                     d="M3638.75,1748.94a10,10,0,0,0,9-13.4l-6.2-17"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <path
                     d="M3625.22,1749.2a10,10,0,0,0,9-13.4l-6.2-17"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <path
                     d="M3612.2,1749.62a10,10,0,0,0,9-13.4l-6.2-17"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <path
                     d="M3598.82,1738.09V1734a12.71,12.71,0,0,0-12.71-12.71h-2.46l-9.5-6.61"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                 </g>
               </g>
@@ -1436,9 +1436,9 @@ export default function Transport() {
                     d="M3432.15,1396.27s-39.34,25.09-81.69,0"
                     fill="none"
                     stroke="#fff"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="5"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="5"
                   />
                 </g>
                 <path
@@ -1452,9 +1452,9 @@ export default function Transport() {
                   d="M3393.73,1345.45a7.49,7.49,0,0,0-7.48-7.38"
                   fill="none"
                   stroke="#59221d"
-                  stroke-linecap="round"
-                  stroke-miterlimit="10"
-                  stroke-width="3"
+                  strokeLinecap="round"
+                  strokeMiterlimit="10"
+                  strokeWidth="3"
                 />
                 <path
                   id="HAIR"
@@ -1474,9 +1474,9 @@ export default function Transport() {
                     y2="1335.69"
                     fill="none"
                     stroke="#59221d"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="3"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="3"
                   />
                   <ellipse
                     cx="3432.22"
@@ -1493,9 +1493,9 @@ export default function Transport() {
                 d="M3447.09,2039.77c10.64-123.92,63-218,126.06-218,21.38,0,41.54,10.83,59.26,30"
                 fill="none"
                 stroke="#f3b304"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="3508.92"
@@ -1504,9 +1504,9 @@ export default function Transport() {
                 y2="1736.62"
                 fill="none"
                 stroke="#f3b304"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="3533.94"
@@ -1515,8 +1515,8 @@ export default function Transport() {
                 y2="2066.74"
                 fill="none"
                 stroke="#f3b304"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="3436.91"
@@ -1525,17 +1525,17 @@ export default function Transport() {
                 y2="1736.62"
                 fill="none"
                 stroke="#f3b304"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M3550.93,1736.62l6.2,43.37a23.43,23.43,0,0,1-23.19,26.73h-204.5"
                 fill="none"
                 stroke="#f3b304"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
             </g>
           </g>
@@ -1737,33 +1737,33 @@ export default function Transport() {
                         d="M2240.33,1417.94a7,7,0,0,1,4-9"
                         fill="none"
                         stroke="#59221d"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
-                        stroke-width="4"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
+                        strokeWidth="4"
                       />
                       <path
                         d="M2179.45,1440.22a7,7,0,0,0-9.22-3.61"
                         fill="none"
                         stroke="#59221d"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
-                        stroke-width="4"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
+                        strokeWidth="4"
                       />
                       <path
                         d="M2208,1436.86a21.66,21.66,0,0,0-10.57-15.52s-3.92,3.14-10.91,2.23"
                         fill="none"
                         stroke="#59221d"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
-                        stroke-width="4"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
+                        strokeWidth="4"
                       />
                       <path
                         d="M2209.06,1416.59s7.9-1.61,11.73-6.5"
                         fill="none"
                         stroke="#59221d"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
-                        stroke-width="4"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
+                        strokeWidth="4"
                       />
                       <ellipse
                         cx="2216.83"
@@ -1785,9 +1785,9 @@ export default function Transport() {
                         d="M2211.48,1445.73s4.35-7.33,8.7-6"
                         fill="none"
                         stroke="#59221d"
-                        stroke-linecap="round"
-                        stroke-miterlimit="10"
-                        stroke-width="4"
+                        strokeLinecap="round"
+                        strokeMiterlimit="10"
+                        strokeWidth="4"
                       />
                     </g>
                   </g>
@@ -1805,8 +1805,8 @@ export default function Transport() {
                       d="M2162.8,1695c0-49,42-88.63,93.76-88.63s93.76,39.68,93.76,88.63"
                       fill="none"
                       stroke="#59221d"
-                      stroke-miterlimit="10"
-                      stroke-width="5"
+                      strokeMiterlimit="10"
+                      strokeWidth="5"
                     />
                     <path
                       d="M2507.55,1666H2254.82s-29.42-43.93,19.29-63.07c59.92-23.54,148.25-27.28,200.68-21.76Z"
@@ -1816,17 +1816,17 @@ export default function Transport() {
                       d="M2274.76,1623.25c-18.11,7.11-22.4,16.65-24.44,27.09"
                       fill="none"
                       stroke="#59221d"
-                      stroke-linecap="round"
-                      stroke-miterlimit="10"
-                      stroke-width="4"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="4"
                     />
                     <path
                       d="M2282.32,1639.59c-18.11,7.11-22.4,13.63-24.44,24.07"
                       fill="none"
                       stroke="#59221d"
-                      stroke-linecap="round"
-                      stroke-miterlimit="10"
-                      stroke-width="4"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="4"
                     />
                   </g>
                   <g id="LEFT_HAND" data-name="LEFT HAND">
@@ -1838,25 +1838,25 @@ export default function Transport() {
                       d="M2140.27,1408.92a23.24,23.24,0,0,1,9.72-11.15l14-8.2a11.58,11.58,0,0,1,5.85-1.59"
                       fill="none"
                       stroke="#59221d"
-                      stroke-linecap="round"
-                      stroke-miterlimit="10"
-                      stroke-width="4"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="4"
                     />
                     <path
                       d="M2156.37,1408.92a23.24,23.24,0,0,1,9.72-11.15l14-8.2A11.55,11.55,0,0,1,2186,1388"
                       fill="none"
                       stroke="#59221d"
-                      stroke-linecap="round"
-                      stroke-miterlimit="10"
-                      stroke-width="4"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="4"
                     />
                     <path
                       d="M2193.06,1398.3l-8,3.38a14.69,14.69,0,0,0-8.38,17.73l10.58,36"
                       fill="none"
                       stroke="#59221d"
-                      stroke-linecap="round"
-                      stroke-miterlimit="10"
-                      stroke-width="4"
+                      strokeLinecap="round"
+                      strokeMiterlimit="10"
+                      strokeWidth="4"
                     />
                   </g>
                 </g>
@@ -1893,9 +1893,9 @@ export default function Transport() {
                     d="M1691.55,1428.68s-2-6.87-8.84-8.51"
                     fill="none"
                     stroke="#ffc200"
-                    stroke-linecap="round"
-                    stroke-miterlimit="10"
-                    stroke-width="4"
+                    strokeLinecap="round"
+                    strokeMiterlimit="10"
+                    strokeWidth="4"
                   />
                   <ellipse
                     cx="1682.93"
@@ -1932,8 +1932,8 @@ export default function Transport() {
                 rx="18.58"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <line
                 x1="1995.82"
@@ -1942,8 +1942,8 @@ export default function Transport() {
                 y2="1312.87"
                 fill="none"
                 stroke="#59221d"
-                stroke-miterlimit="10"
-                stroke-width="5"
+                strokeMiterlimit="10"
+                strokeWidth="5"
               />
               <path
                 d="M2697.89,1613.49v39.06a52.52,52.52,0,0,1-52.52,52.52H1346.45a52.52,52.52,0,0,1-52.52-52.52v-39.06a27.07,27.07,0,0,1,26.82-27.06c103.46-1,135.36,79.79,135.36,79.79h1079.6s31.9-80.78,135.36-79.79A27.07,27.07,0,0,1,2697.89,1613.49Z"
@@ -1953,17 +1953,17 @@ export default function Transport() {
                 d="M2536.8,1664s31.9-80.78,135.36-79.79"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="6"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="6"
               />
               <path
                 d="M1456.11,1660.77S1424.22,1582,1320.76,1583"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="6"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="6"
               />
             </g>
             <g id="CONTOURS-2" data-name="CONTOURS">
@@ -1975,23 +1975,23 @@ export default function Transport() {
                 rx="91.57"
                 fill="none"
                 stroke="#fff"
-                stroke-miterlimit="10"
-                stroke-width="6"
+                strokeMiterlimit="10"
+                strokeWidth="6"
               />
               <path
                 d="M2442.8,1799.7h-894c-23.64,0-36.29-27.81-20.78-45.63l42.67-49h850.18l42.66,49C2479.09,1771.89,2466.43,1799.7,2442.8,1799.7Z"
                 fill="none"
                 stroke="#fff"
-                stroke-miterlimit="10"
-                stroke-width="6"
+                strokeMiterlimit="10"
+                strokeWidth="6"
               />
               <path
                 d="M2506.62,1666.23H1485l128.3-346c14.31-24.69,41-40.32,68.79-40.48l626.58-3.61c29.15-.17,55.68,16.74,69.37,43.35Z"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1436.5"
@@ -2000,9 +2000,9 @@ export default function Transport() {
                 y2="1705.07"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke-width="6"
+                strokeLinecap="round"
+                strokeMiterlimit="10"
+                strokeWidth="6"
               />
               <line
                 x1="2050.64"
@@ -2011,9 +2011,9 @@ export default function Transport() {
                 y2="1362.77"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="2017.24"
@@ -2022,9 +2022,9 @@ export default function Transport() {
                 y2="1445.12"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1867.1"
@@ -2033,9 +2033,9 @@ export default function Transport() {
                 y2="1496.55"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1952.93"
@@ -2044,9 +2044,9 @@ export default function Transport() {
                 y2="1409.8"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
               <line
                 x1="1768.3"
@@ -2055,9 +2055,9 @@ export default function Transport() {
                 y2="1483.79"
                 fill="none"
                 stroke="#fff"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="5"
               />
             </g>
           </g>

@@ -97,8 +97,6 @@ export const SingleChoiceWidgetEditor = ({
     value.options.length === MAX_OPTIONS_COUNT ||
     value.options[value.options.length - 1].value === "Other";
 
-  console.log({ isActionFooterInvisible });
-
   return (
     <ul className="flex flex-col gap-3">
       {value.options.map((option) => (

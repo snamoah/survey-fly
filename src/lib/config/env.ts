@@ -7,6 +7,7 @@ const parsedEnv = z
     FIREBASE_PRIVATE_KEY: z.string(),
     MAILJET_API_KEY: z.string(),
     MAILJET_API_SECRET: z.string(),
+    APP_URL: z.string(),
   })
   .parse(process.env);
 

@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
+import { env } from "../config";
 import { auth } from "../config/firebase";
 import { sendEmail } from "../config/emails";
 
@@ -25,7 +26,7 @@ export const handleSignIn = async (idToken: string) => {
       name: AUTH_SESSION_KEY,
       value: sessionCookie,
       maxAge: expiresIn,
-      secure: true,
+      secure: false,
       httpOnly: true,
       path: "/",
     });
@@ -37,7 +38,7 @@ export const handleSignIn = async (idToken: string) => {
 
 export const sendEmailLink = async (email: string) => {
   const loginLink = await auth.generateSignInWithEmailLink(email, {
-    url: "http://localhost:3000/login/verify",
+    url: `${env("APP_URL")}/login/verify`,
   });
 
   await sendEmail({
@@ -96,7 +97,7 @@ export const signOut = async () => {
     name: AUTH_SESSION_KEY,
     value: "",
     maxAge: 0,
-    secure: true,
+    secure: false,
     httpOnly: true,
     path: "/",
   });

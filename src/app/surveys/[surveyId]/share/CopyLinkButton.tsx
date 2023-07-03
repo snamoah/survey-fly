@@ -17,7 +17,7 @@ export const CopyLinkButton = ({ value }: Props) => {
     copy(value, { format: "text/plain" });
     timeoutId.current = setTimeout(() => {
       setIsCopied(false);
-    }, 1000);
+    }, 500);
   };
 
   return (
