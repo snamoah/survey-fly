@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 
 import { auth } from "../config/firebase";
+import { sendEmail } from "../config/emails";
 
 const AUTH_SESSION_KEY = "authToken";
 
@@ -39,7 +40,11 @@ export const sendEmailLink = async (email: string) => {
     url: "http://localhost:3000/login/verify",
   });
 
-  console.log({ loginLink });
+  await sendEmail({
+    to: email,
+    subject: "Login to your account",
+    htmlPart: `<h3>Hello,</h3><br />Click the button below to login in to your account<br/><a href="${loginLink}">Login</a>`,
+  });
 };
 
 export const verifySession = async () => {
