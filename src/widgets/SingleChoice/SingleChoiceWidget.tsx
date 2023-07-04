@@ -1,7 +1,7 @@
-import { classNames } from "@/utils";
+import { classNames } from '@/utils';
 
-import { WidgetProps } from "../types";
-import { SingleChoice, SingleChoiceAnswer } from "./types";
+import { WidgetProps } from '../types';
+import { SingleChoice, SingleChoiceAnswer } from './types';
 
 const Radio = ({
   option,
@@ -9,14 +9,14 @@ const Radio = ({
   checked,
 }: {
   checked?: boolean;
-  option: SingleChoice["options"][number];
+  option: SingleChoice['options'][number];
   toggle: () => void;
 }) => {
   return (
     <li
       className={classNames(
-        "flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100",
-        !!checked && "rounded-md bg-slate-100"
+        'flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100',
+        !!checked && 'rounded-md bg-slate-100',
       )}
       onClick={toggle}
     >

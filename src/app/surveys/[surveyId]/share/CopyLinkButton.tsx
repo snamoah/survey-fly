@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import copy from "copy-to-clipboard";
-import { useRef, useState } from "react";
+import copy from 'copy-to-clipboard';
+import { useRef, useState } from 'react';
 
 type Props = {
   value: string;
@@ -14,7 +14,7 @@ export const CopyLinkButton = ({ value }: Props) => {
   const onClick = () => {
     setIsCopied(true);
     timeoutId.current && clearTimeout(timeoutId.current);
-    copy(value, { format: "text/plain" });
+    copy(value, { format: 'text/plain' });
     timeoutId.current = setTimeout(() => {
       setIsCopied(false);
     }, 500);
@@ -22,7 +22,7 @@ export const CopyLinkButton = ({ value }: Props) => {
 
   return (
     <button disabled={isCopied} onClick={onClick} className="btn bg-purple-500">
-      {isCopied ? "Copied" : "Copy link"}
+      {isCopied ? 'Copied' : 'Copy link'}
     </button>
   );
 };

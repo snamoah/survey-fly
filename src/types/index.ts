@@ -1,8 +1,8 @@
-import { YesOrNo, YesOrNoAnswer } from "@/widgets/YesOrNo";
-import { SingleChoice, SingleChoiceAnswer } from "@/widgets/SingleChoice";
-import { MultipleChoice, MultipleChoiceAnswer } from "@/widgets/MultipleChoice";
+import { YesOrNo, YesOrNoAnswer } from '@/widgets/YesOrNo';
+import { SingleChoice, SingleChoiceAnswer } from '@/widgets/SingleChoice';
+import { MultipleChoice, MultipleChoiceAnswer } from '@/widgets/MultipleChoice';
 
-export type SurveyStatus = "draft" | "published" | "scheduled";
+export type SurveyStatus = 'draft' | 'published' | 'scheduled';
 
 export type QuestionGeneric<T, WidgetType> = {
   type: T;
@@ -12,26 +12,26 @@ export type QuestionGeneric<T, WidgetType> = {
 };
 
 export type SingleChoiceQuestion = QuestionGeneric<
-  "single-choice",
+  'single-choice',
   SingleChoice
 >;
 
 export type MultipleChoiceQuestion = QuestionGeneric<
-  "multiple-choice",
+  'multiple-choice',
   MultipleChoice
 >;
 
-export type YesOrNoQuestion = QuestionGeneric<"yes-or-no", YesOrNo>;
+export type YesOrNoQuestion = QuestionGeneric<'yes-or-no', YesOrNo>;
 
 export type Question =
   | SingleChoiceQuestion
   | MultipleChoiceQuestion
   | YesOrNoQuestion;
 
-export type TypeOf<T extends { type: unknown }> = T["type"];
+export type TypeOf<T extends { type: unknown }> = T['type'];
 
 export type WidgetOf<T extends { widgetSettings: unknown }> =
-  T["widgetSettings"];
+  T['widgetSettings'];
 
 export type QuestionType = TypeOf<Question>;
 
@@ -76,5 +76,5 @@ export type SurveyResponse = {
 
 export type SurveyResponsePayload = Omit<
   SurveyResponse,
-  "id" | "createdAt" | "updatedAt"
+  'id' | 'createdAt' | 'updatedAt'
 >;

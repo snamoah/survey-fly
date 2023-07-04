@@ -1,12 +1,12 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 
-import type { SurveyResponse, SurveyResponsePayload } from "@/types";
+import type { SurveyResponse, SurveyResponsePayload } from '@/types';
 
-import { db } from "../../config/firebase";
-import { surveyCollection } from "./survey";
+import { db } from '../../config/firebase';
+import { surveyCollection } from './survey';
 
 const getCollection = (surveyId: string) =>
-  surveyCollection.doc(surveyId).collection("surveyResponses");
+  surveyCollection.doc(surveyId).collection('surveyResponses');
 
 export const createSurveyResponse = async (survey: SurveyResponsePayload) => {
   const now = new Date().toISOString();
@@ -25,11 +25,11 @@ export const createSurveyResponse = async (survey: SurveyResponsePayload) => {
 export const listSurveyResponses = async (surveyId: string) => {
   const responseCollection = getCollection(surveyId);
   const snapshots = await responseCollection
-    .where("surveyId", "==", surveyId)
+    .where('surveyId', '==', surveyId)
     .get();
   const responses: SurveyResponse[] = [];
   snapshots.forEach((snapshot) =>
-    responses.push(snapshot.data() as SurveyResponse)
+    responses.push(snapshot.data() as SurveyResponse),
   );
   return responses;
 };
@@ -42,28 +42,28 @@ export const getSurveyResponse = async (surveyId: string, id: string) => {
 
 export const getSurveyRepsonseByRespondentId = async (
   surveyId: string,
-  respondentId: string
+  respondentId: string,
 ) => {
   const responseCollection = getCollection(surveyId);
 
   const snapshots = await responseCollection
-    .where("respondentId", "==", respondentId)
+    .where('respondentId', '==', respondentId)
     .get();
   const actual: SurveyResponse[] = [];
   snapshots.forEach((snapshot) =>
-    actual.push(snapshot.data() as SurveyResponse)
+    actual.push(snapshot.data() as SurveyResponse),
   );
   return actual.at(0);
 };
 
 export const listSurveyResponsesBySurveyOnwerId = async (userId: string) => {
   const snapshotsRef = await db
-    .collectionGroup("surveyResponses")
-    .where("surveyOwnerId", "==", userId)
+    .collectionGroup('surveyResponses')
+    .where('surveyOwnerId', '==', userId)
     .get();
   const list: SurveyResponse[] = [];
   snapshotsRef.forEach((snapshot) =>
-    list.push(snapshot.data() as SurveyResponse)
+    list.push(snapshot.data() as SurveyResponse),
   );
   return list;
 };

@@ -1,1 +1,1 @@
-export * from "./widgetDefinitions";
+export * from './widgetDefinitions';

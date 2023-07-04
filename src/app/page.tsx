@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from 'next/link';
+import Image from 'next/image';
 
-import Logo from "@/ui/Logo";
-import { DashboardImage } from "@/ui/images";
-import { isValidSession } from "@/lib/auth";
-import Image from "next/image";
+import Logo from '@/ui/Logo';
+import { DashboardImage } from '@/ui/images';
+import { isValidSession } from '@/lib/auth';
 
 export default async function LandingPage() {
   const isAuthenticated = await isValidSession();

@@ -1,4 +1,4 @@
-import { YesOrNo } from "./types";
+import { YesOrNo } from './types';
 
 export const buildDefaultYesOrNo = (): YesOrNo => ({
   value: false,

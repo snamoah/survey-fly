@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { Share } from "@/ui/illustrations";
+import Link from 'next/link';
+import { Share } from '@/ui/illustrations';
 
 const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => {
   return (

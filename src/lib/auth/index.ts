@@ -1,19 +1,19 @@
-"use server";
+'use server';
 
-import { cookies } from "next/headers";
-import { notFound, redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { notFound, redirect } from 'next/navigation';
 
-import { env } from "../config";
-import { auth } from "../config/firebase";
-import { sendEmail } from "../config/emails";
+import { env } from '../config';
+import { auth } from '../config/firebase';
+import { sendEmail } from '../config/emails';
 
-const AUTH_SESSION_KEY = "authToken";
+const AUTH_SESSION_KEY = 'authToken';
 
 export const handleSignIn = async (idToken: string) => {
   try {
     const decodedIdToken = await auth.verifyIdToken(idToken);
     if (Date.now() / 1000 - decodedIdToken.auth_time > 5 * 50) {
-      throw new Error("Recent sign in required!");
+      throw new Error('Recent sign in required!');
     }
 
     // Set session expiration to 5 days.
@@ -28,7 +28,7 @@ export const handleSignIn = async (idToken: string) => {
       maxAge: expiresIn,
       secure: false,
       httpOnly: true,
-      path: "/",
+      path: '/',
     });
     return { success: true };
   } catch (_) {
@@ -38,12 +38,12 @@ export const handleSignIn = async (idToken: string) => {
 
 export const sendEmailLink = async (email: string) => {
   const loginLink = await auth.generateSignInWithEmailLink(email, {
-    url: `${env("APP_URL")}/login/verify`,
+    url: `${env('APP_URL')}/login/verify`,
   });
 
   await sendEmail({
     to: email,
-    subject: "Login to your account",
+    subject: 'Login to your account',
     htmlPart: `<h3>Hello,</h3><br />Click the button below to login in to your account<br/><a href="${loginLink}">Login</a>`,
   });
 };
@@ -51,12 +51,12 @@ export const sendEmailLink = async (email: string) => {
 export const verifySession = async () => {
   const sessionCookie = cookies().get(AUTH_SESSION_KEY);
   if (!sessionCookie?.value) {
-    throw new Error("Login required");
+    throw new Error('Login required');
   }
 
   const decodedIdToken = await auth.verifySessionCookie(
     sessionCookie.value,
-    true
+    true,
   );
   return decodedIdToken;
 };
@@ -81,7 +81,7 @@ export const getUser = async () => {
 };
 
 export const redirectToLogin = async () => {
-  redirect("/login");
+  redirect('/login');
 };
 
 export const redirectToNotFoundIfNotSignedIn = async () => {
@@ -95,11 +95,11 @@ export const redirectToNotFoundIfNotSignedIn = async () => {
 export const signOut = async () => {
   cookies().set({
     name: AUTH_SESSION_KEY,
-    value: "",
+    value: '',
     maxAge: 0,
     secure: false,
     httpOnly: true,
-    path: "/",
+    path: '/',
   });
 
   try {

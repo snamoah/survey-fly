@@ -1,4 +1,4 @@
-import IconComponent from "./IconComponent";
+import IconComponent from './IconComponent';
 
 export default IconComponent({
   icon: (

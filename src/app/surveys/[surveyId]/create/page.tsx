@@ -1,14 +1,14 @@
-"use client";
-import { useContext, useState } from "react";
+'use client';
+import { useContext, useState } from 'react';
 
-import { Trash } from "@/ui/icons";
-import { Empty } from "@/ui/illustrations";
-import { QuestionDefinitionMap } from "@/utils/constants";
+import { Trash } from '@/ui/icons';
+import { Empty } from '@/ui/illustrations';
+import { QuestionDefinitionMap } from '@/utils/constants';
 
 import {
   QuestionsContext,
   QuestionsActionsContext,
-} from "../components/QuestionsProvider";
+} from '../components/QuestionsProvider';
 
 const TitleInput = ({
   value,
@@ -35,7 +35,7 @@ const TitleInput = ({
 const Page = () => {
   const { selectedQuestion } = useContext(QuestionsContext);
   const { updateQuestion, deleteQuestion, updateQuestionSettings } = useContext(
-    QuestionsActionsContext
+    QuestionsActionsContext,
   );
 
   if (!selectedQuestion) {

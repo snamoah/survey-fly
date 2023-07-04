@@ -1,4 +1,4 @@
-import React, { cloneElement } from "react";
+import React, { cloneElement } from 'react';
 
 export type IconProps = {
   size?: number;

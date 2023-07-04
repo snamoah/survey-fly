@@ -1,12 +1,12 @@
-import { InputHTMLAttributes, useState } from "react";
-import { WidgetSettings } from "../types";
-import { YesOrNo } from "./types";
+import { InputHTMLAttributes, useState } from 'react';
+import { WidgetSettings } from '../types';
+import { YesOrNo } from './types';
 
 const Input = ({
   value,
   onChange,
   ...props
-}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
+}: Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
   value: string;
   onChange: (value: string) => void;
 }) => {

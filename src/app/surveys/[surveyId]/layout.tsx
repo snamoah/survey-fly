@@ -1,9 +1,9 @@
-import { notFound } from "next/navigation";
+import { notFound } from 'next/navigation';
 
-import { getSurvey } from "@/lib/storage/database";
+import { getSurvey } from '@/lib/storage/database';
 
-import QuestionsProvider from "./components/QuestionsProvider";
-import { LayoutComponent } from "./components/LayoutComponent";
+import QuestionsProvider from './components/QuestionsProvider';
+import { LayoutComponent } from './components/LayoutComponent';
 
 type Props = {
   children: React.ReactNode;

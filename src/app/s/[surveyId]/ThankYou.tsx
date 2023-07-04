@@ -1,6 +1,6 @@
 type Props = {
   error?: string;
-}
+};
 
 export const ThankYou = ({ error }: Props) => (
   <>

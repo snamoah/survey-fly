@@ -1,1 +1,1 @@
-export { default as clientStorage } from "./clientStorage";
+export { default as clientStorage } from './clientStorage';

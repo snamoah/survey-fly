@@ -1,9 +1,9 @@
-"use server";
+'use server';
 
-import groupBy from "lodash/groupBy";
-import { notFound, redirect } from "next/navigation";
+import groupBy from 'lodash/groupBy';
+import { notFound, redirect } from 'next/navigation';
 
-import { Question, Survey, SurveyResponsePayload } from "@/types";
+import { Question, Survey, SurveyResponsePayload } from '@/types';
 import {
   getSurvey,
   updateSurvey,
@@ -13,8 +13,8 @@ import {
   listUserSurveys,
   listSurveyResponsesBySurveyOnwerId,
   getSurveyRepsonseByRespondentId,
-} from "../storage/database";
-import { getUser } from "../auth";
+} from '../storage/database';
+import { getUser } from '../auth';
 
 export const createSurveyAction = async () => {
   const user = await getUser();
@@ -30,13 +30,13 @@ export const getSurveyAction = async (surveyId: string) => {
 
 export const getSurveyForSubmissionAction = async (surveyId: string) => {
   const survey = await getSurveyAction(surveyId);
-  if (survey.status !== "published") return notFound();
+  if (survey.status !== 'published') return notFound();
   return survey;
 };
 
 export const updateSurveyQuestionsAction = async (
   surveyId: string,
-  questions: Question[]
+  questions: Question[],
 ) => {
   const survey = await getSurvey(surveyId);
 
@@ -56,7 +56,7 @@ export const publishSurveyAction = async (surveyId: string) => {
 
   const surveyToUpdate: Survey = {
     ...survey,
-    status: "published",
+    status: 'published',
     updatedAt: new Date().toISOString(),
   };
 
@@ -67,10 +67,10 @@ export const publishSurveyAction = async (surveyId: string) => {
 export const submitSurveyAction = async (survey: SurveyResponsePayload) => {
   const existingSubmission = await getUserSubmission(
     survey.surveyId,
-    survey.respondentId
+    survey.respondentId,
   );
   if (existingSubmission) {
-    return { error: "You have already made a submission" };
+    return { error: 'You have already made a submission' };
   }
   const response = await createSurveyResponse(survey);
   return { response };
@@ -78,11 +78,11 @@ export const submitSurveyAction = async (survey: SurveyResponsePayload) => {
 
 export const getUserSubmission = async (
   surveyId: string,
-  tmpRespondentId: string
+  tmpRespondentId: string,
 ) => {
   const response = await getSurveyRepsonseByRespondentId(
     surveyId,
-    tmpRespondentId
+    tmpRespondentId,
   );
   return response;
 };
@@ -98,7 +98,7 @@ export const getAllSurveyResponses = async () => {
   const responses = await listSurveyResponsesBySurveyOnwerId(user.uid);
   const surveyResponsesBySurveyId = groupBy(
     responses,
-    (response) => response.surveyId
+    (response) => response.surveyId,
   );
   return surveyResponsesBySurveyId;
 };

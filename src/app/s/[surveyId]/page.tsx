@@ -1,6 +1,6 @@
-import { getSurveyForSubmissionAction } from "@/lib/actions";
+import { getSurveyForSubmissionAction } from '@/lib/actions';
 
-import { Stages } from "./Stages";
+import { Stages } from './Stages';
 
 type Props = {
   params: { surveyId: string };
