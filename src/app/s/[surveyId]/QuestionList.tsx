@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import * as uuid from "uuid";
-import { produce } from "immer";
-import { useState } from "react";
+import * as uuid from 'uuid';
+import { produce } from 'immer';
+import { useState } from 'react';
 
-import { classNames } from "@/utils";
-import { clientStorage } from "@/lib/storage";
-import { QuestionDefinitionMap } from "@/utils/constants";
-import { Answer, Survey, SurveyResponsePayload } from "@/types";
+import { classNames } from '@/utils';
+import { clientStorage } from '@/lib/storage';
+import { QuestionDefinitionMap } from '@/utils/constants';
+import { Answer, Survey, SurveyResponsePayload } from '@/types';
 
 type Props = {
   survey: Survey;
@@ -22,7 +22,7 @@ export const QuestionList = ({ survey, submitResponse }: Props) => {
     setAnswers(
       produce(answers, (draft) => {
         draft[questionId] = answer;
-      })
+      }),
     );
   };
 
@@ -31,10 +31,10 @@ export const QuestionList = ({ survey, submitResponse }: Props) => {
 
   const onFinish = async () => {
     // TODO: implement anonymous signin instead
-    let tmpRespondentId = clientStorage.getItem("tmpRespondentId");
+    let tmpRespondentId = clientStorage.getItem('tmpRespondentId');
     if (!tmpRespondentId) {
       tmpRespondentId = uuid.v4();
-      clientStorage.setItem("tmpRespondentId", tmpRespondentId);
+      clientStorage.setItem('tmpRespondentId', tmpRespondentId);
     }
 
     const response: SurveyResponsePayload = {
@@ -63,8 +63,8 @@ export const QuestionList = ({ survey, submitResponse }: Props) => {
           <section
             key={question.uuid}
             className={classNames(
-              "flex w-2/5 flex-col gap-6 py-4",
-              isInactive && "hidden"
+              'flex w-2/5 flex-col gap-6 py-4',
+              isInactive && 'hidden',
             )}
           >
             <header>

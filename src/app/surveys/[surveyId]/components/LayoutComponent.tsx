@@ -1,39 +1,39 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { ReactNode, useState } from "react";
-import { useSearchParams, useSelectedLayoutSegment } from "next/navigation";
+import Link from 'next/link';
+import { ReactNode, useState } from 'react';
+import { useSearchParams, useSelectedLayoutSegment } from 'next/navigation';
 
-import { classNames } from "@/utils";
-import type { Survey } from "@/types";
-import { ArrowRight } from "@/ui/icons";
-import BuildSection from "./BuildSection";
-import { publishSurveyAction } from "@/lib/actions";
+import { classNames } from '@/utils';
+import type { Survey } from '@/types';
+import { ArrowRight } from '@/ui/icons';
+import BuildSection from './BuildSection';
+import { publishSurveyAction } from '@/lib/actions';
 
-import DesignSection from "./DesignSection";
-import TriggerSection from "./TriggerSection";
-import IntegrateSidebar from "./IntegrateSidebar";
+import DesignSection from './DesignSection';
+import TriggerSection from './TriggerSection';
+import IntegrateSidebar from './IntegrateSidebar';
 
 type Props = {
   survey: Survey;
   children: ReactNode;
 };
 
-type ToolbarAction = "build" | "trigger" | "design";
+type ToolbarAction = 'build' | 'trigger' | 'design';
 
-const ASIDE_SEGMENTS = ["create", "integrate"];
+const ASIDE_SEGMENTS = ['create', 'integrate'];
 
 const navLinks = [
-  { key: "create", title: "Create" },
-  { key: "integrate", title: "Integrate" },
-  { key: "share", title: "Share" },
-  { key: "responses", title: "Responses" },
+  { key: 'create', title: 'Create' },
+  { key: 'integrate', title: 'Integrate' },
+  { key: 'share', title: 'Share' },
+  { key: 'responses', title: 'Responses' },
 ];
 
 const toolbarLinks: { key: ToolbarAction; title: string }[] = [
-  { key: "build", title: "Build" },
-  { key: "trigger", title: "Trigger" },
-  { key: "design", title: "Appearance" },
+  { key: 'build', title: 'Build' },
+  { key: 'trigger', title: 'Trigger' },
+  { key: 'design', title: 'Appearance' },
 ];
 
 const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
@@ -47,10 +47,10 @@ export const LayoutComponent = ({ survey, children }: Props) => {
   const searchParams = useSearchParams();
   const segment = useSelectedLayoutSegment();
 
-  const isToolbarVisible = segment === "create";
+  const isToolbarVisible = segment === 'create';
   const basePath = `/surveys/${survey.id}`;
   const isAsideVisible = segment && ASIDE_SEGMENTS.includes(segment);
-  const currentToolbarTab = (searchParams.get("t") ?? "build") as ToolbarAction;
+  const currentToolbarTab = (searchParams.get('t') ?? 'build') as ToolbarAction;
 
   const publishSurvey = async () => {
     setIsPublishing(true);
@@ -78,8 +78,8 @@ export const LayoutComponent = ({ survey, children }: Props) => {
                   <Link href={`${basePath}/create?t=${link.key}`}>
                     <span
                       className={classNames(
-                        "flex h-full items-center pl-6",
-                        isActive && "bg-yellow-300 pl-6"
+                        'flex h-full items-center pl-6',
+                        isActive && 'bg-yellow-300 pl-6',
                       )}
                     >
                       {link.title}
@@ -106,7 +106,7 @@ export const LayoutComponent = ({ survey, children }: Props) => {
                 Go back
               </Link>
             )}
-            <menu className={classNames("flex")}>
+            <menu className={classNames('flex')}>
               {navLinks.map((navLink, index) => (
                 <li key={index} className="relative">
                   <Link href={`${basePath}/${navLink.key}`}>
@@ -137,7 +137,7 @@ export const LayoutComponent = ({ survey, children }: Props) => {
                 onClick={publishSurvey}
                 className="btn bg-purple-500"
               >
-                {isPublishing ? "Publishing..." : "Publish"}
+                {isPublishing ? 'Publishing...' : 'Publish'}
               </button>
             </li>
           </ul>
@@ -145,8 +145,8 @@ export const LayoutComponent = ({ survey, children }: Props) => {
         <div className="flex grow divide-x divide-slate-300 overflow-hidden">
           {isAsideVisible && (
             <section className="flex w-72 flex-col bg-slate-200">
-              {segment === "create" && toolbarTabComponent[currentToolbarTab]}
-              {segment === "integrate" && <IntegrateSidebar />}
+              {segment === 'create' && toolbarTabComponent[currentToolbarTab]}
+              {segment === 'integrate' && <IntegrateSidebar />}
             </section>
           )}
           <main className="grow overflow-y-auto bg-white">{children}</main>

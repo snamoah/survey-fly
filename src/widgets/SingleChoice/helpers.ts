@@ -1,15 +1,15 @@
-import * as uuid from "uuid";
-import { SingleChoice } from "./types";
+import * as uuid from 'uuid';
+import { SingleChoice } from './types';
 
 export const buildDefaultSingleChoice = (): SingleChoice => ({
   options: [
     {
       key: uuid.v4(),
-      value: "Option 1",
+      value: 'Option 1',
     },
     {
       key: uuid.v4(),
-      value: "Option 2",
+      value: 'Option 2',
     },
   ],
 });

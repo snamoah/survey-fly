@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useTransition } from "react";
-import { createSurveyAction } from "@/lib/actions";
+import { useTransition } from 'react';
+import { createSurveyAction } from '@/lib/actions';
 
 export const CreateSurveyButton = () => {
   const [isPending, startTransition] = useTransition();
@@ -12,7 +12,7 @@ export const CreateSurveyButton = () => {
       className="btn bg-purple-500"
       onClick={() => startTransition(() => createSurveyAction())}
     >
-      {isPending ? "Creating..." : "Create Survey"}
+      {isPending ? 'Creating...' : 'Create Survey'}
     </button>
   );
 };

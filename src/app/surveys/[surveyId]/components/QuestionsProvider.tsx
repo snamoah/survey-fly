@@ -1,9 +1,9 @@
-"use client";
-import { produce } from "immer";
-import { createContext, startTransition, useEffect, useState } from "react";
+'use client';
+import { produce } from 'immer';
+import { createContext, startTransition, useEffect, useState } from 'react';
 
-import { Question, WidgetOf } from "@/types";
-import { updateSurveyQuestionsAction } from "@/lib/actions";
+import { Question, WidgetOf } from '@/types';
+import { updateSurveyQuestionsAction } from '@/lib/actions';
 
 type QuestionActionType = {
   selectQuestion: (id: string) => void;
@@ -42,7 +42,7 @@ const QuestionsProvider = ({
 }: Props) => {
   const [questions, setQuestions] = useState<Question[]>(initialValue);
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>(() =>
-    questions.length ? questions[0].uuid : ""
+    questions.length ? questions[0].uuid : '',
   );
 
   const addQuestion = (question: Question) => {
@@ -54,12 +54,12 @@ const QuestionsProvider = ({
     setQuestions(
       produce(questions, (draft) => {
         const index = draft.findIndex(
-          (question) => question.uuid === selectedQuestion?.uuid
+          (question) => question.uuid === selectedQuestion?.uuid,
         );
         if (index > -1) {
           draft[index] = question;
         }
-      })
+      }),
     );
   };
 
@@ -67,12 +67,12 @@ const QuestionsProvider = ({
     setQuestions(
       produce(questions, (draft) => {
         const index = draft.findIndex(
-          (question) => question.uuid === selectedQuestion?.uuid
+          (question) => question.uuid === selectedQuestion?.uuid,
         );
         if (index > -1) {
           draft[index].widgetSettings = settings;
         }
-      })
+      }),
     );
   };
 
@@ -99,7 +99,7 @@ const QuestionsProvider = ({
   }, [questions]);
 
   const selectedQuestion = questions.find(
-    (question) => question.uuid === selectedQuestionId
+    (question) => question.uuid === selectedQuestionId,
   );
 
   return (

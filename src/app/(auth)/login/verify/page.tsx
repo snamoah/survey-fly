@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-import { verifyLoginLink } from "./helpers";
-import Logo from "@/ui/Logo";
+import { verifyLoginLink } from './helpers';
+import Logo from '@/ui/Logo';
 
 const Page = () => {
   const router = useRouter();
@@ -16,10 +16,10 @@ const Page = () => {
     const handleLogin = async () => {
       const { error } = await verifyLoginLink();
       if (error) {
-        router.replace("/login");
+        router.replace('/login');
       }
 
-      router.replace("/dashboard");
+      router.replace('/dashboard');
     };
 
     handleLogin();

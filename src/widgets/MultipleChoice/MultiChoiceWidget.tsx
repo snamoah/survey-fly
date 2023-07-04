@@ -1,23 +1,23 @@
-import { produce } from "immer";
-import { classNames } from "@/utils";
+import { produce } from 'immer';
+import { classNames } from '@/utils';
 
-import { WidgetProps } from "../types";
-import { MultipleChoice, MultipleChoiceAnswer } from "./types";
+import { WidgetProps } from '../types';
+import { MultipleChoice, MultipleChoiceAnswer } from './types';
 
 const CheckBox = ({
   option,
   toggle,
   checked,
 }: {
-  checked: boolean ; 
-  option: MultipleChoice["options"][number];
+  checked: boolean;
+  option: MultipleChoice['options'][number];
   toggle: () => void;
 }) => {
   return (
     <li
       className={classNames(
-        "flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100",
-        !!checked && "rounded-md bg-slate-100"
+        'flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100',
+        !!checked && 'rounded-md bg-slate-100',
       )}
       onClick={toggle}
     >
@@ -46,7 +46,7 @@ export const MultiChoiceWidget = ({
             const index = draft.indexOf(value);
             index > -1 ? draft.splice(index, 1) : draft.push(value);
           })
-        : [value]
+        : [value],
     );
   };
 

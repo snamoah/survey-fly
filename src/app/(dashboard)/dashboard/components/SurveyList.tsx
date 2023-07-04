@@ -1,7 +1,7 @@
-import Link from "next/link";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import Link from 'next/link';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-import { Survey, SurveyResponse } from "@/types";
+import { Survey, SurveyResponse } from '@/types';
 
 type Props = {
   items: Survey[];
@@ -22,15 +22,15 @@ const SurveyList = async ({ items, responses }: Props) => {
                 <h4 className="font-sans">{survey.title}</h4>
                 <p className="flex gap-1 text-xs text-slate-500">
                   <span>
-                    {responseCount} response{responseCount === 1 ? "" : "s"}
+                    {responseCount} response{responseCount === 1 ? '' : 's'}
                   </span>
                   <span>&#8226;</span>
                   <span>
                     {lastSubmission
                       ? `Last submission was ${formatDistanceToNow(
-                          new Date(lastSubmission)
+                          new Date(lastSubmission),
                         )} ago`
-                      : "No submissions received"}
+                      : 'No submissions received'}
                   </span>
                 </p>
               </div>

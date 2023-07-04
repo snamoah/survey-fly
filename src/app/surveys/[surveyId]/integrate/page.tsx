@@ -15,7 +15,7 @@ const Page = () => (
           type="url"
           className="w-full rounded-sm p-3 text-xs ring-1 ring-slate-400"
           placeholder="http:// or https://"
-          defaultValue={"https://"}
+          defaultValue={'https://'}
         />
         <footer className="flex justify-end">
           <button className="btn bg-purple-500">Add new webhook</button>

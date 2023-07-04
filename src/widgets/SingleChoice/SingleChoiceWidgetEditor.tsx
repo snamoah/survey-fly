@@ -1,23 +1,23 @@
-import * as uuid from "uuid";
-import { produce } from "immer";
-import { InputHTMLAttributes, useState } from "react";
+import * as uuid from 'uuid';
+import { produce } from 'immer';
+import { InputHTMLAttributes, useState } from 'react';
 
-import { CloseCircleOutline, VerticalDots } from "@/ui/icons";
+import { CloseCircleOutline, VerticalDots } from '@/ui/icons';
 
-import { SingleChoice } from "./types";
-import { WidgetSettings } from "../types";
-import { buildDefaultSingleChoice } from "./helpers";
+import { SingleChoice } from './types';
+import { WidgetSettings } from '../types';
+import { buildDefaultSingleChoice } from './helpers';
 
 const MAX_OPTIONS_COUNT = 10;
 const MIN_OPTIONS = 2;
-const OTHER_TEXT = "Other";
+const OTHER_TEXT = 'Other';
 
 const Input = ({
   value,
   onChange,
   deleteValue,
   ...props
-}: Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & {
+}: Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
   value: string;
   deleteValue: () => void;
   onChange: (value: string) => void;
@@ -59,7 +59,7 @@ export const SingleChoiceWidgetEditor = ({
       produce(value, (draft) => {
         const index = draft.options.findIndex((option) => option.key === id);
         draft.options[index].value = str;
-      })
+      }),
     );
 
   const addOption = () =>
@@ -67,9 +67,9 @@ export const SingleChoiceWidgetEditor = ({
       produce(value, (draft) => {
         draft.options.push({
           key: uuid.v4(),
-          value: "",
+          value: '',
         });
-      })
+      }),
     );
 
   const deleteOption = (id: string) => {
@@ -78,7 +78,7 @@ export const SingleChoiceWidgetEditor = ({
       onChange(
         produce(value, (draft) => {
           draft.options = draft.options.filter((option) => option.key !== id);
-        })
+        }),
       );
     }
   };
@@ -88,14 +88,14 @@ export const SingleChoiceWidgetEditor = ({
       produce(value, (draft) => {
         draft.options.push({
           key: uuid.v4(),
-          value: "Other",
+          value: 'Other',
         });
-      })
+      }),
     );
 
   const isActionFooterInvisible =
     value.options.length === MAX_OPTIONS_COUNT ||
-    value.options[value.options.length - 1].value === "Other";
+    value.options[value.options.length - 1].value === 'Other';
 
   return (
     <ul className="flex flex-col gap-3">

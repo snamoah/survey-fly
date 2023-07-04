@@ -1,14 +1,14 @@
-"use client";
-import { produce } from "immer";
-import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+'use client';
+import { produce } from 'immer';
+import { useRouter } from 'next/navigation';
+import { useContext, useState } from 'react';
 
-import { Answer } from "@/types";
-import { classNames } from "@/utils";
-import { CloseCircle } from "@/ui/icons";
-import { QuestionDefinitionMap } from "@/utils/constants";
+import { Answer } from '@/types';
+import { classNames } from '@/utils';
+import { CloseCircle } from '@/ui/icons';
+import { QuestionDefinitionMap } from '@/utils/constants';
 
-import { QuestionsContext } from "../components/QuestionsProvider";
+import { QuestionsContext } from '../components/QuestionsProvider';
 
 const Page = () => {
   const router = useRouter();
@@ -20,13 +20,13 @@ const Page = () => {
     setAnswers(
       produce(answers, (draft) => {
         draft[questionId] = answer;
-      })
+      }),
     );
   };
 
   const gotoNext = () => setQuestionIndex((prevIndex) => prevIndex + 1);
   const goToPrevious = () => setQuestionIndex((prevIndex) => prevIndex - 1);
-  const submitSurvey = () => alert("Survey submitted, thanks!");
+  const submitSurvey = () => alert('Survey submitted, thanks!');
 
   return (
     <div className="absolute left-0 top-0 flex h-screen w-screen flex-col overflow-hidden">
@@ -51,8 +51,8 @@ const Page = () => {
               <section
                 key={question.uuid}
                 className={classNames(
-                  "flex w-2/5 flex-col gap-6 py-4",
-                  isInactive && "hidden"
+                  'flex w-2/5 flex-col gap-6 py-4',
+                  isInactive && 'hidden',
                 )}
               >
                 <header>

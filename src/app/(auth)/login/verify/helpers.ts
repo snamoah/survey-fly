@@ -1,14 +1,14 @@
-"use  client";
+'use  client';
 
 import {
   getAuth,
   signInWithEmailLink,
   isSignInWithEmailLink,
-} from "firebase/auth";
-import { initializeApp } from "firebase/app";
+} from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 
-import { handleSignIn } from "@/lib/auth";
-import { clientStorage } from "@/lib/storage";
+import { handleSignIn } from '@/lib/auth';
+import { clientStorage } from '@/lib/storage';
 
 const app = initializeApp({
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
@@ -22,7 +22,7 @@ const app = initializeApp({
 
 export const verifyLoginLink = async () => {
   const auth = getAuth(app);
-  const email = clientStorage.getItem("email");
+  const email = clientStorage.getItem('email');
 
   /*
    * Redirect to login if verification link was opened on another device
@@ -36,9 +36,9 @@ export const verifyLoginLink = async () => {
     const credential = await signInWithEmailLink(
       auth,
       email,
-      window.location.href
+      window.location.href,
     );
-    clientStorage.removeItem("email");
+    clientStorage.removeItem('email');
 
     const idToken = await credential.user.getIdToken();
     const results = await handleSignIn(idToken);

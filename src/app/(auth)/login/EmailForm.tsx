@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
+import { useState, useTransition } from 'react';
 
-import { sendEmailLink } from "@/lib/auth";
-import { clientStorage } from "@/lib/storage";
+import { sendEmailLink } from '@/lib/auth';
+import { clientStorage } from '@/lib/storage';
 
 export const EmailForm = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [isPending, startTransition] = useTransition();
   const [isEmailSent, setIsEmailSent] = useState(false);
 
   const loginWithEmail = async () => {
-    clientStorage.setItem("email", email);
+    clientStorage.setItem('email', email);
     await sendEmailLink(email);
     setIsEmailSent(true);
   };
@@ -24,7 +24,7 @@ export const EmailForm = () => {
   return isEmailSent ? (
     <div className="flex flex-col gap-2">
       <h3 className="font-light text-slate-700">
-        Email has been sent to{" "}
+        Email has been sent to{' '}
         <em className="rounded-sm bg-slate-100 px-3 py-1 font-sans font-bold text-orange-500">
           {email}
         </em>
@@ -49,7 +49,7 @@ export const EmailForm = () => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <button disabled={isPending} type="submit" className="btn bg-orange-400">
-        {isPending ? "Logging in..." : "Login"}
+        {isPending ? 'Logging in...' : 'Login'}
       </button>
     </form>
   );

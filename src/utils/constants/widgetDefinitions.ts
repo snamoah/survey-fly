@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
-import type { ComponentType } from "react";
+import { nanoid } from 'nanoid';
+import type { ComponentType } from 'react';
 
 import {
   Question,
@@ -7,24 +7,24 @@ import {
   YesOrNoQuestion,
   SingleChoiceQuestion,
   MultipleChoiceQuestion,
-} from "@/types";
+} from '@/types';
 import {
   YesOrNoWidget,
   YesOrNoWidgetEditor,
   buildDefaultYesOrNo,
-} from "@/widgets/YesOrNo";
+} from '@/widgets/YesOrNo';
 import {
   SingleChoiceWidget,
   SingleChoiceWidgetEditor,
   buildDefaultSingleChoice,
-} from "@/widgets/SingleChoice";
+} from '@/widgets/SingleChoice';
 import {
   MultiChoiceWidget,
   MultipleChoiceWidgetEditor,
   buildDefaultMultipleChoice,
-} from "@/widgets/MultipleChoice";
-import { WidgetProps, WidgetSettings } from "@/widgets";
-import { Checkbox, Icon, Radio, ThumbUpThumbDown } from "@/ui/icons";
+} from '@/widgets/MultipleChoice';
+import { WidgetProps, WidgetSettings } from '@/widgets';
+import { Checkbox, Icon, Radio, ThumbUpThumbDown } from '@/ui/icons';
 
 export type QuestionDefinition = {
   type: QuestionType;
@@ -38,53 +38,53 @@ export type QuestionDefinition = {
 };
 
 export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
-  "multiple-choice": {
-    name: "Multiple Choice",
-    defaultTitle: "",
+  'multiple-choice': {
+    name: 'Multiple Choice',
+    defaultTitle: '',
     Icon: Checkbox,
-    type: "multiple-choice",
+    type: 'multiple-choice',
     widgetComponent: MultiChoiceWidget,
     editorComponent: MultipleChoiceWidgetEditor,
-    description: "Create a multiple choice question",
+    description: 'Create a multiple choice question',
     buildQuestion() {
       return {
         uuid: nanoid(),
-        title: "",
-        type: "multiple-choice",
+        title: '',
+        type: 'multiple-choice',
         widgetSettings: buildDefaultMultipleChoice(),
       } satisfies MultipleChoiceQuestion;
     },
   },
-  "single-choice": {
-    name: "Single Choice",
-    type: "single-choice",
-    defaultTitle: "",
+  'single-choice': {
+    name: 'Single Choice',
+    type: 'single-choice',
+    defaultTitle: '',
     widgetComponent: SingleChoiceWidget,
     editorComponent: SingleChoiceWidgetEditor,
-    description: "Create a single choice question",
+    description: 'Create a single choice question',
     Icon: Radio,
     buildQuestion() {
       return {
         uuid: nanoid(),
-        title: "",
-        type: "single-choice",
+        title: '',
+        type: 'single-choice',
         widgetSettings: buildDefaultSingleChoice(),
       } satisfies SingleChoiceQuestion;
     },
   },
-  "yes-or-no": {
-    name: "Yes or No",
-    defaultTitle: "",
+  'yes-or-no': {
+    name: 'Yes or No',
+    defaultTitle: '',
     Icon: ThumbUpThumbDown,
-    type: "yes-or-no",
-    description: "Create a yes or no question",
+    type: 'yes-or-no',
+    description: 'Create a yes or no question',
     widgetComponent: YesOrNoWidget,
     editorComponent: YesOrNoWidgetEditor,
     buildQuestion() {
       return {
         uuid: nanoid(),
-        title: "",
-        type: "yes-or-no",
+        title: '',
+        type: 'yes-or-no',
         widgetSettings: buildDefaultYesOrNo(),
       } satisfies YesOrNoQuestion;
     },
