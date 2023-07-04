@@ -1,6 +1,7 @@
 import { Chain } from '@/ui/icons';
 import { CopyLinkButton } from './CopyLinkButton';
 import { clientEnv } from '@/lib/config/clientEnv';
+import Link from 'next/link';
 
 const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => {
   const url = `${clientEnv('NEXT_PUBLIC_SURVEY_DOMAIN')}/s/${surveyId}`;
@@ -49,9 +50,27 @@ const Page = ({ params: { surveyId } }: { params: { surveyId: string } }) => {
             </p>
           </header>
           <footer className="flex gap-2">
-            <button className="btn bg-blue-600">Facebook</button>
-            <button className="btn bg-sky-500">Twitter</button>
-            <button className="btn bg-blue-900">LinkedIn</button>
+            <Link
+              target="_blank"
+              className="btn bg-blue-600"
+              href={`https://www.facebook.com/sharer.php?u=${url}`}
+            >
+              Facebook
+            </Link>
+            <Link
+              target="_blank"
+              className="btn bg-sky-500"
+              href={`https://twitter.com/intent/tweet?url=${url}`}
+            >
+              Twitter
+            </Link>
+            <Link
+              target="_blank"
+              className="btn bg-blue-900"
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`}
+            >
+              LinkedIn
+            </Link>
           </footer>
         </section>
       </article>
