@@ -22,10 +22,12 @@ export const createSurveyResponse = async (survey: SurveyResponsePayload) => {
   return newSurveyResponse;
 };
 
-export const listSurveyResponses = async (surveyId: string) => {
+export const listSurveyResponses = async (surveyId: string, userId: string) => {
   const responseCollection = getCollection(surveyId);
   const snapshots = await responseCollection
     .where('surveyId', '==', surveyId)
+    .where('surveyOwnerId', '==', userId)
+    .orderBy('createdAt', 'desc')
     .get();
   const responses: SurveyResponse[] = [];
   snapshots.forEach((snapshot) =>
