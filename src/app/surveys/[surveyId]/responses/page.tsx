@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import isEmpty from 'lodash/isEmpty';
 
+import { Stats } from './Stats';
 import { Share } from '@/ui/illustrations';
 import { getSurveyResponses } from '@/lib/actions';
+import { TabView, Tabs, TabsProvider } from './Tabs';
 
 type Props = {
   params: { surveyId: string };
@@ -10,7 +12,7 @@ type Props = {
 
 const EmptyState = ({ surveyId }: { surveyId: string }) => (
   <div className="grid h-full place-content-center">
-    <section className="flex  flex-col items-center gap-3">
+    <section className="flex flex-col items-center gap-3">
       <div className="rounded-full bg-sky-200">
         <Share />
       </div>
@@ -37,8 +39,22 @@ const Page = async ({ params: { surveyId } }: Props) => {
   return isEmpty(responses) ? (
     <EmptyState surveyId={surveyId} />
   ) : (
-    <div>
-      <h1>Responses</h1>
+    <div className="flex h-full flex-col divide-y">
+      <TabsProvider>
+        <div className="flex h-20 justify-between">
+          <div>
+            <Tabs />
+          </div>
+        </div>
+        <div className="grid h-full overflow-hidden">
+          <TabView tab="stats">
+            <Stats />
+          </TabView>
+          <TabView tab="all_responses">
+            <h1>All responses</h1>
+          </TabView>
+        </div>
+      </TabsProvider>
     </div>
   );
 };
