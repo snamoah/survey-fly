@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import isEmpty from 'lodash/isEmpty';
 
-import { Stats } from './Stats';
 import { Share } from '@/ui/illustrations';
-import { getSurveyResponses } from '@/lib/actions';
+import { getSurveyAction, getSurveyResponses } from '@/lib/actions';
+
+import { Stats } from './Stats';
+import { Table } from './Table';
 import { TabView, Tabs, TabsProvider } from './Tabs';
 
 type Props = {
@@ -34,7 +36,12 @@ const EmptyState = ({ surveyId }: { surveyId: string }) => (
 );
 
 const Page = async ({ params: { surveyId } }: Props) => {
-  const responses = await getSurveyResponses(surveyId);
+  const [survey, responses] = await Promise.all([
+    getSurveyAction(surveyId),
+    getSurveyResponses(surveyId),
+  ]);
+
+  const answers = responses.map(response => response.answers);
 
   return isEmpty(responses) ? (
     <EmptyState surveyId={surveyId} />
@@ -51,7 +58,7 @@ const Page = async ({ params: { surveyId } }: Props) => {
             <Stats />
           </TabView>
           <TabView tab="all_responses">
-            <h1>All responses</h1>
+            <Table answers={answers} questions={survey.questions} />
           </TabView>
         </div>
       </TabsProvider>
