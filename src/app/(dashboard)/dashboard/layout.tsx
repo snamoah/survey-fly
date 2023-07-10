@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { isAnonymousUser } from '@/utils';
-import { getUser, signOut } from '@/lib/auth';
+import { getUser, redirectToSignInIfNotSignedIn, signOut } from '@/lib/auth';
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   const user = await getUser();

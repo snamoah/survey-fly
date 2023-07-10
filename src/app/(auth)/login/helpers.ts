@@ -4,6 +4,10 @@ import {
   getAuth,
   signInWithEmailLink,
   isSignInWithEmailLink,
+  signInAnonymously,
+  setPersistence,
+  inMemoryPersistence,
+  linkWithCredential,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
@@ -20,8 +24,10 @@ const app = initializeApp({
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
 });
 
+const auth = getAuth(app);
+setPersistence(auth, inMemoryPersistence);
+
 export const verifyLoginLink = async () => {
-  const auth = getAuth(app);
   const email = clientStorage.getItem('email');
 
   /*
@@ -33,11 +39,12 @@ export const verifyLoginLink = async () => {
   }
 
   try {
-    const credential = await signInWithEmailLink(
+    let credential = await signInWithEmailLink(
       auth,
       email,
       window.location.href,
     );
+
     clientStorage.removeItem('email');
 
     const idToken = await credential.user.getIdToken();
@@ -47,3 +54,16 @@ export const verifyLoginLink = async () => {
     return { error: true };
   }
 };
+
+export const signInAsGuest = async () => {
+  try {
+    const credential = await signInAnonymously(auth);
+    const idToken = await credential.user.getIdToken();
+    const results = await handleSignIn(idToken, { isGuest: true });
+    return results;
+  } catch (_) {
+    return { error: true };
+  }
+};
+
+export const signOut = () => auth.signOut();

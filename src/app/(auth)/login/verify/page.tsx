@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { verifyLoginLink } from './helpers';
+import { verifyLoginLink } from '../helpers';
 import Logo from '@/ui/Logo';
 
 const Page = () => {
