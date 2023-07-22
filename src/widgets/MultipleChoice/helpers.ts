@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import type { MultipleChoice } from './types';
+import type { MultipleChoice, MultipleChoiceAnswer } from './types';
 
 export const buildDefaultMultipleChoice = (): MultipleChoice => ({
   options: [
@@ -17,3 +17,6 @@ export const buildDefaultMultipleChoice = (): MultipleChoice => ({
     },
   ],
 });
+
+export const multipleChoiceAnswerToString = (answer: MultipleChoiceAnswer) =>
+  answer.join(',');

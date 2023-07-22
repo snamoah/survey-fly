@@ -1,10 +1,12 @@
 'use client';
 
+import 'react-data-grid/lib/styles.css';
+
 import { useMemo } from 'react';
 import DataGrid, { Column } from 'react-data-grid';
-import { Question, SurveyResponse } from '@/types';
 
-import 'react-data-grid/lib/styles.css';
+import { Question, SurveyResponse } from '@/types';
+import { QuestionDefinitionMap } from '@/utils/constants';
 
 const getColumns = (
   questions: Question[],
@@ -12,6 +14,15 @@ const getColumns = (
   questions.map((question) => ({
     key: question.uuid,
     name: question.title,
+    renderCell({ column, row }) {
+      return (
+        <>
+          {QuestionDefinitionMap[question.type].formatAnswerToString(
+            row[column.key],
+          )}
+        </>
+      );
+    },
   }));
 
 type Props = {

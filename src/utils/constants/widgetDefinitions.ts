@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import type { ComponentType } from 'react';
 
 import {
+  Answer,
   Question,
   QuestionType,
   YesOrNoQuestion,
@@ -12,16 +13,19 @@ import {
   YesOrNoWidget,
   YesOrNoWidgetEditor,
   buildDefaultYesOrNo,
+  yesOrNoAnswerToString,
 } from '@/widgets/YesOrNo';
 import {
   SingleChoiceWidget,
   SingleChoiceWidgetEditor,
   buildDefaultSingleChoice,
+  singleChoiceAnswerToString,
 } from '@/widgets/SingleChoice';
 import {
   MultiChoiceWidget,
   MultipleChoiceWidgetEditor,
   buildDefaultMultipleChoice,
+  multipleChoiceAnswerToString,
 } from '@/widgets/MultipleChoice';
 import { WidgetProps, WidgetSettings } from '@/widgets';
 import { Checkbox, Icon, Radio, ThumbUpThumbDown } from '@/ui/icons';
@@ -34,6 +38,7 @@ export type QuestionDefinition = {
   defaultTitle: string;
   buildQuestion: () => Question;
   widgetComponent: ComponentType<WidgetProps>;
+  formatAnswerToString: (answer: any) => string;
   editorComponent: ComponentType<WidgetSettings<any>>;
 };
 
@@ -45,6 +50,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     type: 'multiple-choice',
     widgetComponent: MultiChoiceWidget,
     editorComponent: MultipleChoiceWidgetEditor,
+    formatAnswerToString: multipleChoiceAnswerToString,
     description: 'Create a multiple choice question',
     buildQuestion() {
       return {
@@ -61,6 +67,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     defaultTitle: '',
     widgetComponent: SingleChoiceWidget,
     editorComponent: SingleChoiceWidgetEditor,
+    formatAnswerToString: singleChoiceAnswerToString,
     description: 'Create a single choice question',
     Icon: Radio,
     buildQuestion() {
@@ -80,6 +87,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
     description: 'Create a yes or no question',
     widgetComponent: YesOrNoWidget,
     editorComponent: YesOrNoWidgetEditor,
+    formatAnswerToString: yesOrNoAnswerToString,
     buildQuestion() {
       return {
         uuid: nanoid(),
