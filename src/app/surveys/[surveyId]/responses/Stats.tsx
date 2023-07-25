@@ -123,34 +123,19 @@ const geoData = [
 
 const barData = [
   {
-    country: 'AD',
-    'hot dog': 70,
-    'hot dogColor': 'hsl(152, 70%, 50%)',
+    type: 'iOS',
+    count: 70,
+    countColor: 'hsl(152, 70%, 50%)',
   },
   {
-    country: 'AE',
-    'hot dog': 31,
-    'hot dogColor': 'hsl(38, 70%, 50%)',
+    type: 'Android',
+    count: 31,
+    countColor: 'hsl(38, 70%, 50%)',
   },
   {
-    country: 'AF',
-    'hot dog': 119,
-    'hot dogColor': 'hsl(233, 70%, 50%)',
-  },
-  {
-    country: 'AG',
-    'hot dog': 43,
-    'hot dogColor': 'hsl(34, 70%, 50%)',
-  },
-  {
-    country: 'AL',
-    'hot dog': 32,
-    'hot dogColor': 'hsl(352, 70%, 50%)',
-  },
-  {
-    country: 'AM',
-    'hot dog': 17,
-    'hot dogColor': 'hsl(222, 70%, 50%)',
+    type: 'macOS',
+    count: 119,
+    countColor: 'hsl(233, 70%, 50%)',
   },
 ];
 
@@ -231,10 +216,12 @@ export const Stats = () => (
     </article>
     <article className={classNames(widgetClassName, 'col-span-3')}>
       <ResponsiveBar
+        enableGridY={false}
+        enableGridX={false}
         data={barData}
-        keys={['hot dog']}
-        indexBy="country"
-        margin={{ top: 30, right: 30, bottom: 50, left: 60 }}
+        keys={['count']}
+        indexBy="type"
+        margin={{ top: 30, right: 10, bottom: 50, left: 10 }}
         padding={0.3}
         valueScale={{ type: 'linear' }}
         borderColor={{
@@ -242,14 +229,13 @@ export const Stats = () => (
           modifiers: [['darker', 1.6]],
         }}
         axisBottom={{
-          legend: 'country',
+          legend: 'devices',
           legendPosition: 'middle',
           legendOffset: 32,
         }}
         axisLeft={{
-          legend: 'food',
-          legendPosition: 'middle',
-          legendOffset: -40,
+          renderTick: () => <></>,
+          tickValues: 5,
         }}
         labelSkipWidth={12}
         labelSkipHeight={12}
@@ -258,7 +244,6 @@ export const Stats = () => (
           modifiers: [['darker', 1.6]],
         }}
         role="application"
-        ariaLabel="Nivo bar chart demo"
         barAriaLabel={(e) =>
           e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue
         }

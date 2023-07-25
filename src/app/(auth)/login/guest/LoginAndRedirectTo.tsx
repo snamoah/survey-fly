@@ -24,7 +24,7 @@ export const LoginAndRedirectTo = ({ path, fallback }: Props) => {
       }
     };
     handleLogin();
-  }, []);
+  }, [router, path]);
 
   return <>{fallback}</>;
 };

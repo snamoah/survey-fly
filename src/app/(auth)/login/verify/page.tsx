@@ -23,7 +23,7 @@ const Page = () => {
     };
 
     handleLogin();
-  }, []);
+  }, [router]);
 
   return (
     <div className="grid h-screen w-screen place-content-center">

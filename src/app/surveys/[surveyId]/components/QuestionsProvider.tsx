@@ -96,7 +96,7 @@ const QuestionsProvider = ({
 
   useEffect(() => {
     updateSurveyQuestionsAction(surveyId, questions);
-  }, [questions]);
+  }, [questions, surveyId]);
 
   const selectedQuestion = questions.find(
     (question) => question.uuid === selectedQuestionId,
