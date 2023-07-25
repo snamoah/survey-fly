@@ -6,7 +6,7 @@ type Props = {
   params: { surveyId: string };
 };
 
-export const Page = async ({ params: { surveyId } }: Props) => {
+const Page = async ({ params: { surveyId } }: Props) => {
   const survey = await getSurveyForSubmissionAction(surveyId);
 
   return (
