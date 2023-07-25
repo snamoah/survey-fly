@@ -1,5 +1,5 @@
 import * as uuid from 'uuid';
-import { SingleChoice } from './types';
+import { SingleChoice, SingleChoiceAnswer } from './types';
 
 export const buildDefaultSingleChoice = (): SingleChoice => ({
   options: [
@@ -13,3 +13,6 @@ export const buildDefaultSingleChoice = (): SingleChoice => ({
     },
   ],
 });
+
+export const singleChoiceAnswerToString = (answer: SingleChoiceAnswer) =>
+  answer;

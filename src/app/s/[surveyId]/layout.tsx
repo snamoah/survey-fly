@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react';
 
-import { redirectToNotFoundIfNotSignedIn } from '@/lib/auth';
+import { redirectToSignInIfNotSignedIn } from '@/lib/auth';
 
 const Layout = async ({ children }: { children: ReactNode }) => {
-  await redirectToNotFoundIfNotSignedIn();
+  await redirectToSignInIfNotSignedIn({ asGuest: true });
   return <>{children}</>;
 };
 

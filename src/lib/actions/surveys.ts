@@ -102,3 +102,9 @@ export const getAllSurveyResponses = async () => {
   );
   return surveyResponsesBySurveyId;
 };
+
+export const getSurveyResponses = async (surveyId: string) => {
+  const user = await getUser();
+  const responses = await listSurveyResponses(surveyId, user.uid);
+  return responses;
+};

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { verifyLoginLink } from './helpers';
+import { verifyLoginLink } from '../helpers';
 import Logo from '@/ui/Logo';
 
 const Page = () => {
@@ -23,7 +23,7 @@ const Page = () => {
     };
 
     handleLogin();
-  }, []);
+  }, [router]);
 
   return (
     <div className="grid h-screen w-screen place-content-center">

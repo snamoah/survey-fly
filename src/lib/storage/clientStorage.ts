@@ -15,8 +15,10 @@ const setItem = (key: LocalStorageKey, value: string) =>
 
 const removeItem = (key: LocalStorageKey) => localStorage.removeItem(key);
 
-export default {
+const clientStorage = {
   getItem,
   setItem,
   removeItem,
 };
+
+export default clientStorage;

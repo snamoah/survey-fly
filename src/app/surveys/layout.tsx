@@ -1,7 +1,7 @@
-import { redirectToNotFoundIfNotSignedIn } from '@/lib/auth';
+import { redirectToSignInIfNotSignedIn } from '@/lib/auth';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
-  await redirectToNotFoundIfNotSignedIn();
+  await redirectToSignInIfNotSignedIn();
 
   return <>{children}</>;
 };

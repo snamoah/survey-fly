@@ -1,23 +1,36 @@
 'use server';
 
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { notFound, redirect } from 'next/navigation';
 
 import { env } from '../config';
 import { auth } from '../config/firebase';
 import { sendEmail } from '../config/emails';
+import { RedirectType } from 'next/dist/client/components/redirect';
 
 const AUTH_SESSION_KEY = 'authToken';
+const GUEST_SESSION_EXPIRES_IN = 60 * 60 * 5 * 1000; // 5 days
+const DEFAULT_SESSION_EXPIRES_IN = 60 * 60 * 24 * 14 * 1000; // 14 days
 
-export const handleSignIn = async (idToken: string) => {
+type SignInOptions = {
+  isGuest?: boolean;
+};
+
+export const handleSignIn = async (
+  idToken: string,
+  options: SignInOptions = {},
+) => {
   try {
     const decodedIdToken = await auth.verifyIdToken(idToken);
     if (Date.now() / 1000 - decodedIdToken.auth_time > 5 * 50) {
       throw new Error('Recent sign in required!');
     }
 
-    // Set session expiration to 5 days.
-    const expiresIn = 60 * 60 * 24 * 5 * 1000;
+    // Set session expiration to 30 days.
+    const expiresIn = options.isGuest
+      ? GUEST_SESSION_EXPIRES_IN
+      : DEFAULT_SESSION_EXPIRES_IN;
+
     const sessionCookie = await auth.createSessionCookie(idToken, {
       expiresIn,
     });
@@ -80,15 +93,28 @@ export const getUser = async () => {
   }
 };
 
-export const redirectToLogin = async () => {
-  redirect('/login');
-};
+export const redirectToLogin = () => redirect('/login');
 
 export const redirectToNotFoundIfNotSignedIn = async () => {
   try {
     await verifySession();
   } catch (_) {
     return notFound();
+  }
+};
+
+export const redirectToSignInIfNotSignedIn = async ({
+  asGuest,
+}: {
+  asGuest?: boolean;
+} = {}) => {
+  const currentUrl = headers().get('x-url');
+  const pathName = asGuest ? '/login/guest' : '/login';
+
+  try {
+    await verifySession();
+  } catch (_) {
+    return redirect(`${pathName}?from=${currentUrl}`, RedirectType.replace);
   }
 };
 
