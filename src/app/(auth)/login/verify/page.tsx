@@ -3,8 +3,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { verifyLoginLink } from '../helpers';
 import Logo from '@/ui/Logo';
+
+import { verifyLoginLink } from '../helpers';
 
 const Page = () => {
   const router = useRouter();

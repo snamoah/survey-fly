@@ -1,14 +1,14 @@
 import { redirect } from 'next/navigation';
 
 import Logo from '@/ui/Logo';
-import { isValidSession } from '@/lib/auth';
 import { Transport } from '@/ui/illustrations';
+import { isGuestSession, isValidSession } from '@/lib/auth';
 
 import { EmailForm } from './EmailForm';
 
 const LoginPage = async () => {
   // User is logged in so should be redirected directly into the app
-  if (await isValidSession()) {
+  if ((await isValidSession()) && !(await isGuestSession())) {
     redirect('/dashboard');
   }
 

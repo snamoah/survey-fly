@@ -7,12 +7,11 @@ import {
   signInAnonymously,
   setPersistence,
   inMemoryPersistence,
-  linkWithCredential,
 } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 
-import { handleSignIn } from '@/lib/auth';
 import { clientStorage } from '@/lib/storage';
+import { handleSignIn, signOutServer } from '@/lib/auth';
 
 const app = initializeApp({
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
@@ -39,7 +38,7 @@ export const verifyLoginLink = async () => {
   }
 
   try {
-    let credential = await signInWithEmailLink(
+    const credential = await signInWithEmailLink(
       auth,
       email,
       window.location.href,
@@ -66,4 +65,7 @@ export const signInAsGuest = async () => {
   }
 };
 
-export const signOut = () => auth.signOut();
+export const signOut = async () => {
+  await auth.signOut();
+  await signOutServer();
+};

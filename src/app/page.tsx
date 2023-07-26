@@ -15,7 +15,7 @@ export default async function LandingPage() {
           <Logo />
           <ul>
             <li>
-              <Link href="/dashboard">See Demo</Link>
+              <Link href="/login/guest">See Demo</Link>
             </li>
           </ul>
           <ul>

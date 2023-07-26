@@ -16,6 +16,15 @@ type SignInOptions = {
   isGuest?: boolean;
 };
 
+type AuthSessionCookie = {
+  isGuest?: boolean;
+  sessionCookie: string;
+};
+
+const decodeSessionCookie = (value: string): AuthSessionCookie =>
+  JSON.parse(value);
+const encodeSessionCookie = (value: AuthSessionCookie) => JSON.stringify(value);
+
 export const handleSignIn = async (
   idToken: string,
   options: SignInOptions = {},
@@ -37,7 +46,7 @@ export const handleSignIn = async (
 
     cookies().set({
       name: AUTH_SESSION_KEY,
-      value: sessionCookie,
+      value: encodeSessionCookie({ sessionCookie, isGuest: options.isGuest }),
       maxAge: expiresIn,
       secure: false,
       httpOnly: true,
@@ -67,11 +76,15 @@ export const verifySession = async () => {
     throw new Error('Login required');
   }
 
+  const authSessionCookie = decodeSessionCookie(sessionCookie.value);
   const decodedIdToken = await auth.verifySessionCookie(
-    sessionCookie.value,
+    authSessionCookie.sessionCookie,
     true,
   );
-  return decodedIdToken;
+  return {
+    decodedIdToken,
+    isGuest: authSessionCookie.isGuest,
+  };
 };
 
 export const isValidSession = async () => {
@@ -83,9 +96,18 @@ export const isValidSession = async () => {
   }
 };
 
+export const isGuestSession = async () => {
+  try {
+    const { isGuest } = await verifySession();
+    return !!isGuest;
+  } catch (_) {
+    return false;
+  }
+};
+
 export const getUser = async () => {
   try {
-    const decodedIdToken = await verifySession();
+    const { decodedIdToken } = await verifySession();
     const userRecord = await auth.getUser(decodedIdToken.uid);
     return userRecord;
   } catch (_) {
@@ -118,7 +140,7 @@ export const redirectToSignInIfNotSignedIn = async ({
   }
 };
 
-export const signOut = async () => {
+export const signOutServer = async () => {
   cookies().set({
     name: AUTH_SESSION_KEY,
     value: '',

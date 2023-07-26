@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
+import { getUser } from '@/lib/auth';
 import { isAnonymousUser } from '@/utils';
-import { getUser, redirectToSignInIfNotSignedIn, signOut } from '@/lib/auth';
+import { LogoutButton } from './components/LogoutButton';
 
 const Layout = async ({ children }: { children: ReactNode }) => {
   const user = await getUser();
@@ -47,14 +48,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
               </>
             ) : (
               <li className="flex items-center">
-                <form action={signOut}>
-                  <button
-                    type="submit"
-                    className="rounded-sm px-3 py-2 font-medium text-slate-100 hover:bg-slate-600"
-                  >
-                    Logout
-                  </button>
-                </form>
+                <LogoutButton />
               </li>
             )}
           </menu>
