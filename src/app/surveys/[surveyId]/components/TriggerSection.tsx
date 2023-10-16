@@ -1,3 +1,5 @@
-const TriggerSection = () => <h1>Trigger</h1>;
+import QuestionList from './QuestionList';
+
+const TriggerSection = () => <QuestionList />;
 
 export default TriggerSection;
