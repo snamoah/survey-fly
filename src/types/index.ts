@@ -1,6 +1,9 @@
 import { YesOrNo, YesOrNoAnswer } from '@/widgets/YesOrNo';
 import { SingleChoice, SingleChoiceAnswer } from '@/widgets/SingleChoice';
 import { MultipleChoice, MultipleChoiceAnswer } from '@/widgets/MultipleChoice';
+import { Trigger } from './triggers';
+
+export type ToolbarAction = 'build' | 'trigger' | 'design';
 
 export type SurveyStatus = 'draft' | 'published' | 'scheduled';
 
@@ -55,6 +58,7 @@ export type Survey = {
   description: string;
   status: SurveyStatus;
   questions: Question[];
+  triggers: Trigger[];
 };
 
 export type BrowserInfo = {
