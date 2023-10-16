@@ -1,15 +1,15 @@
 import { Fragment, useContext } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 
-import { classNames } from '@/utils';
 import { QuestionType } from '@/types';
-import { VerticalDots } from '@/ui/icons';
 import { QuestionDefinitionMap } from '@/utils/constants';
+
+import QuestionList from './QuestionList';
 import { QuestionsActionsContext, QuestionsContext } from './QuestionsProvider';
 
 const BuildSection = () => {
-  const { questions, selectedQuestion } = useContext(QuestionsContext);
-  const { addQuestion, selectQuestion } = useContext(QuestionsActionsContext);
+  const { questions } = useContext(QuestionsContext);
+  const { addQuestion } = useContext(QuestionsActionsContext);
 
   const onSelectQuestion = (questionType: QuestionType) => {
     addQuestion(QuestionDefinitionMap[questionType].buildQuestion());
@@ -79,37 +79,7 @@ const BuildSection = () => {
           )}
         </Popover>
       </header>
-      <section className="w-full grow overflow-y-auto overflow-x-hidden scroll-smooth border-t border-slate-300">
-        <ul>
-          {questions.map((question, index) => {
-            const isSelected = selectedQuestion?.uuid === question.uuid;
-            return (
-              <li
-                key={index}
-                className={classNames(
-                  'flex p-4 hover:cursor-pointer',
-                  isSelected
-                    ? 'border-y border-slate-300 bg-white'
-                    : 'hover:bg-slate-100',
-                )}
-                onClick={() => selectQuestion(question.uuid)}
-              >
-                {isSelected && (
-                  <div className="mr-3 flex items-center justify-items-center font-bold">
-                    <VerticalDots size={18} className="text-slate-300" />
-                  </div>
-                )}
-                <div className="inline-block w-52">
-                  <h3 className="overflow-hidden text-ellipsis whitespace-nowrap text-base">
-                    {question.title || 'Untitled Question'}
-                  </h3>
-                  <p className="text-sm">{question.type}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
+      <QuestionList />
     </div>
   );
 };
