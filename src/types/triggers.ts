@@ -26,6 +26,8 @@ type JumpToAction = {
 
 type TriggerAction = JumpToAction;
 
+export type TriggerOperator = UnaryOperator | BinaryOperator;
+
 export type Trigger = {
   condition: TriggerCondition;
   actions: TriggerAction[];

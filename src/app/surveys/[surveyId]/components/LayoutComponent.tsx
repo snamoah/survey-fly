@@ -5,9 +5,9 @@ import { ReactNode, useState } from 'react';
 import { useSearchParams, useSelectedLayoutSegment } from 'next/navigation';
 
 import { classNames } from '@/utils';
-import type { Survey } from '@/types';
 import { ArrowRight } from '@/ui/icons';
 import BuildSection from './BuildSection';
+import { Survey, ToolbarAction } from '@/types';
 import { publishSurveyAction } from '@/lib/actions';
 
 import DesignSection from './DesignSection';
@@ -18,8 +18,6 @@ type Props = {
   survey: Survey;
   children: ReactNode;
 };
-
-type ToolbarAction = 'build' | 'trigger' | 'design';
 
 const ASIDE_SEGMENTS = ['create', 'integrate'];
 

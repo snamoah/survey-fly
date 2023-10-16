@@ -1,7 +1,9 @@
 import { YesOrNo, YesOrNoAnswer } from '@/widgets/YesOrNo';
 import { SingleChoice, SingleChoiceAnswer } from '@/widgets/SingleChoice';
 import { MultipleChoice, MultipleChoiceAnswer } from '@/widgets/MultipleChoice';
+
 import { Trigger } from './triggers';
+export type { TriggerOperator } from './triggers';
 
 export type ToolbarAction = 'build' | 'trigger' | 'design';
 
