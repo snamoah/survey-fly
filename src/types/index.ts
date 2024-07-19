@@ -1,8 +1,12 @@
-import { YesOrNo, YesOrNoAnswer } from '@/widgets/YesOrNo';
-import { SingleChoice, SingleChoiceAnswer } from '@/widgets/SingleChoice';
-import { MultipleChoice, MultipleChoiceAnswer } from '@/widgets/MultipleChoice';
+import { Icon } from '@/ui/icons';
+import { ComponentType } from 'react';
+import { WidgetProps, WidgetSettings } from '@/widgets';
+import { QuestionMapType } from './questionDefintion';
 
 export type SurveyStatus = 'draft' | 'published' | 'scheduled';
+
+export type WidgetOf<T extends { widgetSettings: unknown }> =
+  T['widgetSettings'];
 
 export type QuestionGeneric<T, WidgetType> = {
   type: T;
@@ -11,40 +15,43 @@ export type QuestionGeneric<T, WidgetType> = {
   widgetSettings: WidgetType;
 };
 
-export type SingleChoiceQuestion = QuestionGeneric<
-  'single-choice',
-  SingleChoice
->;
+export type QuestionType = keyof QuestionMapType;
 
-export type MultipleChoiceQuestion = QuestionGeneric<
-  'multiple-choice',
-  MultipleChoice
->;
+export type Question = keyof QuestionMapType extends infer T
+  ? T extends keyof QuestionMapType
+    ? QuestionGeneric<T, QuestionMapType[T]['setting']>
+    : never
+  : never;
 
-export type YesOrNoQuestion = QuestionGeneric<'yes-or-no', YesOrNo>;
+export type Answer = QuestionMapType[QuestionType]['answer'];
 
-export type Question =
-  | SingleChoiceQuestion
-  | MultipleChoiceQuestion
-  | YesOrNoQuestion;
+export type AnswerToString<T extends string> = `${T}AnswerToString`;
 
-export type TypeOf<T extends { type: unknown }> = T['type'];
-
-export type WidgetOf<T extends { widgetSettings: unknown }> =
-  T['widgetSettings'];
-
-export type QuestionType = TypeOf<Question>;
-
-export type WidgetOptions = WidgetOf<Question>;
-
-/**
- * See stackoverflow https://stackoverflow.com/a/50125960
- */
-export type ByType<T extends Record<K, string>, K extends keyof T> = {
-  [V in T[K]]: Extract<T, Record<K, V>>;
+export type QuestionDefinition<
+  T extends QuestionType,
+  TQuestionType,
+  TSettingType,
+  TAnswerType,
+> = {
+  type: T;
+  name: string;
+  Icon: Icon;
+  description: string;
+  defaultTitle: string;
+  buildQuestion: () => TQuestionType;
+  formatAnswerToString: (answer: TAnswerType) => string;
+  widgetComponent: ComponentType<WidgetProps<TSettingType, TAnswerType>>;
+  editorComponent: ComponentType<WidgetSettings<TSettingType>>;
 };
 
-export type Answer = MultipleChoiceAnswer | SingleChoiceAnswer | YesOrNoAnswer;
+export type QuestionDefinitionMapType = {
+  [T in QuestionType]: QuestionDefinition<
+    T,
+    QuestionGeneric<T, QuestionMapType[T]['setting']>,
+    QuestionMapType[T]['setting'],
+    QuestionMapType[T]['answer']
+  >;
+};
 
 export type Survey = {
   id: string;

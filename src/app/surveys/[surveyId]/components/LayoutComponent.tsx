@@ -8,7 +8,7 @@ import { classNames } from '@/utils';
 import type { Survey } from '@/types';
 import { ArrowRight } from '@/ui/icons';
 import BuildSection from './BuildSection';
-import { publishSurveyAction } from '@/lib/actions';
+import { gotoDashboard, publishSurveyAction } from '@/lib/actions';
 
 import DesignSection from './DesignSection';
 import TriggerSection from './TriggerSection';
@@ -17,6 +17,7 @@ import IntegrateSidebar from './IntegrateSidebar';
 type Props = {
   survey: Survey;
   children: ReactNode;
+  responsesCount: number;
 };
 
 type ToolbarAction = 'build' | 'trigger' | 'design';
@@ -42,7 +43,11 @@ const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
   trigger: <TriggerSection />,
 };
 
-export const LayoutComponent = ({ survey, children }: Props) => {
+export const LayoutComponent = ({
+  survey,
+  responsesCount,
+  children,
+}: Props) => {
   const [isPublishing, setIsPublishing] = useState(false);
   const searchParams = useSearchParams();
   const segment = useSelectedLayoutSegment();
@@ -62,13 +67,13 @@ export const LayoutComponent = ({ survey, children }: Props) => {
     <div className="flex h-screen divide-x divide-slate-300">
       {isToolbarVisible && (
         <nav className="w-48 bg-yellow-200">
-          <Link
-            href="/dashboard"
+          <button
+            onClick={gotoDashboard}
             className="flex h-20 w-48 items-center justify-center gap-2"
           >
             <ArrowRight size={16} />
             <span>Go back</span>
-          </Link>
+          </button>
 
           <menu className="mt-20">
             {toolbarLinks.map((link, index) => {
@@ -132,13 +137,15 @@ export const LayoutComponent = ({ survey, children }: Props) => {
               </Link>
             </li>
             <li>
-              <button
-                disabled={isPublishing}
-                onClick={publishSurvey}
-                className="btn bg-purple-500"
-              >
-                {isPublishing ? 'Publishing...' : 'Publish'}
-              </button>
+              {responsesCount < 1 && (
+                <button
+                  disabled={isPublishing}
+                  onClick={publishSurvey}
+                  className="btn bg-purple-500"
+                >
+                  {isPublishing ? 'Publishing...' : 'Publish'}
+                </button>
+              )}
             </li>
           </ul>
         </nav>

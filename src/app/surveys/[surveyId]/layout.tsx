@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 
 import { getSurvey } from '@/lib/storage/database';
+import { getResponsesCount } from '@/lib/actions/surveys';
 
 import QuestionsProvider from './components/QuestionsProvider';
 import { LayoutComponent } from './components/LayoutComponent';
@@ -13,7 +14,10 @@ type Props = {
 };
 
 const Layout = async ({ children, params }: Props) => {
-  const survey = await getSurvey(params.surveyId);
+  const [survey, responsesCount] = await Promise.all([
+    getSurvey(params.surveyId),
+    getResponsesCount(params.surveyId),
+  ]);
 
   if (!survey) {
     notFound();
@@ -21,7 +25,9 @@ const Layout = async ({ children, params }: Props) => {
 
   return (
     <QuestionsProvider surveyId={survey.id} initialValue={survey.questions}>
-      <LayoutComponent survey={survey}>{children}</LayoutComponent>
+      <LayoutComponent survey={survey} responsesCount={responsesCount}>
+        {children}
+      </LayoutComponent>
     </QuestionsProvider>
   );
 };
