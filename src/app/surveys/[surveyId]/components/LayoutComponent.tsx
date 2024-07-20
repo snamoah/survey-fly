@@ -8,7 +8,7 @@ import { classNames } from '@/utils';
 import type { Survey } from '@/types';
 import { ArrowRight } from '@/ui/icons';
 import BuildSection from './BuildSection';
-import { gotoDashboard, publishSurveyAction } from '@/lib/actions';
+import { publishSurveyAction } from '@/lib/actions';
 
 import DesignSection from './DesignSection';
 import TriggerSection from './TriggerSection';
@@ -67,13 +67,12 @@ export const LayoutComponent = ({
     <div className="flex h-screen divide-x divide-slate-300">
       {isToolbarVisible && (
         <nav className="w-48 bg-yellow-200">
-          <button
-            onClick={gotoDashboard}
-            className="flex h-20 w-48 items-center justify-center gap-2"
-          >
-            <ArrowRight size={16} />
-            <span>Go back</span>
-          </button>
+          <Link href="/dashboard">
+            <button className="flex h-20 w-48 items-center justify-center gap-2">
+              <ArrowRight size={16} />
+              <span>Go back</span>
+            </button>
+          </Link>
 
           <menu className="mt-20">
             {toolbarLinks.map((link, index) => {

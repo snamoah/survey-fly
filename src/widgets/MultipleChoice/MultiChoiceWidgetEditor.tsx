@@ -4,8 +4,8 @@ import { InputHTMLAttributes, useState } from 'react';
 
 import { CloseCircleOutline, VerticalDots } from '@/ui/icons';
 
-import type { MultipleChoice } from './types';
-import type { WidgetSettings } from '../types';
+import type { MultipleChoiceSettings, MultipleChoiceType } from './types';
+import type { WidgetEditorProps } from '../types';
 import { buildDefaultMultipleChoice } from './helpers';
 
 const MAX_OPTIONS_COUNT = 10;
@@ -50,10 +50,12 @@ const Input = ({
   );
 };
 
-export const MultipleChoiceWidgetEditor = ({
+export const MultipleChoiceWidgetEditor = <
+  T extends MultipleChoiceType = MultipleChoiceType,
+>({
   value = buildDefaultMultipleChoice(),
   onChange,
-}: WidgetSettings<MultipleChoice>) => {
+}: WidgetEditorProps<T, MultipleChoiceSettings>) => {
   const updateOptionAtIndex = (str: string, id: string) =>
     onChange(
       produce(value, (draft) => {

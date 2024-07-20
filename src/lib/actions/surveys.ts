@@ -16,7 +16,6 @@ import {
   getSurveyResponsesCount,
 } from '../storage/database';
 import { getUser } from '../auth';
-import { revalidatePath } from 'next/cache';
 
 export const createSurveyAction = async () => {
   const user = await getUser();
@@ -115,9 +114,4 @@ export const getResponsesCount = async (surveyId: string) => {
   const user = await getUser();
   const count = await getSurveyResponsesCount(surveyId, user.uid);
   return count;
-};
-
-export const gotoDashboard = async () => {
-  revalidatePath('/(dashboard)/dashboard');
-  redirect('/dashboard');
 };

@@ -2,7 +2,11 @@ import { produce } from 'immer';
 import { classNames } from '@/utils';
 
 import { WidgetProps } from '../types';
-import { MultipleChoice, MultipleChoiceAnswer } from './types';
+import {
+  MultipleChoiceAnswer,
+  MultipleChoice,
+  MultipleChoiceType,
+} from './types';
 
 const CheckBox = ({
   option,
@@ -34,19 +38,27 @@ const CheckBox = ({
   );
 };
 
-export const MultiChoiceWidget = ({
+export const MultiChoiceWidget = <
+  T extends MultipleChoiceType = MultipleChoiceType,
+>({
+  type,
   settings,
   onChange,
-  answer = [],
-}: WidgetProps<MultipleChoice, MultipleChoiceAnswer>) => {
+  answer = { type, value: [] },
+}: WidgetProps<T, MultipleChoice, MultipleChoiceAnswer>) => {
+  const buildAnswer = (value: MultipleChoiceAnswer) => ({
+    type,
+    value,
+  });
+
   const toggleOption = (value: string) => {
     onChange(
-      answer
-        ? produce(answer, (draft) => {
-            const index = draft.indexOf(value);
-            index > -1 ? draft.splice(index, 1) : draft.push(value);
-          })
-        : [value],
+      buildAnswer(
+        produce(answer.value, (draft) => {
+          const index = draft.indexOf(value);
+          index > -1 ? draft.splice(index, 1) : draft.push(value);
+        }),
+      ),
     );
   };
 
@@ -57,7 +69,7 @@ export const MultiChoiceWidget = ({
           key={option.key}
           option={option}
           toggle={() => toggleOption(option.value)}
-          checked={answer.includes(option.value)}
+          checked={answer.value.includes(option.value)}
         />
       ))}
     </div>

@@ -18,7 +18,8 @@ const getColumns = (
       <>
         {/* Still unable to fix the types for this so resorting to any now*/}
         {(QuestionDefinitionMap[question.type].formatAnswerToString as any)(
-          row[column.key] as any,
+          // support legacy answer type
+          row[column.key]?.value || row[column.key],
         )}
       </>
     ),

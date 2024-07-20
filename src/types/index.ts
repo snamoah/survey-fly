@@ -1,6 +1,6 @@
 import { Icon } from '@/ui/icons';
 import { ComponentType } from 'react';
-import { WidgetProps, WidgetSettings } from '@/widgets';
+import { AnswerType, WidgetProps, WidgetEditorProps } from '@/widgets';
 import { QuestionMapType } from './questionDefintion';
 
 export type SurveyStatus = 'draft' | 'published' | 'scheduled';
@@ -8,22 +8,28 @@ export type SurveyStatus = 'draft' | 'published' | 'scheduled';
 export type WidgetOf<T extends { widgetSettings: unknown }> =
   T['widgetSettings'];
 
-export type QuestionGeneric<T, WidgetType> = {
+export type QuestionGeneric<T, TWidgetSettingsType> = {
   type: T;
   uuid: string;
   title: string;
-  widgetSettings: WidgetType;
+  widgetSettings: TWidgetSettingsType;
 };
 
 export type QuestionType = keyof QuestionMapType;
 
-export type Question = keyof QuestionMapType extends infer T
-  ? T extends keyof QuestionMapType
+export type Question = QuestionType extends infer T
+  ? T extends QuestionType
     ? QuestionGeneric<T, QuestionMapType[T]['setting']>
     : never
   : never;
 
-export type Answer = QuestionMapType[QuestionType]['answer'];
+export type WidgetSettingsType<T extends QuestionType> =
+  QuestionMapType[T]['setting'];
+
+export type Answer<T extends QuestionType = QuestionType> = AnswerType<
+  T,
+  QuestionMapType[T]['answer']
+>;
 
 export type AnswerToString<T extends string> = `${T}AnswerToString`;
 
@@ -40,8 +46,8 @@ export type QuestionDefinition<
   defaultTitle: string;
   buildQuestion: () => TQuestionType;
   formatAnswerToString: (answer: TAnswerType) => string;
-  widgetComponent: ComponentType<WidgetProps<TSettingType, TAnswerType>>;
-  editorComponent: ComponentType<WidgetSettings<TSettingType>>;
+  widgetComponent: ComponentType<WidgetProps<T, TSettingType, TAnswerType>>;
+  editorComponent: ComponentType<WidgetEditorProps<T, TSettingType>>;
 };
 
 export type QuestionDefinitionMapType = {
