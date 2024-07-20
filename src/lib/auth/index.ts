@@ -130,7 +130,7 @@ export const redirectToSignInIfNotSignedIn = async ({
 }: {
   asGuest?: boolean;
 } = {}) => {
-  const currentUrl = headers().get('x-url');
+  const currentUrl = headers().get('X-Url');
   const pathName = asGuest ? '/login/guest' : '/login';
 
   try {
