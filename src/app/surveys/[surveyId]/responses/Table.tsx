@@ -3,26 +3,26 @@
 import 'react-data-grid/lib/styles.css';
 
 import { useMemo } from 'react';
-import DataGrid, { Column } from 'react-data-grid';
+import DataGrid, { Column as TColumn } from 'react-data-grid';
 
 import { Question, SurveyResponse } from '@/types';
 import { QuestionDefinitionMap } from '@/utils/constants';
 
 const getColumns = (
   questions: Question[],
-): Column<SurveyResponse['answers']>[] =>
+): TColumn<SurveyResponse['answers']>[] =>
   questions.map((question) => ({
     key: question.uuid,
     name: question.title,
-    renderCell({ column, row }) {
-      return (
-        <>
-          {QuestionDefinitionMap[question.type].formatAnswerToString(
-            row[column.key],
-          )}
-        </>
-      );
-    },
+    renderCell: ({ column, row }) => (
+      <>
+        {/* Still unable to fix the types for this so resorting to any now*/}
+        {(QuestionDefinitionMap[question.type].formatAnswerToString as any)(
+          // support legacy answer type
+          row[column.key]?.value || row[column.key],
+        )}
+      </>
+    ),
   }));
 
 type Props = {

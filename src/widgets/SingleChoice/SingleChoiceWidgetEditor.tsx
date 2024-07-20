@@ -4,8 +4,8 @@ import { InputHTMLAttributes, useState } from 'react';
 
 import { CloseCircleOutline, VerticalDots } from '@/ui/icons';
 
-import { SingleChoice } from './types';
-import { WidgetSettings } from '../types';
+import { SingleChoiceSettings, SingleChoiceType } from './types';
+import { WidgetEditorProps } from '../types';
 import { buildDefaultSingleChoice } from './helpers';
 
 const MAX_OPTIONS_COUNT = 10;
@@ -50,10 +50,12 @@ const Input = ({
   );
 };
 
-export const SingleChoiceWidgetEditor = ({
+export const SingleChoiceWidgetEditor = <
+  T extends SingleChoiceType = SingleChoiceType,
+>({
   value = buildDefaultSingleChoice(),
   onChange,
-}: WidgetSettings<SingleChoice>) => {
+}: WidgetEditorProps<T, SingleChoiceSettings>) => {
   const updateOptionAtIndex = (str: string, id: string) =>
     onChange(
       produce(value, (draft) => {

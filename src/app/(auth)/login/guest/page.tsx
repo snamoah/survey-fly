@@ -26,7 +26,7 @@ const getFromQueryFromUrl = (urlLike: string) => {
 };
 
 export default async function GuestLoginPage() {
-  const refererFromHeaders = headers().get('x-url') ?? '';
+  const refererFromHeaders = headers().get('X-Url') ?? '';
   const referer = getFromQueryFromUrl(refererFromHeaders) ?? '/dashboard';
 
   if (await isValidSession()) {

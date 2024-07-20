@@ -1,14 +1,6 @@
 import { nanoid } from 'nanoid';
-import type { ComponentType } from 'react';
 
-import {
-  Answer,
-  Question,
-  QuestionType,
-  YesOrNoQuestion,
-  SingleChoiceQuestion,
-  MultipleChoiceQuestion,
-} from '@/types';
+import { QuestionDefinitionMapType } from '@/types';
 import {
   YesOrNoWidget,
   YesOrNoWidgetEditor,
@@ -27,22 +19,9 @@ import {
   buildDefaultMultipleChoice,
   multipleChoiceAnswerToString,
 } from '@/widgets/MultipleChoice';
-import { WidgetProps, WidgetSettings } from '@/widgets';
-import { Checkbox, Icon, Radio, ThumbUpThumbDown } from '@/ui/icons';
+import { Checkbox, Radio, ThumbUpThumbDown } from '@/ui/icons';
 
-export type QuestionDefinition = {
-  type: QuestionType;
-  name: string;
-  Icon: Icon;
-  description: string;
-  defaultTitle: string;
-  buildQuestion: () => Question;
-  widgetComponent: ComponentType<WidgetProps>;
-  formatAnswerToString: (answer: any) => string;
-  editorComponent: ComponentType<WidgetSettings<any>>;
-};
-
-export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
+export const QuestionDefinitionMap: QuestionDefinitionMapType = {
   'multiple-choice': {
     name: 'Multiple Choice',
     defaultTitle: '',
@@ -58,7 +37,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
         title: '',
         type: 'multiple-choice',
         widgetSettings: buildDefaultMultipleChoice(),
-      } satisfies MultipleChoiceQuestion;
+      };
     },
   },
   'single-choice': {
@@ -76,7 +55,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
         title: '',
         type: 'single-choice',
         widgetSettings: buildDefaultSingleChoice(),
-      } satisfies SingleChoiceQuestion;
+      };
     },
   },
   'yes-or-no': {
@@ -94,7 +73,7 @@ export const QuestionDefinitionMap: Record<QuestionType, QuestionDefinition> = {
         title: '',
         type: 'yes-or-no',
         widgetSettings: buildDefaultYesOrNo(),
-      } satisfies YesOrNoQuestion;
+      };
     },
   },
 

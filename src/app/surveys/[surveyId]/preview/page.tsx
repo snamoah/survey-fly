@@ -9,6 +9,7 @@ import { CloseCircle } from '@/ui/icons';
 import { QuestionDefinitionMap } from '@/utils/constants';
 
 import { QuestionsContext } from '../components/QuestionsProvider';
+import { QuestionWidget } from '@/app/s/[surveyId]/QuestionList';
 
 const Page = () => {
   const router = useRouter();
@@ -62,8 +63,8 @@ const Page = () => {
                   <h1>{question.title}</h1>
                 </header>
 
-                <WidgetComponent
-                  settings={question.widgetSettings}
+                <QuestionWidget
+                  question={question}
                   answer={answers[question.uuid]}
                   onChange={(answer) => submitAnswer(question.uuid, answer)}
                 />

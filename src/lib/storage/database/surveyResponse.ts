@@ -22,13 +22,22 @@ export const createSurveyResponse = async (survey: SurveyResponsePayload) => {
   return newSurveyResponse;
 };
 
-export const listSurveyResponses = async (surveyId: string, userId: string) => {
+const getResponsesQuery = (surveyId: string, userId: string) => {
   const responseCollection = getCollection(surveyId);
-  const snapshots = await responseCollection
+  return responseCollection
     .where('surveyId', '==', surveyId)
-    .where('surveyOwnerId', '==', userId)
-    .orderBy('createdAt', 'desc')
-    .get();
+    .where('surveyOwnerId', '==', userId);
+};
+
+export const getSurveyResponsesCount = async (surveyId: string, userId: string) => {
+  const snapshot = await getResponsesQuery(surveyId, userId).count().get();
+  return snapshot.data().count;
+};
+
+export const listSurveyResponses = async (surveyId: string, userId: string) => {
+  const query = getResponsesQuery(surveyId, userId);
+  const snapshots = await query.orderBy('createdAt', 'desc').get();
+
   const responses: SurveyResponse[] = [];
   snapshots.forEach((snapshot) =>
     responses.push(snapshot.data() as SurveyResponse),

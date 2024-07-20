@@ -17,6 +17,7 @@ import IntegrateSidebar from './IntegrateSidebar';
 type Props = {
   survey: Survey;
   children: ReactNode;
+  responsesCount: number;
 };
 
 type ToolbarAction = 'build' | 'trigger' | 'design';
@@ -42,7 +43,11 @@ const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
   trigger: <TriggerSection />,
 };
 
-export const LayoutComponent = ({ survey, children }: Props) => {
+export const LayoutComponent = ({
+  survey,
+  responsesCount,
+  children,
+}: Props) => {
   const [isPublishing, setIsPublishing] = useState(false);
   const searchParams = useSearchParams();
   const segment = useSelectedLayoutSegment();
@@ -62,12 +67,11 @@ export const LayoutComponent = ({ survey, children }: Props) => {
     <div className="flex h-screen divide-x divide-slate-300">
       {isToolbarVisible && (
         <nav className="w-48 bg-yellow-200">
-          <Link
-            href="/dashboard"
-            className="flex h-20 w-48 items-center justify-center gap-2"
-          >
-            <ArrowRight size={16} />
-            <span>Go back</span>
+          <Link href="/dashboard">
+            <button className="flex h-20 w-48 items-center justify-center gap-2">
+              <ArrowRight size={16} />
+              <span>Go back</span>
+            </button>
           </Link>
 
           <menu className="mt-20">
@@ -132,13 +136,15 @@ export const LayoutComponent = ({ survey, children }: Props) => {
               </Link>
             </li>
             <li>
-              <button
-                disabled={isPublishing}
-                onClick={publishSurvey}
-                className="btn bg-purple-500"
-              >
-                {isPublishing ? 'Publishing...' : 'Publish'}
-              </button>
+              {responsesCount < 1 && (
+                <button
+                  disabled={isPublishing}
+                  onClick={publishSurvey}
+                  className="btn bg-purple-500"
+                >
+                  {isPublishing ? 'Publishing...' : 'Publish'}
+                </button>
+              )}
             </li>
           </ul>
         </nav>

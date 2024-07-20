@@ -1,7 +1,7 @@
 import { classNames } from '@/utils';
 
 import { WidgetProps } from '../types';
-import { YesOrNo, YesOrNoAnswer } from './types';
+import { YesOrNo, YesOrNoAnswer, YesOrNoType } from './types';
 
 const Radio = ({
   label,
@@ -28,21 +28,22 @@ const Radio = ({
   );
 };
 
-export const YesOrNoWidget = ({
+export const YesOrNoWidget = <T extends YesOrNoType = YesOrNoType>({
+  type,
   answer,
   onChange,
-}: WidgetProps<YesOrNo, YesOrNoAnswer>) => {
+}: WidgetProps<T, YesOrNo, YesOrNoAnswer>) => {
   return (
     <div className="grid grid-flow-row gap-2">
       <Radio
         label="Yes"
-        toggle={() => onChange(true)}
-        checked={answer === true}
+        toggle={() => onChange({ type, value: true })}
+        checked={answer?.value === true}
       />
       <Radio
         label="No"
-        toggle={() => onChange(false)}
-        checked={answer === false}
+        toggle={() => onChange({ type, value: false })}
+        checked={answer?.value === false}
       />
     </div>
   );

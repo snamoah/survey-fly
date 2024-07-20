@@ -1,7 +1,7 @@
 import { classNames } from '@/utils';
 
 import { WidgetProps } from '../types';
-import { SingleChoice, SingleChoiceAnswer } from './types';
+import { SingleChoice, SingleChoiceAnswer, SingleChoiceType } from './types';
 
 const Radio = ({
   option,
@@ -28,19 +28,22 @@ const Radio = ({
   );
 };
 
-export const SingleChoiceWidget = ({
+export const SingleChoiceWidget = <
+  T extends SingleChoiceType = SingleChoiceType,
+>({
+  type,
   answer,
   settings,
   onChange,
-}: WidgetProps<SingleChoice, SingleChoiceAnswer>) => {
+}: WidgetProps<T, SingleChoice, SingleChoiceAnswer>) => {
   return (
     <div className="grid grid-flow-row gap-2">
       {settings.options.map((option) => (
         <Radio
           key={option.key}
           option={option}
-          toggle={() => onChange(option.value)}
-          checked={answer === option.value}
+          toggle={() => onChange({ type, value: option.value })}
+          checked={answer?.value === option.value}
         />
       ))}
     </div>

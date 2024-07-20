@@ -9,6 +9,10 @@ import {
   QuestionsContext,
   QuestionsActionsContext,
 } from '../components/QuestionsProvider';
+import {
+  QuestionType,
+  WidgetSettingsType,
+} from '@/types';
 
 const TitleInput = ({
   value,
@@ -30,6 +34,22 @@ const TitleInput = ({
       type="text"
     />
   );
+};
+
+type EditorWidgetProps<T extends QuestionType> = {
+  type: T;
+  settings: WidgetSettingsType<T>;
+  onChange: (setting: WidgetSettingsType<T>) => void;
+};
+
+const EditorWidget = <TQuestionType extends QuestionType>({
+  type,
+  settings,
+  onChange,
+}: EditorWidgetProps<TQuestionType>) => {
+  const Editor = QuestionDefinitionMap[type].editorComponent;
+
+  return <Editor type={type} value={settings} onChange={onChange} />;
 };
 
 const Page = () => {
@@ -62,9 +82,6 @@ const Page = () => {
     });
   };
 
-  const WidgetComponent =
-    QuestionDefinitionMap[selectedQuestion.type].editorComponent;
-
   return (
     <article
       key={selectedQuestion.uuid}
@@ -85,9 +102,10 @@ const Page = () => {
         />
       </header>
       <footer className="p-6">
-        <WidgetComponent
+        <EditorWidget
+          settings={selectedQuestion.widgetSettings}
+          type={selectedQuestion.type}
           onChange={updateQuestionSettings}
-          value={selectedQuestion.widgetSettings}
         />
       </footer>
     </article>

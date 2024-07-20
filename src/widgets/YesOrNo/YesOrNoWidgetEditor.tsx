@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, useState } from 'react';
-import { WidgetSettings } from '../types';
-import { YesOrNo } from './types';
+import { WidgetEditorProps } from '../types';
+import { YesOrNoSettings, YesOrNoType } from './types';
 
 const Input = ({
   value,
@@ -29,7 +29,9 @@ const Input = ({
   );
 };
 
-export const YesOrNoWidgetEditor = (props: WidgetSettings<YesOrNo>) => (
+export const YesOrNoWidgetEditor = <T extends YesOrNoType = YesOrNoType>(
+  props: WidgetEditorProps<T, YesOrNoSettings>,
+) => (
   <ul className="flex flex-col gap-3">
     <Input value="Yes" tabIndex={-1} readOnly={true} onChange={() => {}} />
     <Input value="No" tabIndex={-1} onChange={() => {}} />

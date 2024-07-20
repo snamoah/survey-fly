@@ -13,6 +13,7 @@ import {
   listUserSurveys,
   listSurveyResponsesBySurveyOnwerId,
   getSurveyRepsonseByRespondentId,
+  getSurveyResponsesCount,
 } from '../storage/database';
 import { getUser } from '../auth';
 
@@ -107,4 +108,10 @@ export const getSurveyResponses = async (surveyId: string) => {
   const user = await getUser();
   const responses = await listSurveyResponses(surveyId, user.uid);
   return responses;
+};
+
+export const getResponsesCount = async (surveyId: string) => {
+  const user = await getUser();
+  const count = await getSurveyResponsesCount(surveyId, user.uid);
+  return count;
 };

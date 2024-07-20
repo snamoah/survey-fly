@@ -41,7 +41,7 @@ const Page = async ({ params: { surveyId } }: Props) => {
     getSurveyResponses(surveyId),
   ]);
 
-  const answers = responses.map(response => response.answers);
+  const answers = responses.map((response) => response.answers);
 
   return isEmpty(responses) ? (
     <EmptyState surveyId={surveyId} />
