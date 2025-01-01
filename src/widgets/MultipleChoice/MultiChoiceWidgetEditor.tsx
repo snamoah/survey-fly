@@ -7,6 +7,8 @@ import { CloseCircleOutline, VerticalDots } from '@/ui/icons';
 import type { MultipleChoiceSettings, MultipleChoiceType } from './types';
 import type { WidgetEditorProps } from '../types';
 import { buildDefaultMultipleChoice } from './helpers';
+import { classNames } from '@/utils';
+import { useTheme } from '@/ui/theme';
 
 const MAX_OPTIONS_COUNT = 10;
 const MIN_OPTIONS = 2;
@@ -23,9 +25,26 @@ const Input = ({
   onChange: (value: string) => void;
 }) => {
   const [valueToEdit, setValueToEdit] = useState(value);
+  const { theme, defaultTheme } = useTheme();
+
+  const backgroundColor = theme.fillColor || defaultTheme.fillColor;
+  const color = theme.strokeColor || defaultTheme.strokeColor;
 
   return (
-    <li className="flex h-10 flex-row gap-2 rounded-sm p-2 ring-1">
+    <li
+      className="flex h-10 flex-row gap-2 rounded-sm p-2"
+      style={{
+        color,
+        backgroundColor,
+        borderColor: color,
+        textAlign: theme.textAlign,
+        borderWidth: theme.borderWidth,
+        borderTopLeftRadius: `${theme.borderTopLeftRadius}px`,
+        borderTopRightRadius: `${theme.borderTopRightRadius}px`,
+        borderBottomLeftRadius: `${theme.borderBottomLeftRadius}px`,
+        borderBottomRightRadius: `${theme.borderBottomRightRadius}px`,
+      }}
+    >
       <div className="flex items-center">
         <VerticalDots size={12} className="fill-slate-300" />
       </div>
@@ -38,7 +57,16 @@ const Input = ({
         value={valueToEdit}
         onBlur={() => onChange(valueToEdit)}
         onChange={(e) => setValueToEdit(e.target.value)}
-        className="my-1 grow text-xs outline-none"
+        style={{
+          backgroundColor,
+          textAlign: theme.textAlign,
+          letterSpacing: `${theme.letterSpacing}px`,
+          lineHeight: `${theme.lineHeight}px`,
+          fontWeight: theme.textBold ? 'bold' : 'normal',
+          fontStyle: theme.textItalic ? 'italic' : 'normal',
+          textDecoration: theme.textUnderline ? 'underline' : 'none',
+        }}
+        className={classNames('my-1 grow text-xs outline-none')}
       />
       <div
         onClick={deleteValue}
@@ -56,6 +84,7 @@ export const MultipleChoiceWidgetEditor = <
   value = buildDefaultMultipleChoice(),
   onChange,
 }: WidgetEditorProps<T, MultipleChoiceSettings>) => {
+  const { theme } = useTheme();
   const updateOptionAtIndex = (str: string, id: string) =>
     onChange(
       produce(value, (draft) => {
@@ -101,7 +130,12 @@ export const MultipleChoiceWidgetEditor = <
     value.options[value.options.length - 1].value === 'Other';
 
   return (
-    <ul className="flex flex-col gap-3">
+    <ul
+      className={classNames(
+        'grid grid-flow-row gap-3',
+        `grid-cols-${theme.gridCols}`,
+      )}
+    >
       {value.options.map((option) => (
         <Input
           key={option.key}

@@ -1,5 +1,3 @@
-import { WidgetSettings } from '../types';
-
 export type SingleChoiceType = 'single-choice';
 
 export type SingleChoiceSettings = {
