@@ -1,12 +1,15 @@
 import { produce } from 'immer';
 import { classNames } from '@/utils';
 
-import { WidgetProps } from '../types';
+import { CSSProperties, WidgetProps } from '../types';
 import {
   MultipleChoiceAnswer,
   MultipleChoice,
   MultipleChoiceType,
 } from './types';
+import { useTheme } from '@/ui/theme';
+
+import styles from '../Widget.module.css';
 
 const CheckBox = ({
   option,
@@ -17,11 +20,42 @@ const CheckBox = ({
   option: MultipleChoice['options'][number];
   toggle: () => void;
 }) => {
+  const { theme, defaultTheme } = useTheme();
+
+  const hoverBackgroundColor =
+    theme.selectedFillColor || defaultTheme.selectedFillColor;
+
+  const backgroundColor = !!checked
+    ? hoverBackgroundColor
+    : theme.fillColor || defaultTheme.fillColor;
+
+  const color = theme.strokeColor || defaultTheme.strokeColor;
+
+  const cssStyle: CSSProperties = {
+    color,
+    borderColor: color,
+    textAlign: theme.textAlign,
+    borderWidth: theme.borderWidth,
+    fontWeight: theme.textBold ? 'bold' : 'normal',
+    fontStyle: theme.textItalic ? 'italic' : 'normal',
+    textDecoration: theme.textUnderline ? 'underline' : 'none',
+    letterSpacing: `${theme.letterSpacing}px`,
+    lineHeight: `${theme.lineHeight}px`,
+    borderTopLeftRadius: `${theme.borderTopLeftRadius}px`,
+    borderTopRightRadius: `${theme.borderTopRightRadius}px`,
+    borderBottomLeftRadius: `${theme.borderBottomLeftRadius}px`,
+    borderBottomRightRadius: `${theme.borderBottomRightRadius}px`,
+    '--background-color': backgroundColor,
+    '--hover-background-color': hoverBackgroundColor,
+  };
+
   return (
     <li
+      style={cssStyle}
       className={classNames(
-        'flex h-10 flex-row items-center gap-2 rounded-sm p-2 ring-1 ring-slate-500 hover:cursor-pointer hover:bg-slate-100',
-        !!checked && 'rounded-md bg-slate-100',
+        styles.WidgetOption,
+        'flex h-10 flex-row items-center gap-2 p-2',
+        !!checked && 'rounded-md',
       )}
       onClick={toggle}
     >
@@ -31,9 +65,9 @@ const CheckBox = ({
         type="checkbox"
         onChange={toggle}
       />
-      <label htmlFor={option.key} className="my-1 text-xs outline-none">
+      <span onClick={toggle} className="my-1 w-full text-xs outline-none">
         {option.value}
-      </label>
+      </span>
     </li>
   );
 };
@@ -46,6 +80,8 @@ export const MultiChoiceWidget = <
   onChange,
   answer = { type, value: [] },
 }: WidgetProps<T, MultipleChoice, MultipleChoiceAnswer>) => {
+  const { theme } = useTheme();
+
   const buildAnswer = (value: MultipleChoiceAnswer) => ({
     type,
     value,
@@ -63,7 +99,12 @@ export const MultiChoiceWidget = <
   };
 
   return (
-    <div className="grid grid-flow-row gap-2">
+    <div
+      className={classNames(
+        'grid grid-flow-row gap-2',
+        `grid-cols-${theme.gridCols}`,
+      )}
+    >
       {settings.options.map((option) => (
         <CheckBox
           key={option.key}

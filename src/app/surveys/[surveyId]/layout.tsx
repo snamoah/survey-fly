@@ -5,6 +5,7 @@ import { getResponsesCount } from '@/lib/actions/surveys';
 
 import QuestionsProvider from './components/QuestionsProvider';
 import { LayoutComponent } from './components/LayoutComponent';
+import { ThemeProvider } from '@/ui/theme';
 
 type Props = {
   children: React.ReactNode;
@@ -25,9 +26,11 @@ const Layout = async ({ children, params }: Props) => {
 
   return (
     <QuestionsProvider surveyId={survey.id} initialValue={survey.questions}>
-      <LayoutComponent survey={survey} responsesCount={responsesCount}>
-        {children}
-      </LayoutComponent>
+      <ThemeProvider surveyId={survey.id} theme={survey.theme}>
+        <LayoutComponent survey={survey} responsesCount={responsesCount}>
+          {children}
+        </LayoutComponent>
+      </ThemeProvider>
     </QuestionsProvider>
   );
 };

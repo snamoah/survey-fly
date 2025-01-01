@@ -59,6 +59,25 @@ export type QuestionDefinitionMapType = {
   >;
 };
 
+export type Theme = {
+  fillColor: string;
+  strokeColor: string;
+  selectedFillColor: string;
+  borderWidth: number;
+  gridCols: number;
+  borderTopLeftRadius: number;
+  borderBottomLeftRadius: number;
+  borderTopRightRadius: number;
+  borderBottomRightRadius: number;
+  textUnderline: boolean;
+  textItalic: boolean;
+  textBold: boolean;
+  borderStyle: 'dashed' | 'solid';
+  textAlign: 'start' | 'center' | 'end';
+  lineHeight: number;
+  letterSpacing: number;
+};
+
 export type Survey = {
   id: string;
   title: string;
@@ -68,6 +87,7 @@ export type Survey = {
   description: string;
   status: SurveyStatus;
   questions: Question[];
+  theme?: Theme;
 };
 
 export type BrowserInfo = {

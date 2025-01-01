@@ -3,7 +3,7 @@
 import groupBy from 'lodash/groupBy';
 import { notFound, redirect } from 'next/navigation';
 
-import { Question, Survey, SurveyResponsePayload } from '@/types';
+import { Question, Survey, SurveyResponsePayload, Theme } from '@/types';
 import {
   getSurvey,
   updateSurvey,
@@ -46,6 +46,19 @@ export const updateSurveyQuestionsAction = async (
   }
 
   await updateSurvey(surveyId, { ...survey, questions });
+};
+
+export const updateSurveyThemeAction = async (
+  surveyId: string,
+  theme: Theme,
+) => {
+  const survey = await getSurvey(surveyId);
+
+  if (!survey) {
+    return;
+  }
+
+  await updateSurvey(surveyId, { ...survey, theme });
 };
 
 export const publishSurveyAction = async (surveyId: string) => {

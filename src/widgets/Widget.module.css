@@ -1,0 +1,8 @@
+.WidgetOption {
+  background-color: var(--background-color);
+}
+
+.WidgetOption:hover {
+  background-color: var(--hover-background-color);
+  cursor: pointer;
+}

@@ -7,4 +7,5 @@ export { default as CloseCircle } from './CloseCircle';
 export { default as VerticalDots } from './VerticalDots';
 export { default as ThumbUpThumbDown } from './ThumbUpThumbDown';
 export { default as CloseCircleOutline } from './CloseCircleOutline';
+export { default as BorderWidth } from './BorderWidth';
 export type { IconProps, Icon } from './IconComponent';

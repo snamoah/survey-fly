@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type AnswerType<TQuestionType, TAnswerType> = {
   type: TQuestionType;
   value: TAnswerType;
@@ -18,4 +20,9 @@ export type WidgetProps<T, SettingsType, TAnswerType> = {
   settings: SettingsType;
   answer?: AnswerType<T, TAnswerType>;
   onChange: (value: AnswerType<T, TAnswerType>) => void;
+};
+
+export type CSSProperties = React.CSSProperties & {
+  '--background-color'?: string;
+  '--hover-background-color'?: string;
 };

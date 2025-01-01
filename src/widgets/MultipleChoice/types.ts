@@ -1,5 +1,3 @@
-import { WidgetSettings } from '../types';
-
 export type MultipleChoiceType = 'multiple-choice';
 
 export type MultipleChoiceSettings = {
