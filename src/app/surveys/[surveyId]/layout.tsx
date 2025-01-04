@@ -27,7 +27,11 @@ const Layout = async ({ children, params }: Props) => {
   return (
     <QuestionsProvider surveyId={survey.id} initialValue={survey.questions}>
       <ThemeProvider surveyId={survey.id} theme={survey.theme}>
-        <LayoutComponent survey={survey} responsesCount={responsesCount}>
+        <LayoutComponent
+          survey={survey}
+          responsesCount={responsesCount}
+          questionsCount={survey.questions.length}
+        >
           {children}
         </LayoutComponent>
       </ThemeProvider>
