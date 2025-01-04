@@ -18,6 +18,7 @@ type Props = {
   survey: Survey;
   children: ReactNode;
   responsesCount: number;
+  questionsCount: number;
 };
 
 type ToolbarAction = 'build' | 'trigger' | 'design';
@@ -46,6 +47,7 @@ const toolbarTabComponent: Record<ToolbarAction, JSX.Element> = {
 export const LayoutComponent = ({
   survey,
   responsesCount,
+  questionsCount,
   children,
 }: Props) => {
   const [isPublishing, setIsPublishing] = useState(false);
@@ -128,17 +130,19 @@ export const LayoutComponent = ({
 
           <ul className="mr-6 flex items-center gap-2">
             <li>
-              <Link
-                href={`${basePath}/preview`}
-                className="btn text-slate-700 ring-1 ring-slate-700"
-              >
-                Preview
-              </Link>
+              {questionsCount > 1 && (
+                <Link
+                  href={`${basePath}/preview`}
+                  className="btn text-slate-700 ring-1 ring-slate-700"
+                >
+                  Preview
+                </Link>
+              )}
             </li>
             <li>
               {responsesCount < 1 && (
                 <button
-                  disabled={isPublishing}
+                  disabled={isPublishing || questionsCount < 1}
                   onClick={publishSurvey}
                   className="btn bg-purple-500"
                 >
